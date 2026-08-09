@@ -1,0 +1,8 @@
+module Kettle
+  module Changelog
+    module Version
+      VERSION: String
+    end
+    VERSION: String
+  end
+end
