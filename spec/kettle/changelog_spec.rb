@@ -5,7 +5,8 @@ RSpec.describe Kettle::Changelog do
     expect(Kettle::Changelog::VERSION).not_to be_nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "exposes the changelog CLI and entry adder" do
+    expect(described_class::CLI).to be < Object
+    expect(described_class::EntryAdder).to be < Object
   end
 end

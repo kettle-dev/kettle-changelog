@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "💎 TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "💎 TODO: Write a longer description or delete this line."
+  spec.summary = "📝 Release and maintain structured CHANGELOG.md files."
+  spec.description = "📝 kettle-changelog formats release sections, manages Unreleased entries, and emits machine-readable release events for Ruby gems."
   spec.homepage = "https://github.com/kettle-dev/kettle-changelog"
   spec.licenses = ["AGPL-3.0-only"]
   spec.required_ruby_version = ">= 4.0.0"
@@ -96,6 +96,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Utilities
+  spec.add_dependency("ast-crispr-markdown-markly", "~> 7.1", ">= 7.1.1")        # ruby >= 4.0.0
+  spec.add_dependency("kettle-dev", "~> 2.5", ">= 2.5.26")                       # ruby >= 2.4.0
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.15")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
@@ -110,9 +112,6 @@ Gem::Specification.new do |spec|
   #
   #       Development dependencies that require strictly newer Ruby versions should be in a "gemfile",
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
-
-  # Dev, Test, & Release Tasks
-  spec.add_development_dependency("kettle-dev", "~> 2.5", ">= 2.5.26")             # ruby >= 4.0.0
 
   # Security
   spec.add_development_dependency("bundler-audit", "~> 0.9.3")                      # ruby >= 2.0.0

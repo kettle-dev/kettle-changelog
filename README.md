@@ -1,6 +1,6 @@
 <a href="https://github.com/kettle-dev"><img alt="kettle-dev Logo by GitHub" src="https://github.com/kettle-dev.png?size=192" width="14%" align="right"/></a>
 
-# 💎 Kettle::Changelog
+# 📝 Kettle::Changelog
 
 [![Version][👽versioni]][👽version] [![Ruby Users Forum][✉️ruby-forum-top-img]][✉️ruby-forum] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: AGPL-3.0-only][📄license-img]][📄license] [![Total downloads][👽dl-ranki]][👽dl-rank] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![CI JRuby][🚎10-j-wfi]][🚎10-j-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf]
 
@@ -20,6 +20,8 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 </details>
 
 ## 🌻 Synopsis <a href="https://discord.gg/3qme4XHNKN"><img alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px.svg" width="8%" align="right"/></a> <a href="https://ruby-toolbox.com"><img alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5" src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-128px.svg" width="8%" align="right"/></a>
+
+`kettle-changelog` prepares and maintains `CHANGELOG.md` files for Ruby gems. It moves entries from `Unreleased` into a versioned release section, adds coverage and documentation statistics, updates comparison links, and can emit structured release events for orchestration tools.
 
 ## 💡 Info you can shake a stick at
 
@@ -117,9 +119,31 @@ gem install kettle-changelog
 
 ## ⚙️ Configuration
 
+`kettle-changelog` has no project configuration file. Configure project-specific paths and release behavior with environment variables:
+
+- `K_CHANGELOG_PATH` selects a changelog outside the current project root.
+- `K_CHANGELOG_COVERAGE_ROOT` selects the project root used for coverage generation.
+- `K_CHANGELOG_VERSION_FILE` selects the version file when the project has more than one version tree.
+- `K_CHANGELOG_GEM_NAME` overrides the gem name used for release lookups.
+- `K_CHANGELOG_STRICT=false` allows missing coverage or YARD data.
+- `K_CHANGELOG_COVERAGE_HARD=false` disables hard coverage-threshold failures.
+- `KETTLE_GEM_COOP_REFRESH=true` refreshes cached gem metadata.
+
 ## 🔧 Basic Usage
 
-TODO: Write usage instructions here
+Run the release preparation command from the gem root:
+
+```console
+bundle exec kettle-changelog
+```
+
+Use `--yes` for non-interactive release automation. Add a note without preparing a release with:
+
+```console
+bundle exec kettle-changelog --add-unreleased-entry --section Fixed --entry "Describe the fix."
+```
+
+Useful queries and maintenance commands include `--pending-release`, `--release-state`, `--reformat`, `--update-prep`, `--json`, and `--events=changelog`. Run `bundle exec kettle-changelog --help` for the complete option list.
 
 ## 🔐 Security
 
@@ -421,7 +445,7 @@ Thanks for RTFM. ☺️
 | Field | Value |
 |---|---|
 | Package | kettle-changelog |
-| Description | 💎 TODO: Write a longer description or delete this line. |
+| Description | 📝 kettle-changelog formats release sections, manages Unreleased entries, and emits machine-readable release events for Ruby gems. |
 | Homepage | https://github.com/kettle-dev/kettle-changelog |
 | Source | https://github.com/kettle-dev/kettle-changelog |
 | License | `AGPL-3.0-only` |

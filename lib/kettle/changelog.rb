@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require "version_gem"
+require "kettle/dev"
 require_relative "changelog/version"
 
 module Kettle
   module Changelog
     class Error < StandardError; end
-    # Your code goes here...
+
+    autoload :CLI, "kettle/changelog/cli"
+    autoload :EntryAdder, "kettle/changelog/entry_adder"
   end
 end
 

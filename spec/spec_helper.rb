@@ -23,6 +23,8 @@ end
 require "kettle/test/rspec"
 # `kettle/test/rspec` installs harness helpers documented in spec/README.md.
 require "kettle/changelog"
+require_relative "support/shared_contexts/with_mocked_git_adapter"
+require_relative "support/shared_contexts/with_mocked_exit_adapter"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
