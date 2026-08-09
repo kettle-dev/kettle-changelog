@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "💎 Changelog generation and release preparation for kettle-dev projects"
-  spec.description = spec.summary
+  spec.summary = "💎 TODO: Write a short summary, because RubyGems requires one."
+  spec.description = "💎 TODO: Write a longer description or delete this line."
   spec.homepage = "https://github.com/kettle-dev/kettle-changelog"
   spec.licenses = ["AGPL-3.0-only"]
   spec.required_ruby_version = ">= 4.0.0"
@@ -47,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.metadata["discord_uri"] = "https://discord.gg/3qme4XHNKN"
   spec.metadata["mailing_list_uri"] = "https://www.rubyforum.org/tag/kettle-dev"
   spec.metadata["rubygems_mfa_required"] = "true"
+  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   gemspec_root = __dir__
   relative_package_path = lambda do |path|
@@ -91,7 +92,7 @@ Gem::Specification.new do |spec|
   ]
   spec.bindir = "exe"
   # Listed files are the relative paths from bindir above.
-  spec.executables = []
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   # Utilities

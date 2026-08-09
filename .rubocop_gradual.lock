@@ -2,7 +2,11 @@
   "gemfiles/modular/templating.gemfile:155879869": [
     [15, 3, 47, "Bundler/DuplicatedGem: Gem `tree_sitter_language_pack` requirements already given on line 11 of the Gemfile.", 3843603197]
   ],
-  "kettle-changelog.gemspec:750387440": [
+  "kettle-changelog.gemspec:3580764828": [
     [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
+  ],
+  "spec/kettle/changelog_spec.rb:7340818": [
+    [9, 12, 5, "RSpec/ExpectActual: Provide the actual value you are testing to `expect(...)`.", 170962968],
+    [9, 22, 2, "RSpec/BeEq: Prefer `be` over `eq`.", 5860785]
   ]
 }

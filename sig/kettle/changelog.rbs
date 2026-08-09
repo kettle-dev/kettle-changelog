@@ -1,8 +1,9 @@
 module Kettle
   module Changelog
+    VERSION: String
     module Version
       VERSION: String
     end
-    VERSION: String
+    # See the writing guide of rbs: https://github.com/ruby/rbs#guides
   end
 end

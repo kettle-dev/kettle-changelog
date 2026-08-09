@@ -37,12 +37,11 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260725-002 - Version specs now use `anonymous_loader` to
   cover `version.rb` without redefining constants, or are removed when version
   specs are not managed for the project.
-- kettle-jem-template-20260801-001 - Generated README gem dashboard links now
-  use ClickGems instead of BestGems.
-
 - kettle-jem-template-20260728-001 - Generated Ruby workflows now use clearer
   setup-ruby-flash planning and can prepare appraisal-only jobs without
   installing the main Gemfile bundle.
+- kettle-jem-template-20260801-001 - Generated README gem dashboard links now
+  use ClickGems instead of BestGems.
 
 ### Deprecated
 
@@ -62,6 +61,12 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260728-002 - Generated RuboCop configs now ignore the
   same `gemfiles/vendor/bundle` tree as `.gitignore`, so vendored dependency
   installs are not reported as project lint debt.
+- kettle-jem-template-20260728-003 - Generated dep-heads workflows now run
+  TruffleRuby jobs with current RubyGems and Bundler, avoiding setup failures
+  before the test suite starts.
+- kettle-jem-template-20260728-004 - Generated dep-heads workflows now use the
+  setup-ruby Bundler install path for direct appraisal Gemfiles, avoiding rv
+  lockfile parser failures on Git and path dependencies.
 - kettle-jem-template-20260728-005 - VersionGem bootstrap now creates the
   missing canonical version spec when a project only has shim namespace version
   specs.
@@ -80,11 +85,8 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,
   preserving comments and trailing commas during template updates.
 
-- kettle-jem-template-20260728-003 - Generated dep-heads workflows now run
-  TruffleRuby jobs with current RubyGems and Bundler, avoiding setup failures
-  before the test suite starts.
-- kettle-jem-template-20260728-004 - Generated dep-heads workflows now use the
-  setup-ruby Bundler install path for direct appraisal Gemfiles, avoiding rv
-  lockfile parser failures on Git and path dependencies.
-
 ### Security
+
+## [0.1.0] - 2026-08-09
+
+- Initial release

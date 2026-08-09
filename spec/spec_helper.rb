@@ -22,8 +22,6 @@ end
 # External RSpec & related config
 require "kettle/test/rspec"
 # `kettle/test/rspec` installs harness helpers documented in spec/README.md.
-
-# This library
 require "kettle/changelog"
 
 RSpec.configure do |config|

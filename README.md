@@ -119,6 +119,8 @@ gem install kettle-changelog
 
 ## 🔧 Basic Usage
 
+TODO: Write usage instructions here
+
 ## 🔐 Security
 
 See [SECURITY.md][🔐security].
@@ -419,7 +421,7 @@ Thanks for RTFM. ☺️
 | Field | Value |
 |---|---|
 | Package | kettle-changelog |
-| Description | 💎 Changelog generation and release preparation for kettle-dev projects |
+| Description | 💎 TODO: Write a longer description or delete this line. |
 | Homepage | https://github.com/kettle-dev/kettle-changelog |
 | Source | https://github.com/kettle-dev/kettle-changelog |
 | License | `AGPL-3.0-only` |
