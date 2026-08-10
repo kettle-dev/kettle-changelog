@@ -89,6 +89,8 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,
   preserving comments and trailing commas during template updates.
 
+- Run target coverage and documentation commands with the target project bundle.
+
 ### Security
 
 ## [0.1.0] - 2026-08-09

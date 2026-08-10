@@ -5,8 +5,9 @@
 source "https://gem.coop"
 
 gem "kettle-changelog", path: File.expand_path("..", __dir__)
+gem "yard-fence", "~> 0.9", ">= 0.9.7"
 
-local_root = ENV.fetch("KETTLE_DEV_DEV", "").to_s.strip
+local_root = ENV.fetch("KETTLE_CHANGELOG_DEV_ROOT", ENV.fetch("KETTLE_DEV_DEV", "")).to_s.strip
 local_root_active = !local_root.empty? && !%w[false 0 no off].include?(local_root.downcase)
 
 if local_root_active
@@ -14,3 +15,7 @@ if local_root_active
 else
   gem "kettle-dev", ">= 2.5.26", "< 4.0.0"
 end
+
+# This variable selects the local path while Bundler evaluates this file. It
+# must not leak into the application or target project's test environment.
+ENV.delete("KETTLE_CHANGELOG_DEV_ROOT")

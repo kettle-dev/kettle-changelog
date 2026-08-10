@@ -1207,7 +1207,9 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
             "bundle_gemfile" => ENV["BUNDLE_GEMFILE"],
             "bundle_bin_path" => ENV["BUNDLE_BIN_PATH"],
             "bundler_setup" => ENV["BUNDLER_SETUP"],
-            "rubyopt" => ENV["RUBYOPT"]
+            "rubyopt" => ENV["RUBYOPT"],
+            "kettle_dev_dev" => ENV["KETTLE_DEV_DEV"],
+            "kettle_changelog_dev_root" => ENV["KETTLE_CHANGELOG_DEV_ROOT"]
           }
           File.write(#{snapshot_path.dump}, JSON.generate(snapshot))
           exit(12) unless ARGV == ["exec", "kettle-test"]
@@ -1248,6 +1250,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(snapshot.fetch("bundle_bin_path")).to be_nil.or eq("")
         expect(snapshot.fetch("bundler_setup")).to be_nil.or eq("")
         expect(snapshot.fetch("rubyopt")).to be_nil.or eq("")
+        expect(snapshot.fetch("kettle_dev_dev")).to eq("false")
+        expect(snapshot.fetch("kettle_changelog_dev_root")).to be_nil
         expect(line_cov).to eq("COVERAGE: 50.00% -- 1/2 lines in 1 files")
         expect(branch_cov).to eq("BRANCH COVERAGE: 50.00% -- 1/2 branches in 1 files")
       end
@@ -1386,8 +1390,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         File.write(yard, "#!/usr/bin/env ruby\n")
         FileUtils.chmod(0o755, rake)
         FileUtils.chmod(0o755, yard)
-        allow(Open3).to receive(:capture2e).with(rake, "yard", {chdir: root}).and_return(["no task here\n", double("rake status")])
-        allow(Open3).to receive(:capture2e).with(yard, {chdir: root}).and_return(["95.35% documented\n", double("yard status")])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "false"), rake, "yard", {chdir: root}).and_return(["no task here\n", double("rake status")])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "false"), yard, {chdir: root}).and_return(["95.35% documented\n", double("yard status")])
 
         cli = described_class.new(strict: true)
         expect(cli.send(:yard_percent_documented)).to eq("95.35% documented")
@@ -1404,7 +1408,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         FileUtils.chmod(0o755, rake)
         status = instance_double(Process::Status, success?: false, exitstatus: 1)
         output = "bundle exec yard-lint lib\nrake aborted!\nCommand failed with status (1): [bundle exec yard-lint lib]\n"
-        allow(Open3).to receive(:capture2e).with(rake, "yard", {chdir: root}).and_return([output, status])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "false"), rake, "yard", {chdir: root}).and_return([output, status])
 
         cli = described_class.new(strict: true)
 

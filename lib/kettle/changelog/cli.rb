@@ -910,6 +910,8 @@ module Kettle
         env = Kettle::Dev::BundlerEnvGuard.unbundled_env.merge(
           "PATH" => ENV.fetch("PATH", ""),
           "RUBYOPT" => nil,
+          "KETTLE_DEV_DEV" => "false",
+          "KETTLE_CHANGELOG_DEV_ROOT" => nil,
           "K_SOUP_COV_DO" => "true",
           "K_SOUP_COV_FORMATTERS" => "json",
           "K_SOUP_COV_MIN_HARD" => @enforce_coverage_thresholds ? "true" : "false",
@@ -981,9 +983,21 @@ module Kettle
       end
 
       def capture_yard_command(command)
-        Open3.capture2e(*command, {chdir: @root})
+        Open3.capture2e(yard_command_env, *command, {chdir: @root})
       rescue => e
         ["#{e.class}: #{e.message}", false]
+      end
+
+      def yard_command_env
+        env = Kettle::Dev::BundlerEnvGuard.unbundled_env.merge(
+          "PATH" => ENV.fetch("PATH", ""),
+          "RUBYOPT" => nil,
+          "KETTLE_DEV_DEV" => "false",
+          "KETTLE_CHANGELOG_DEV_ROOT" => nil
+        )
+        gemfile = File.join(@root, "Gemfile")
+        env["BUNDLE_GEMFILE"] = gemfile if File.file?(gemfile)
+        env
       end
 
       def handle_yard_documentation_failure(message)
