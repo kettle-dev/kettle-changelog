@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+# Minimal bundle used when kettle-changelog is the release tool for a project
+# that cannot include kettle-changelog in its own development bundle yet.
+source "https://gem.coop"
+
+gem "kettle-changelog", path: File.expand_path("..", __dir__)
+
+local_root = ENV.fetch("KETTLE_DEV_DEV", "").to_s.strip
+local_root_active = !local_root.empty? && !%w[false 0 no off].include?(local_root.downcase)
+
+if local_root_active
+  gem "kettle-dev", path: File.join(File.expand_path(local_root), "kettle-dev")
+else
+  gem "kettle-dev", ">= 2.5.26", "< 4.0.0"
+end

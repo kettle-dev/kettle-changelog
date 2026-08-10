@@ -30,6 +30,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Provide a standalone CLI for formatting releases and maintaining CHANGELOG.md files.
 
+- Provide a minimal release bundle for standalone kettle-changelog bootstrapping.
+
 ### Changed
 
 - kettle-jem-template-20260716-002 - Gemspecs now ship fewer repository-only
