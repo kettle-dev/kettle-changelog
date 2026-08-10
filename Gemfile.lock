@@ -481,7 +481,7 @@ DEPENDENCIES
   gitmoji-regex (~> 2.0, >= 2.0.11)
   irb (~> 1.17)
   kettle-changelog!
-  kettle-family (~> 1.2, >= 1.2.43)
+  kettle-family (~> 1.2, >= 1.2.44)
   kettle-soup-cover (~> 3.0, >= 3.0.9)
   kettle-test (~> 2.0, >= 2.0.19)
   kramdown (~> 2.5, >= 2.5.2)
@@ -505,14 +505,14 @@ DEPENDENCIES
   stringio (>= 3.0)
   turbo_tests2 (~> 3.2, >= 3.2.5)
   webrick (~> 1.9)
-  yaml-converter (~> 0.2, >= 0.2.4)
+  yaml-converter (~> 0.2, >= 0.2.5)
   yard (~> 0.9, >= 0.9.45)
-  yard-fence (~> 0.9, >= 0.9.7)
+  yard-fence (~> 0.9, >= 0.9.8)
   yard-junk (~> 0.1, >= 0.1.0)
   yard-lint (~> 1.10, >= 1.10.3)
   yard-relative_markdown_links (~> 0.6)
-  yard-timekeeper (~> 0.2, >= 0.2.5)
-  yard-yaml (~> 0.2, >= 0.2.4)
+  yard-timekeeper (~> 0.2, >= 0.2.6)
+  yard-yaml (~> 0.2, >= 0.2.5)
 
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
