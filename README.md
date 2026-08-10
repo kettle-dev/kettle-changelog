@@ -27,8 +27,6 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 | Tokens to Remember | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace] |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Works with JRuby | [![JRuby current Compat][💎jruby-c-i]][🚎10-j-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]|
-| Works with Truffle Ruby | [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf] [![Truffle Ruby HEAD Compat][💎truby-headi]][🚎3-hd-wf]|
 | Works with MRI Ruby 4 | [![Ruby current Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]|
 | Support & Community | [![Join Me on Daily.dev's RubyFriends][✉️ruby-friends-img]][✉️ruby-friends] [![Get help from RubyForum][✉️ruby-forum-img]][✉️ruby-forum] [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] [![Get help from me on Upwork][👨🏼‍🏫expsup-upwork-img]][👨🏼‍🏫expsup-upwork] [![Get help from me on Codementor][👨🏼‍🏫expsup-codementor-img]][👨🏼‍🏫expsup-codementor] |
 | Source | [![Source on GitLab.com][📜src-gl-img]][📜src-gl] [![Source on CodeBerg.org][📜src-cb-img]][📜src-cb] [![Source on GitHub.com][📜src-gh-img]][📜src-gh] [![The best SHA: dQw4w9WgXcQ!][🧮kloc-img]][🧮kloc] |
@@ -40,7 +38,7 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 ### Compatibility
 
-Compatible with MRI Ruby, JRuby, and TruffleRuby.
+Compatible with MRI Ruby.
 CI workflows and Appraisals are generated for MRI Ruby 4.0.0+.
 This test floor is configured by `ruby.test_minimum` in `.kettle-jem.yml` and
 may be higher than the gem's runtime compatibility floor when legacy Rubies are
@@ -192,11 +190,11 @@ Also see GitLab Contributors: [https://gitlab.com/kettle-dev/kettle-changelog/-/
 <details markdown="1">
  <summary>⭐️ Star History</summary>
 
-<a href="https://star-history.com/kettle-dev/kettle-changelog&Date">
+<a href="https://star-history.dera.page/#kettle-dev/kettle-changelog&type=date&legend=top-left">
  <picture>
- <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=kettle-dev/kettle-changelog&type=Date&theme=dark" />
- <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=kettle-dev/kettle-changelog&type=Date" />
- <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=kettle-dev/kettle-changelog&type=Date" />
+ <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&theme=dark&legend=top-left" />
+ <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&legend=top-left" />
+ <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&legend=top-left" />
  </picture>
 </a>
 
@@ -210,7 +208,7 @@ For most applications, prefer the [Pessimistic Version Constraint][📌pvc] with
 For example:
 
 ```ruby
-spec.add_dependency("kettle-changelog", "~> 0.0")
+spec.add_dependency("kettle-changelog", "~> 1.0")
 ```
 
 <details markdown="1">
@@ -375,10 +373,6 @@ Thanks for RTFM. ☺️
 [🚎3-hd-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/heads.yml/badge.svg
 [🚎5-st-wf]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/style.yml
 [🚎5-st-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/style.yml/badge.svg
-[🚎9-t-wf]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/truffle.yml
-[🚎9-t-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/truffle.yml/badge.svg
-[🚎10-j-wf]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/jruby.yml
-[🚎10-j-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/jruby.yml/badge.svg
 [🚎11-c-wf]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/current.yml
 [🚎11-c-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/current.yml/badge.svg
 [🚎12-crh-wf]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/dep-heads.yml
@@ -389,10 +383,6 @@ Thanks for RTFM. ☺️
 [🚎14-🔓️-wfi]: https://github.com/kettle-dev/kettle-changelog/actions/workflows/unlocked_deps.yml/badge.svg
 [💎ruby-c-i]: https://img.shields.io/badge/Ruby-current-CC342D?style=for-the-badge&logo=ruby&logoColor=green
 [💎ruby-headi]: https://img.shields.io/badge/Ruby-HEAD-CC342D?style=for-the-badge&logo=ruby&logoColor=blue
-[💎truby-c-i]: https://img.shields.io/badge/Truffle_Ruby-current-34BCB1?style=for-the-badge&logo=ruby&logoColor=green
-[💎truby-headi]: https://img.shields.io/badge/Truffle_Ruby-HEAD-34BCB1?style=for-the-badge&logo=ruby&logoColor=blue
-[💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green
-[💎jruby-headi]: https://img.shields.io/badge/JRuby-HEAD-FBE742?style=for-the-badge&logo=ruby&logoColor=blue
 [🤝gh-issues]: https://github.com/kettle-dev/kettle-changelog/issues
 [🤝gh-pulls]: https://github.com/kettle-dev/kettle-changelog/pulls
 [🤝gl-issues]: https://gitlab.com/kettle-dev/kettle-changelog/-/issues

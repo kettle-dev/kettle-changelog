@@ -123,8 +123,6 @@ project_emoji: "📝"
 # JRuby runtime is installed. Do not hand-edit a shared lockfile for JRuby.
 engines:
   - ruby
-  - jruby
-  - truffleruby
 
 # Ruby version policy.
 ruby:
