@@ -99,7 +99,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("ast-crispr-markdown-markly", "~> 7.1", ">= 7.1.1")        # ruby >= 4.0.0
   # kettle-dev 3.0.0 moved the kettle-changelog executable into this gem.
   # Older kettle-dev releases ship a competing executable with the same name.
-  spec.add_dependency("kettle-dev", ">= 3.0.0", "< 4.0.0")                       # ruby >= 2.4.0
+  spec.add_dependency("kettle-dev", ">= 3.0.1", "< 4.0.0")                       # ruby >= 2.4.0
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.15")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
