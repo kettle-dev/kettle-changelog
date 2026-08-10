@@ -91,6 +91,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Run target coverage and documentation commands with the target project bundle.
 
+- Prevent release workflow and GitHub release settings from contaminating target project tests.
+
 ### Security
 
 ## [0.1.0] - 2026-08-09

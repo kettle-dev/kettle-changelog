@@ -1209,7 +1209,9 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
             "bundler_setup" => ENV["BUNDLER_SETUP"],
             "rubyopt" => ENV["RUBYOPT"],
             "kettle_dev_dev" => ENV["KETTLE_DEV_DEV"],
-            "kettle_changelog_dev_root" => ENV["KETTLE_CHANGELOG_DEV_ROOT"]
+            "kettle_changelog_dev_root" => ENV["KETTLE_CHANGELOG_DEV_ROOT"],
+            "k_release_ci_workflows" => ENV["K_RELEASE_CI_WORKFLOWS"],
+            "kettle_release_skip_github_release" => ENV["KETTLE_RELEASE_SKIP_GITHUB_RELEASE"]
           }
           File.write(#{snapshot_path.dump}, JSON.generate(snapshot))
           exit(12) unless ARGV == ["exec", "kettle-test"]
@@ -1235,6 +1237,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           "BUNDLE_GEMFILE" => File.join(member_root, "Gemfile"),
           "BUNDLER_SETUP" => File.join(member_root, "member-setup"),
           "K_CHANGELOG_COVERAGE_ROOT" => coverage_root,
+          "K_RELEASE_CI_WORKFLOWS" => "current.yml",
+          "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => "true",
           "PATH" => "#{fake_bin}#{File::PATH_SEPARATOR}#{ENV.fetch("PATH", "")}",
           "RUBYOPT" => "-rbundler/setup"
         )
@@ -1252,6 +1256,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(snapshot.fetch("rubyopt")).to be_nil.or eq("")
         expect(snapshot.fetch("kettle_dev_dev")).to eq("false")
         expect(snapshot.fetch("kettle_changelog_dev_root")).to be_nil
+        expect(snapshot.fetch("k_release_ci_workflows")).to be_nil
+        expect(snapshot.fetch("kettle_release_skip_github_release")).to be_nil
         expect(line_cov).to eq("COVERAGE: 50.00% -- 1/2 lines in 1 files")
         expect(branch_cov).to eq("BRANCH COVERAGE: 50.00% -- 1/2 branches in 1 files")
       end

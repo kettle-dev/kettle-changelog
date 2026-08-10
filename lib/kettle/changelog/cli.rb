@@ -912,6 +912,8 @@ module Kettle
           "RUBYOPT" => nil,
           "KETTLE_DEV_DEV" => "false",
           "KETTLE_CHANGELOG_DEV_ROOT" => nil,
+          "K_RELEASE_CI_WORKFLOWS" => nil,
+          "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => nil,
           "K_SOUP_COV_DO" => "true",
           "K_SOUP_COV_FORMATTERS" => "json",
           "K_SOUP_COV_MIN_HARD" => @enforce_coverage_thresholds ? "true" : "false",
@@ -993,7 +995,9 @@ module Kettle
           "PATH" => ENV.fetch("PATH", ""),
           "RUBYOPT" => nil,
           "KETTLE_DEV_DEV" => "false",
-          "KETTLE_CHANGELOG_DEV_ROOT" => nil
+          "KETTLE_CHANGELOG_DEV_ROOT" => nil,
+          "K_RELEASE_CI_WORKFLOWS" => nil,
+          "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => nil
         )
         gemfile = File.join(@root, "Gemfile")
         env["BUNDLE_GEMFILE"] = gemfile if File.file?(gemfile)
