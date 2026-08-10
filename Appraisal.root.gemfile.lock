@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (0.1.0)
+    kettle-changelog (1.0.0)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (~> 2.5, >= 2.5.26)
+      kettle-dev (>= 3.0.0, < 4.0.0)
       version_gem (~> 1.1, >= 1.1.15)
 
 GEM
@@ -87,7 +87,7 @@ GEM
     gitmoji-regex (2.0.11)
       version_gem (~> 1.1, >= 1.1.14)
     json (2.21.2)
-    kettle-dev (2.5.27)
+    kettle-dev (3.0.0)
       emoji_regex (>= 15.0)
       kettle-gha-pins (~> 0.3, >= 0.3.10)
       kettle-ndjson (~> 0.1, >= 0.1.10)
@@ -302,6 +302,12 @@ GEM
       parslet (~> 2.0)
       tree_sitter_language_pack (>= 1.13.2, < 2.0)
       version_gem (~> 1.1, >= 1.1.15)
+    tree_sitter_language_pack (1.14.3-aarch64-linux)
+      sorbet-runtime (~> 0.5)
+    tree_sitter_language_pack (1.14.3-arm64-darwin)
+      sorbet-runtime (~> 0.5)
+    tree_sitter_language_pack (1.14.3-x86_64-darwin)
+      sorbet-runtime (~> 0.5)
     tree_sitter_language_pack (1.14.3-x86_64-linux)
       sorbet-runtime (~> 0.5)
     tsort (0.2.0)
@@ -322,6 +328,9 @@ GEM
     zlib (3.2.3)
 
 PLATFORMS
+  aarch64-linux
+  arm64-darwin
+  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
@@ -375,8 +384,8 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.11) sha256=54b2533a47c2dfaeaebfff97190b644923a12aaf3147b75258017bed78dc2819
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
-  kettle-changelog (0.1.0)
-  kettle-dev (2.5.27) sha256=77e16082017f26bdb7a8d722026af6d12f159a9200f63b1005482c063c3ccdc5
+  kettle-changelog (1.0.0)
+  kettle-dev (3.0.0) sha256=302b0186bc9d8f8552b9feaa07780facef307908b22bfff6ad77524f4131fe6a
   kettle-gha-pins (0.3.10) sha256=e33401a8eb4eba9f8206bbd06d674e31bb12fc8f4379e1b06252c93691c269d1
   kettle-ndjson (0.1.11) sha256=f09d3d926b0734a1b257109247b919725489b04235a871372e223f46b826a1ca
   kettle-rb (0.1.9) sha256=6dc58a072d6389a1399288f791819ce8f9e9653cf16767a9edc3a5e8a5127936
@@ -446,6 +455,9 @@ CHECKSUMS
   timecop-rspec (1.0.3) sha256=005f14841bb606dcaefb060e321b5388e2e59537742bee8b3a9a9a40e598fab9
   token-resolver (2.0.9) sha256=4d0a6f3cdd252538f949edd94dd2b88f52c0fb02f1d1cd6073af6d7b1f549fe1
   tree_haver (7.1.1) sha256=9ace0047514fce53780238d7f087a30df64c52deadeeb9a5aacc6213f64d1880
+  tree_sitter_language_pack (1.14.3-aarch64-linux) sha256=4f29f21e189e4f77478b56873dc3b9b60368b074d05328e0eed429f3fb147bbf
+  tree_sitter_language_pack (1.14.3-arm64-darwin) sha256=37d9972478328f389b78ae9688580d96b7ec0dfe8bbcf89998a9d027e3ffae10
+  tree_sitter_language_pack (1.14.3-x86_64-darwin) sha256=0269ae68b8d18e42755731df467892825218b543f38f5584f32caed243d5b21e
   tree_sitter_language_pack (1.14.3-x86_64-linux) sha256=4c4701ceb1743997b8fcba0a396c884f74be72aea9aaf52ca104f183b2f15fa4
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tty-cursor (0.7.1) sha256=79534185e6a777888d88628b14b6a1fdf5154a603f285f80b1753e1908e0bf48

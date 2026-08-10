@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.0] - 2026-08-10
+
+- TAG: [v1.0.0][1.0.0t]
+- COVERAGE: 93.19% -- 807/866 lines in 4 files
+- BRANCH COVERAGE: 78.31% -- 296/378 branches in 4 files
+- 47.62% documented
+
+### Added
+
 - kettle-jem-template-20260720-005 - README Support & Community links now
   include RubyForum.
 - kettle-jem-template-20260726-001 - Projects now include YARD lint
@@ -46,10 +65,6 @@ Please file a bug if you notice a violation of semantic versioning.
   installing the main Gemfile bundle.
 - kettle-jem-template-20260801-001 - Generated README gem dashboard links now
   use ClickGems instead of BestGems.
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 
@@ -95,8 +110,10 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Require kettle-dev 3.0.0 or newer so the standalone executable does not conflict with the legacy kettle-dev changelog executable.
 
-### Security
-
 ## [0.1.0] - 2026-08-09
 
 - Initial release
+
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/kettle-dev/kettle-changelog/compare/v0.1.0...v1.0.0
+[1.0.0t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.0

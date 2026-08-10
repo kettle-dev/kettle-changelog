@@ -2,19 +2,19 @@
   "gemfiles/modular/templating.gemfile:155879869": [
     [15, 3, 47, "Bundler/DuplicatedGem: Gem `tree_sitter_language_pack` requirements already given on line 11 of the Gemfile.", 3843603197]
   ],
-  "kettle-changelog.gemspec:542513455": [
+  "kettle-changelog.gemspec:2017475475": [
     [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
   ],
-  "lib/kettle/changelog/cli.rb:2113345905": [
+  "lib/kettle/changelog/cli.rb:2847716515": [
     [148, 43, 24, "Style/SlicingWithRange: Prefer `[unreleased_ref_idx..]` over `[unreleased_ref_idx..-1]`.", 3348125965],
     [596, 28, 12, "Style/SlicingWithRange: Prefer `[next_i..]` over `[next_i..-1]`.", 2124827054],
     [605, 42, 14, "Style/SlicingWithRange: Prefer `[footer_i..]` over `[footer_i..-1]`.", 2377888684],
     [632, 46, 7, "Style/SlicingWithRange: Prefer `[1..]` over `[1..-1]`.", 1439778702],
     [635, 32, 24, "Style/SlicingWithRange: Prefer `[release_line_count..]` over `[release_line_count..-1]`.", 2424433883],
     [637, 37, 7, "Style/SlicingWithRange: Prefer `[1..]` over `[1..-1]`.", 1439778702],
-    [1084, 14, 16, "Style/SlicingWithRange: Prefer `[scan_start..]` over `[scan_start..-1]`.", 4064532703],
-    [1232, 26, 15, "Style/SlicingWithRange: Prefer `[first_ref..]` over `[first_ref..-1]`.", 4126436875],
-    [1316, 21, 9, "Style/SlicingWithRange: Prefer `[idx..]` over `[idx..-1]`.", 610899530]
+    [1102, 14, 16, "Style/SlicingWithRange: Prefer `[scan_start..]` over `[scan_start..-1]`.", 4064532703],
+    [1250, 26, 15, "Style/SlicingWithRange: Prefer `[first_ref..]` over `[first_ref..-1]`.", 4126436875],
+    [1334, 21, 9, "Style/SlicingWithRange: Prefer `[idx..]` over `[idx..-1]`.", 610899530]
   ],
   "spec/kettle/changelog/entry_adder_spec.rb:2036989935": [
     [238, 58, 25, "Style/SlicingWithRange: Prefer `[(heading_level + 1)..]` over `[(heading_level + 1)..-1]`.", 945490021],
