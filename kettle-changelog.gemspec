@@ -97,7 +97,7 @@ Gem::Specification.new do |spec|
 
   # Utilities
   spec.add_dependency("ast-crispr-markdown-markly", "~> 7.1", ">= 7.1.1")        # ruby >= 4.0.0
-  spec.add_dependency("kettle-dev", ">= 3.0.2", "< 4.0.0")                       # ruby >= 2.4.0
+  spec.add_dependency("kettle-dev", ">= 3.0.3", "< 4.0.0")                       # ruby >= 2.4.0
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.15")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
