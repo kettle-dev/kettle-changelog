@@ -13,7 +13,7 @@ local_root_active = !local_root.empty? && !%w[false 0 no off].include?(local_roo
 if local_root_active
   gem "kettle-dev", path: File.join(File.expand_path(local_root), "kettle-dev")
 else
-  gem "kettle-dev", ">= 2.5.26", "< 4.0.0"
+  gem "kettle-dev", ">= 3.0.0", "< 4.0.0"
 end
 
 # This variable selects the local path while Bundler evaluates this file. It

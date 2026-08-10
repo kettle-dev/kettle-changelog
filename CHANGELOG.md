@@ -93,6 +93,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Prevent release workflow and GitHub release settings from contaminating target project tests.
 
+- Require kettle-dev 3.0.0 or newer so the standalone executable does not conflict with the legacy kettle-dev changelog executable.
+
 ### Security
 
 ## [0.1.0] - 2026-08-09
