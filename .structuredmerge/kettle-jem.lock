@@ -566,7 +566,7 @@ files:
   README.md:
     recipe: template_source_application_README_md
     action: write
-    dest_sha256: e0630fc0796f941b1f7f4e736926c249e604aec75240c9dd00b3610c7a98103f
+    dest_sha256: 910a0c79744bbf770fcb51dd8050c428a84a7a280eeed7f418e589af4f8485e3
     input_fingerprint: 1aea928c87de6455591d71d821c33986800524c5289842f4dc6cc427f627eaf8
     template_sources:
     - README.md.example
