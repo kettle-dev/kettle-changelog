@@ -2,7 +2,7 @@
   "gemfiles/modular/templating.gemfile:155879869": [
     [15, 3, 47, "Bundler/DuplicatedGem: Gem `tree_sitter_language_pack` requirements already given on line 11 of the Gemfile.", 3843603197]
   ],
-  "kettle-changelog.gemspec:27708252": [
+  "kettle-changelog.gemspec:3316945661": [
     [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
   ],
   "lib/kettle/changelog/cli.rb:2847716515": [

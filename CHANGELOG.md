@@ -28,9 +28,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- kettle-jem-template-20260720-004 - MRI-only projects now omit JRuby and
-  TruffleRuby workflow jobs.
-
 ### Security
 
 ## [1.0.0] - 2026-08-10
@@ -112,6 +109,9 @@ Please file a bug if you notice a violation of semantic versioning.
 - Prevent release workflow and GitHub release settings from contaminating target project tests.
 
 - Require kettle-dev 3.0.0 or newer so the standalone executable does not conflict with the legacy kettle-dev changelog executable.
+
+- kettle-jem-template-20260720-004 - MRI-only projects now omit JRuby and
+  TruffleRuby workflow jobs.
 
 ## [0.1.0] - 2026-08-09
 
