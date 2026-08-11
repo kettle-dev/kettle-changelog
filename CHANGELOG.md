@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Preserve family-local dependency wiring during aggregate coverage runs.
+
 ### Security
 
 ## [1.0.0] - 2026-08-10

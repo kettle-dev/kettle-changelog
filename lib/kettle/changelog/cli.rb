@@ -910,7 +910,6 @@ module Kettle
         env = Kettle::Dev::BundlerEnvGuard.unbundled_env.merge(
           "PATH" => ENV.fetch("PATH", ""),
           "RUBYOPT" => nil,
-          "KETTLE_DEV_DEV" => "false",
           "KETTLE_CHANGELOG_DEV_ROOT" => nil,
           "K_RELEASE_CI_WORKFLOWS" => nil,
           "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => nil,
@@ -994,7 +993,6 @@ module Kettle
         env = Kettle::Dev::BundlerEnvGuard.unbundled_env.merge(
           "PATH" => ENV.fetch("PATH", ""),
           "RUBYOPT" => nil,
-          "KETTLE_DEV_DEV" => "false",
           "KETTLE_CHANGELOG_DEV_ROOT" => nil,
           "K_RELEASE_CI_WORKFLOWS" => nil,
           "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => nil
