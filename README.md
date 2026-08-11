@@ -38,7 +38,7 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 ### Compatibility
 
-Compatible with MRI Ruby.
+Compatible with MRI Ruby 4.0.0+.
 CI workflows and Appraisals are generated for MRI Ruby 4.0.0+.
 This test floor is configured by `ruby.test_minimum` in `.kettle-jem.yml` and
 may be higher than the gem's runtime compatibility floor when legacy Rubies are
@@ -150,8 +150,7 @@ See [SECURITY.md][🔐security].
 ## 🤝 Contributing
 
 If you need some ideas of where to help, you could work on adding more code coverage,
-or if it is already 💯 (see [below](#code-coverage)) check [issues][🤝gh-issues] or [PRs][🤝gh-pulls],
-or use the gem and think about how it could be better.
+check [issues][🤝gh-issues] or [PRs][🤝gh-pulls], or use the gem and think about how it could be better.
 
 We [![Keep A Changelog][📗keep-changelog-img]][📗keep-changelog] so if you make changes, remember to update it.
 
@@ -186,19 +185,6 @@ chat rooms and mailing lists agrees to follow the [![Contributor Covenant 2.1][�
 Made with [contributors-img][🖐contrib-rocks].
 
 Also see GitLab Contributors: [https://gitlab.com/kettle-dev/kettle-changelog/-/graphs/main][🚎contributors-gl]
-
-<details markdown="1">
- <summary>⭐️ Star History</summary>
-
-<a href="https://star-history.dera.page/#kettle-dev/kettle-changelog&type=date&legend=top-left">
- <picture>
- <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&theme=dark&legend=top-left" />
- <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&legend=top-left" />
- <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=kettle-dev/kettle-changelog&type=date&legend=top-left" />
- </picture>
-</a>
-
-</details>
 
 ## 📌 Versioning
 

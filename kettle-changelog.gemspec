@@ -47,7 +47,6 @@ Gem::Specification.new do |spec|
   spec.metadata["discord_uri"] = "https://discord.gg/3qme4XHNKN"
   spec.metadata["mailing_list_uri"] = "https://www.rubyforum.org/tag/kettle-dev"
   spec.metadata["rubygems_mfa_required"] = "true"
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   gemspec_root = __dir__
   relative_package_path = lambda do |path|
