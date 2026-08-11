@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.
+
 ### Changed
 
 ### Deprecated
