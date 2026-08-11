@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.0)
+    kettle-changelog (1.0.1)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
       kettle-dev (>= 3.0.6, < 4.0.0)
       version_gem (~> 1.1, >= 1.1.15)
@@ -384,7 +384,7 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.11) sha256=54b2533a47c2dfaeaebfff97190b644923a12aaf3147b75258017bed78dc2819
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
-  kettle-changelog (1.0.0)
+  kettle-changelog (1.0.1)
   kettle-dev (3.0.6) sha256=0b570b42377cb4b7baa27cfc055e6a3996e1b7cb259c7fc018ff77b1feed005b
   kettle-gha-pins (0.3.11) sha256=f0239d2f91df5093a0d961bffa1f1b8308e63e3d0e5ff6fbf0cc567c479251fa
   kettle-ndjson (0.1.11) sha256=f09d3d926b0734a1b257109247b919725489b04235a871372e223f46b826a1ca

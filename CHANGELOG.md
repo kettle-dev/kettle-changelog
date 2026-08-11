@@ -20,8 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.
-
 ### Changed
 
 ### Deprecated
@@ -30,9 +28,22 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Preserve family-local dependency wiring during aggregate coverage runs.
-
 ### Security
+
+## [1.0.1] - 2026-08-11
+
+- TAG: [v1.0.1][1.0.1t]
+- COVERAGE: 93.56% -- 944/1009 lines in 5 files
+- BRANCH COVERAGE: 77.39% -- 332/429 branches in 5 files
+- 42.31% documented
+
+### Added
+
+- Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.
+
+### Fixed
+
+- Preserve family-local dependency wiring during aggregate coverage runs.
 
 ## [1.0.0] - 2026-08-10
 
@@ -116,6 +127,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.0...v1.0.1
+[1.0.1t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.1
 [1.0.0]: https://github.com/kettle-dev/kettle-changelog/compare/v0.1.0...v1.0.0
 [1.0.0t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.0
