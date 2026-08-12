@@ -22,8 +22,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Add structural [kc]-keyed upserts for maintenance changelog entries.
-
 ### Deprecated
 
 ### Removed
@@ -31,6 +29,17 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [1.0.2] - 2026-08-12
+
+- TAG: [v1.0.2][1.0.2t]
+- COVERAGE: 94.03% -- 1055/1122 lines in 6 files
+- BRANCH COVERAGE: 76.79% -- 364/474 branches in 6 files
+- 38.71% documented
+
+### Changed
+
+- Add structural [kc]-keyed upserts for maintenance changelog entries.
 
 ## [1.0.1] - 2026-08-11
 
@@ -129,7 +138,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.1...v1.0.2
+[1.0.2t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.2
 [1.0.1]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.0...v1.0.1
 [1.0.1t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.1
 [1.0.0]: https://github.com/kettle-dev/kettle-changelog/compare/v0.1.0...v1.0.0
