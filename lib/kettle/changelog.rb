@@ -10,6 +10,7 @@ module Kettle
 
     autoload :CLI, "kettle/changelog/cli"
     autoload :EntryAdder, "kettle/changelog/entry_adder"
+    autoload :KeyedEntryUpserter, "kettle/changelog/keyed_entry_upserter"
     autoload :TransferMerger, "kettle/changelog/transfer_merger"
   end
 end

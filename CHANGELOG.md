@@ -22,6 +22,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- Add structural [kc]-keyed upserts for maintenance changelog entries.
+
 ### Deprecated
 
 ### Removed

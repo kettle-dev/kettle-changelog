@@ -63,7 +63,7 @@ end
 
 if ARGV.include?("-h") || ARGV.include?("--help")
   puts <<~USAGE
-    Usage: kettle-changelog [--version VERSION] [--yes] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
+    Usage: kettle-changelog [--version VERSION] [--yes] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--upsert-unreleased-entry --section SECTION --key KEY --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
 
     Detects the current version from lib/**/version.rb, the latest live release, and
     the most recent CHANGELOG.md release section, then prompts to confirm the selected plan:
@@ -84,8 +84,11 @@ if ARGV.include?("-h") || ARGV.include?("--help")
       --release-status          Print changelog release state, including latest published release and pending sources
       --refresh-cache           Bypass cached gem.coop version data for this invocation
       --add-unreleased-entry    Add one entry to an existing section under ## [Unreleased]
+      --upsert-unreleased-entry Insert or replace one [kc]-keyed entry under ## [Unreleased]
       --section SECTION         Unreleased section to receive the entry (Added, Changed, Deprecated, Removed, Fixed, Security)
+      --key KEY                 Stable kettle-changelog key for --upsert-unreleased-entry
       --entry TEXT              Changelog entry text; "- " is added when omitted
+      --legacy-prefix TEXT      Legacy entry prefix to replace during a keyed upsert; may be repeated
       --json                    Print query output as JSON
       --events[=TYPES]          Print newline-delimited JSON changelog events
       --no-strict               Allow missing coverage and yard data (warnings only, no errors)
@@ -168,6 +171,7 @@ begin
   release_state_query = ARGV.delete("--release-state") || ARGV.delete("--release-status")
   refresh_cache = ARGV.delete("--refresh-cache")
   add_unreleased_entry = ARGV.delete("--add-unreleased-entry") || ARGV.delete("--add-changelog-entry")
+  upsert_unreleased_entry = ARGV.delete("--upsert-unreleased-entry") || ARGV.delete("--upsert-changelog-entry")
   json_output = ARGV.delete("--json")
   events_output, event_types = extract_events_arg!(ARGV)
   Kettle::Dev::ExitAdapter.abort("--events cannot be combined with --json") if events_output && json_output
@@ -193,7 +197,35 @@ begin
     value
   end
 
+  def extract_option_args!(argv, name)
+    values = []
+    while (value = extract_option_arg!(argv, name))
+      values << value
+    end
+    values
+  end
+
   historical_backfill_version = extract_option_arg!(ARGV, "--backfill-released-version")
+
+  if upsert_unreleased_entry
+    section = extract_option_arg!(ARGV, "--section")
+    key = extract_option_arg!(ARGV, "--key")
+    entry = extract_option_arg!(ARGV, "--entry")
+    legacy_prefixes = extract_option_args!(ARGV, "--legacy-prefix")
+    Kettle::Dev::ExitAdapter.abort("--section is required with --upsert-unreleased-entry") if section.to_s.empty?
+    Kettle::Dev::ExitAdapter.abort("--key is required with --upsert-unreleased-entry") if key.to_s.empty?
+    Kettle::Dev::ExitAdapter.abort("--entry is required with --upsert-unreleased-entry") if entry.to_s.empty?
+
+    result = Kettle::Changelog::KeyedEntryUpserter.new(
+      section: section,
+      key: key,
+      entry: entry,
+      legacy_prefixes: legacy_prefixes
+    ).run
+    message = result.fetch(:changed) ? "CHANGELOG.md keyed entry updated under Unreleased #{section}." : "CHANGELOG.md keyed entry already matches under Unreleased #{section}."
+    puts(json_output ? JSON.pretty_generate(result) : message)
+    exit(0)
+  end
 
   if add_unreleased_entry
     section = extract_option_arg!(ARGV, "--section")
