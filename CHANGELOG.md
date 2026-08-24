@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Prevent release-target K_CHANGELOG_* overrides from leaking into nested coverage test processes.
+
 ### Security
 
 ## [1.0.2] - 2026-08-12

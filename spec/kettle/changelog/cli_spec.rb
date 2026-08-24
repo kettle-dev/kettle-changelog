@@ -1208,6 +1208,10 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
             "bundle_bin_path" => ENV["BUNDLE_BIN_PATH"],
             "bundler_setup" => ENV["BUNDLER_SETUP"],
             "rubyopt" => ENV["RUBYOPT"],
+            "kettle_changelog_gem_name" => ENV["K_CHANGELOG_GEM_NAME"],
+            "kettle_changelog_path" => ENV["K_CHANGELOG_PATH"],
+            "kettle_changelog_version_file" => ENV["K_CHANGELOG_VERSION_FILE"],
+            "kettle_changelog_coverage_root" => ENV["K_CHANGELOG_COVERAGE_ROOT"],
             "kettle_dev_dev" => ENV["KETTLE_DEV_DEV"],
             "kettle_changelog_dev_root" => ENV["KETTLE_CHANGELOG_DEV_ROOT"],
             "k_release_ci_workflows" => ENV["K_RELEASE_CI_WORKFLOWS"],
@@ -1236,6 +1240,9 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           "BUNDLE_BIN_PATH" => File.join(member_root, "member-bundle-bin"),
           "BUNDLE_GEMFILE" => File.join(member_root, "Gemfile"),
           "BUNDLER_SETUP" => File.join(member_root, "member-setup"),
+          "K_CHANGELOG_GEM_NAME" => "structuredmerge-ruby",
+          "K_CHANGELOG_PATH" => File.join(member_root, "CHANGELOG.md"),
+          "K_CHANGELOG_VERSION_FILE" => File.join(member_root, "gems/tree_haver/lib/tree_haver/version.rb"),
           "K_CHANGELOG_COVERAGE_ROOT" => coverage_root,
           "KETTLE_DEV_DEV" => "/workspace/kettle-dev",
           "K_RELEASE_CI_WORKFLOWS" => "current.yml",
@@ -1258,6 +1265,10 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(snapshot.fetch("bundle_bin_path")).to be_nil.or eq("")
         expect(snapshot.fetch("bundler_setup")).to be_nil.or eq("")
         expect(snapshot.fetch("rubyopt")).to be_nil.or eq("")
+        expect(snapshot.fetch("kettle_changelog_gem_name")).to be_nil
+        expect(snapshot.fetch("kettle_changelog_path")).to be_nil
+        expect(snapshot.fetch("kettle_changelog_version_file")).to be_nil
+        expect(snapshot.fetch("kettle_changelog_coverage_root")).to be_nil
         expect(snapshot.fetch("kettle_dev_dev")).to eq("/workspace/kettle-dev")
         expect(snapshot.fetch("kettle_changelog_dev_root")).to be_nil
         expect(snapshot.fetch("k_release_ci_workflows")).to be_nil

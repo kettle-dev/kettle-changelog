@@ -18,6 +18,7 @@ module Kettle
       UNRELEASED_SECTION_HEADING = "[Unreleased]:"
       CHANGELOG_VERSION_PATTERN = /\d+\.\d+\.\d+(?:[.-][0-9A-Za-z]+)*/
       CHANGELOG_VERSION_PATTERN_SOURCE = CHANGELOG_VERSION_PATTERN.source
+      COVERAGE_CHILD_ENV_PREFIXES = %w[K_CHANGELOG_].freeze
       # Matches a Markdown link-reference definition line, e.g. `[key]: https://...`
       LINK_REF_DEF_RE = /^\s*\[[^\]]+\]:\s+\S+/
       # Matches an ATX heading at H4 or deeper (####, #####, ...)
@@ -919,6 +920,11 @@ module Kettle
           "K_SOUP_COV_MULTI_FORMATTERS" => "false",
           "K_SOUP_COV_OPEN_BIN" => ""
         )
+        ENV.each_key do |key|
+          next unless COVERAGE_CHILD_ENV_PREFIXES.any? { |prefix| key.start_with?(prefix) }
+
+          env[key] = nil
+        end
         env.merge!(changelog_coverage_workflow_thresholds)
         gemfile = File.join(@coverage_root, "Gemfile")
         env["BUNDLE_GEMFILE"] = gemfile if File.file?(gemfile)
