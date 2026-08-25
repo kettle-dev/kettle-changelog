@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.2)
+    kettle-changelog (1.0.3)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (>= 3.0.6, < 4.0.0)
+      kettle-dev (>= 3.0.11, < 4.0.0)
       version_gem (~> 1.1, >= 1.1.15)
 
 GEM
@@ -87,22 +87,22 @@ GEM
     gitmoji-regex (2.0.11)
       version_gem (~> 1.1, >= 1.1.14)
     json (2.21.2)
-    kettle-dev (3.0.6)
+    kettle-dev (3.0.11)
       emoji_regex (>= 15.0)
-      kettle-gha-pins (~> 0.3, >= 0.3.11)
-      kettle-ndjson (~> 0.1, >= 0.1.10)
-      kettle-rb (~> 0.1, >= 0.1.8)
-      kettle-test (~> 2.0, >= 2.0.18)
+      kettle-gha-pins (~> 0.3, >= 0.3.13)
+      kettle-ndjson (~> 0.1, >= 0.1.12)
+      kettle-rb (~> 0.1, >= 0.1.10)
+      kettle-test (~> 2.0, >= 2.0.20)
       ruby-progressbar (~> 1.13)
       tty-progressbar (~> 0.18)
-    kettle-gha-pins (0.3.11)
+    kettle-gha-pins (0.3.13)
       ruby-progressbar (~> 1.13)
       tty-progressbar (~> 0.18)
       version_gem (~> 1.1, >= 1.1.15)
-    kettle-ndjson (0.1.11)
+    kettle-ndjson (0.1.12)
       version_gem (~> 1.1, >= 1.1.15)
-    kettle-rb (0.1.9)
-    kettle-test (2.0.19)
+    kettle-rb (0.1.10)
+    kettle-test (2.0.20)
       appraisal2 (~> 3.0, >= 3.0.6)
       backports (~> 3.0)
       rspec (~> 3.0)
@@ -340,7 +340,7 @@ DEPENDENCIES
   bundler-audit (~> 0.9.3)
   gitmoji-regex (~> 2.0, >= 2.0.11)
   kettle-changelog!
-  kettle-test (~> 2.0, >= 2.0.19)
+  kettle-test (~> 2.0, >= 2.0.20)
   rake (~> 13.0)
   reek (~> 6.5, >= 6.5.0)
   require_bench (~> 1.0, >= 1.0.4)
@@ -384,12 +384,12 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.11) sha256=54b2533a47c2dfaeaebfff97190b644923a12aaf3147b75258017bed78dc2819
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
-  kettle-changelog (1.0.2)
-  kettle-dev (3.0.6) sha256=0b570b42377cb4b7baa27cfc055e6a3996e1b7cb259c7fc018ff77b1feed005b
-  kettle-gha-pins (0.3.11) sha256=f0239d2f91df5093a0d961bffa1f1b8308e63e3d0e5ff6fbf0cc567c479251fa
-  kettle-ndjson (0.1.11) sha256=f09d3d926b0734a1b257109247b919725489b04235a871372e223f46b826a1ca
-  kettle-rb (0.1.9) sha256=6dc58a072d6389a1399288f791819ce8f9e9653cf16767a9edc3a5e8a5127936
-  kettle-test (2.0.19) sha256=c3628b910100976bc021d98921489ba77e06f61e1d8a873a0ac3f9dbd5565d70
+  kettle-changelog (1.0.3)
+  kettle-dev (3.0.11) sha256=ce2a4c7d8015987d03e0c1bdbc21b0af07e2993f26a37b40861678b173ce8ace
+  kettle-gha-pins (0.3.13) sha256=c393aa90a7c78248d42fd63b2f4abfb0ca39df94a7b0d8f53082fa3ffdaa3f80
+  kettle-ndjson (0.1.12) sha256=9c506b197c1b95904227876890a5b1a55a5f435f1c425857036e7fab83d152e5
+  kettle-rb (0.1.10) sha256=98fadfb0baf6a655132e651079bd4e499135b9db10e2c751212739b06b9acb01
+  kettle-test (2.0.20) sha256=258172ff763eb4f9dedefa66cd66fa6863135aba5833e6e2aafc69d4c03ba2d0
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
