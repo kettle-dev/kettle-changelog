@@ -3,3 +3,5 @@
 # kettle-changelog depends on the current kettle-dev APIs and the structured
 # Markdown merger. Keep it out of older appraisal jobs whose Ruby cannot load
 # its runtime dependency floor.
+# Release lockfile/build commands also set the dependency-specific switch below
+# so this development tool cannot pull unpublished family gems into resolution.
