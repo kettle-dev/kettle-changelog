@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Backfill missing release-tag Markdown references only when the matching local Git tag exists.
+
 ### Security
 
 ## [1.0.4] - 2026-08-28

@@ -1478,6 +1478,40 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
       expect(out).to include("[1.1.0]: https://github.com/acme/x/compare/v1.0.0...v1.1.0")
       expect(out).to include("[1.1.0t]: https://github.com/acme/x/releases/tag/v1.1.0")
     end
+
+    it "backfills historical tag refs for existing TAG rows" do
+      cli = described_class.new(strict: false)
+      allow(cli).to receive(:local_release_tag?).with("3.0.0.rc3").and_return(true)
+      input = <<~TXT
+        ## [3.0.0.rc3] - 2026-06-20
+
+        - TAG: [v3.0.0.rc3][3.0.0.rc3t]
+
+        [Unreleased]: https://github.com/acme/x/compare/v3.0.0.rc3...HEAD
+        [3.0.0.rc3]: https://github.com/acme/x/compare/v3.0.0.rc2...v3.0.0.rc3
+      TXT
+
+      out = cli.send(:update_link_refs, input, "acme", "x", "3.0.0.rc3", "3.0.1")
+
+      expect(out).to include("[3.0.0.rc3t]: https://github.com/acme/x/releases/tag/v3.0.0.rc3")
+    end
+
+    it "warns without inventing a tag reference when a historical tag is absent" do
+      cli = described_class.new(strict: false)
+      allow(cli).to receive(:local_release_tag?).with("3.0.0.rc3").and_return(false)
+      input = <<~TXT
+        ## [3.0.0.rc3] - 2026-06-20
+
+        - TAG: [v3.0.0.rc3][3.0.0.rc3t]
+
+        [Unreleased]: https://github.com/acme/x/compare/v3.0.0.rc3...HEAD
+      TXT
+
+      expect {
+        out = cli.send(:update_link_refs, input, "acme", "x", "3.0.0.rc3", "3.0.1")
+        expect(out).not_to include("[3.0.0.rc3t]:")
+      }.to output(/local git tag v3\.0\.0\.rc3 is absent/).to_stderr
+    end
   end
 
   describe "#update_link_refs GitLab compare owner override and multiple entries" do

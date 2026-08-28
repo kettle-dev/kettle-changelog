@@ -23,6 +23,8 @@ module Kettle
       LINK_REF_DEF_RE = /^\s*\[[^\]]+\]:\s+\S+/
       # Matches an ATX heading at H4 or deeper (####, #####, ...)
       DEEP_HEADING_RE = /^\#{4,}\s/
+      # Matches the canonical release-tag row emitted for each release section.
+      TAG_REFERENCE_USAGE_RE = /^ {0,3}- TAG: \[v(#{CHANGELOG_VERSION_PATTERN_SOURCE})\]\[\1t\]\s*$/o
 
       # Initialize the changelog CLI
       # Sets up paths for CHANGELOG.md and coverage.json
@@ -146,7 +148,7 @@ module Kettle
             # Keep all content prior to the link-ref (older releases and interspersed refs)
             preserved_body = after_lines[0...unreleased_ref_idx].join
             # Then append the tail starting from the Unreleased link-ref line to preserve the footer refs
-            preserved_footer = after_lines[unreleased_ref_idx..-1].join
+            preserved_footer = after_lines[unreleased_ref_idx..].join
             updated << preserved_body << preserved_footer
           else
             # No Unreleased ref found; just append the remainder as-is
@@ -594,7 +596,7 @@ module Kettle
         # Now next_i points to the next section heading or EOF
         before = lines[0..(start_i - 1)].join
         unreleased_body = lines[(start_i + 1)..(next_i - 1)] || []
-        after_lines = lines[next_i..-1] || []
+        after_lines = lines[next_i..] || []
 
         # When this is the very first release there is no `## [X.Y.Z]` heading to act
         # as a boundary, so the footer link-ref block ([Unreleased]: ...) sits at the
@@ -603,7 +605,7 @@ module Kettle
         if next_i == lines.length
           footer_i = unreleased_body.index { |l| l.start_with?(UNRELEASED_SECTION_HEADING) }
           if footer_i
-            after_lines = unreleased_body[footer_i..-1] + after_lines
+            after_lines = unreleased_body[footer_i..] + after_lines
             unreleased_body = unreleased_body[0...footer_i]
           end
         end
@@ -630,12 +632,12 @@ module Kettle
 
         prepared_version = release_heading[1]
         release_and_tail = after.lines
-        next_release_index = release_and_tail[1..-1].to_a.index { |line| line.start_with?("## [") }
+        next_release_index = release_and_tail[1..].to_a.index { |line| line.start_with?("## [") }
         release_line_count = next_release_index ? next_release_index + 1 : release_and_tail.length
         release_lines = release_and_tail[0...release_line_count]
-        tail = release_and_tail[release_line_count..-1].to_a.join
+        tail = release_and_tail[release_line_count..].to_a.join
 
-        release_body = release_lines[1..-1].to_a.join
+        release_body = release_lines[1..].to_a.join
         merged_body = merge_release_body_with_unreleased(release_body, unreleased_block)
 
         release_section = +""
@@ -1103,7 +1105,7 @@ module Kettle
         scan_start = lines.index { |l| l.start_with?(UNRELEASED_SECTION_HEADING) } || lines.length
         t_versions = {}
         non_t_tag_refs = {}
-        lines[scan_start..-1].to_a.each do |l|
+        lines[scan_start..].to_a.each do |l|
           # Case A: explicit tag ref key like [1.2.3t]: ...
           if (m = l.match(/^\[(#{CHANGELOG_VERSION_PATTERN_SOURCE})t\]:\s+(\S+)/o))
             t_versions[m[1]] = true
@@ -1237,6 +1239,8 @@ module Kettle
         end
 
         if owner && repo
+          add_missing_tag_link_refs!(lines, owner, repo, except: new_version)
+
           # Add compare link for the new version
           from = prev_version ? "v#{prev_version}" : detect_initial_compare_base(lines)
           new_compare = "[#{new_version}]: https://github.com/#{owner}/#{repo}/compare/#{from}...v#{new_version}\n"
@@ -1251,7 +1255,7 @@ module Kettle
         end
 
         # Rebuild and sort the reference block so Unreleased is first, then newest to oldest versions, preserving everything above first_ref
-        ref_lines = lines[first_ref..-1].select { |l| /^\[[^\]]+\]:\s+http/.match?(l) }
+        ref_lines = lines[first_ref..].select { |l| /^\[[^\]]+\]:\s+http/.match?(l) }
         # Deduplicate by key (text inside the square brackets)
         by_key = {}
         ref_lines.each do |l|
@@ -1289,6 +1293,35 @@ module Kettle
         end
         rebuilt = head + new_ref_block + ["\n"]
         rebuilt.join
+      end
+
+      # Historical sections can contain the canonical TAG row while lacking the
+      # matching Markdown reference definition. Reconcile those records rather
+      # than limiting reference generation to the release currently being
+      # prepared.
+      def add_missing_tag_link_refs!(lines, owner, repo, except: nil)
+        tag_versions = lines.filter_map do |line|
+          line.match(TAG_REFERENCE_USAGE_RE)&.[](1)
+        end.uniq
+
+        tag_versions.each do |version|
+          next if version == except
+          next if lines.any? { |line| line.start_with?("[#{version}t]:") }
+          unless local_release_tag?(version)
+            warn("kettle-changelog: local git tag v#{version} is absent; leaving its TAG reference unresolved")
+            next
+          end
+
+          lines << "[#{version}t]: https://github.com/#{owner}/#{repo}/releases/tag/v#{version}\n"
+        end
+      end
+
+      def local_release_tag?(version)
+        @local_release_tags ||= begin
+          output, status = Open3.capture2e("git", "tag", "--list", "v*", chdir: @root)
+          status.success? ? output.lines.map(&:strip) : []
+        end
+        @local_release_tags.include?("v#{version}")
       end
 
       # Ensure every Markdown atx-style heading line (e.g., "# ", "## ") has exactly one blank line
@@ -1335,7 +1368,7 @@ module Kettle
         idx = lines.index { |l| l.start_with?(UNRELEASED_SECTION_HEADING) }
         return text unless idx
         head = lines[0...idx]
-        tail = lines[idx..-1]
+        tail = lines[idx..]
         # Ensure exactly one blank line between body and refs
         if head.any? && head.last.to_s.strip != ""
           head << ""

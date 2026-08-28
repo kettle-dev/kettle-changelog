@@ -2,17 +2,6 @@
   "kettle-changelog.gemspec:247951855": [
     [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
   ],
-  "lib/kettle/changelog/cli.rb:910520277": [
-    [149, 43, 24, "Style/SlicingWithRange: Prefer `[unreleased_ref_idx..]` over `[unreleased_ref_idx..-1]`.", 3348125965],
-    [597, 28, 12, "Style/SlicingWithRange: Prefer `[next_i..]` over `[next_i..-1]`.", 2124827054],
-    [606, 42, 14, "Style/SlicingWithRange: Prefer `[footer_i..]` over `[footer_i..-1]`.", 2377888684],
-    [633, 46, 7, "Style/SlicingWithRange: Prefer `[1..]` over `[1..-1]`.", 1439778702],
-    [636, 32, 24, "Style/SlicingWithRange: Prefer `[release_line_count..]` over `[release_line_count..-1]`.", 2424433883],
-    [638, 37, 7, "Style/SlicingWithRange: Prefer `[1..]` over `[1..-1]`.", 1439778702],
-    [1106, 14, 16, "Style/SlicingWithRange: Prefer `[scan_start..]` over `[scan_start..-1]`.", 4064532703],
-    [1254, 26, 15, "Style/SlicingWithRange: Prefer `[first_ref..]` over `[first_ref..-1]`.", 4126436875],
-    [1338, 21, 9, "Style/SlicingWithRange: Prefer `[idx..]` over `[idx..-1]`.", 610899530]
-  ],
   "spec/kettle/changelog/entry_adder_spec.rb:2036989935": [
     [238, 58, 25, "Style/SlicingWithRange: Prefer `[(heading_level + 1)..]` over `[(heading_level + 1)..-1]`.", 945490021],
     [242, 34, 17, "Style/SlicingWithRange: Prefer `[(index + 1)..]` over `[(index + 1)..-1]`.", 2379829754]
