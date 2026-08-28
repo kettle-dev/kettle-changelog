@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Backfill missing release-tag Markdown references only when the matching local Git tag exists.
-
 ### Security
+
+## [1.0.5] - 2026-08-28
+
+- TAG: [v1.0.5][1.0.5t]
+- COVERAGE: 94.05% -- 1075/1143 lines in 6 files
+- BRANCH COVERAGE: 76.95% -- 374/486 branches in 6 files
+- 39.39% documented
+
+### Fixed
+
+- Backfill missing release-tag Markdown references only when the matching local Git tag exists.
 
 ## [1.0.4] - 2026-08-28
 
@@ -170,7 +179,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.4...v1.0.5
+[1.0.5t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.5
 [1.0.4]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.3...v1.0.4
 [1.0.4t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.4
 [1.0.3]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.2...v1.0.3
