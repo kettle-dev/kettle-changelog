@@ -425,6 +425,7 @@ module Kettle
         updated = convert_heading_tag_suffix_to_list(changelog)
         updated = normalize_legacy_release_headings(updated)
         updated = remove_redundant_historical_placeholders(updated)
+        updated = collapse_keyed_project_file_updates_by_release(updated)
         updated = normalize_heading_spacing(updated)
         updated = ensure_footer_spacing(updated)
         updated = updated.rstrip + "\n"
@@ -458,6 +459,15 @@ module Kettle
         return changelog if removals.empty?
 
         lines.each_with_index.reject { |_line, index| removals.any? { |range| range.cover?(index) } }.map(&:first).join
+      end
+
+      def collapse_keyed_project_file_updates_by_release(changelog)
+        lines = changelog.to_s.lines
+        changelog_release_sections(lines).sort_by { |section| section.fetch(:start) }.reverse_each do |section|
+          range = section.fetch(:start)...section.fetch(:finish)
+          lines[range] = KeyedEntryUpserter.collapse_project_file_updates(lines[range].join).lines
+        end
+        lines.join
       end
 
       def changelog_release_sections(lines)

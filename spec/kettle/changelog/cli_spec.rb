@@ -2118,6 +2118,61 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(changelog).to include("[Unreleased]: https://github.com/acme/demo/compare/v1.2.3...HEAD")
       end
     end
+
+    it "consolidates repeated keyed project-file updates within one published release" do
+      mkproj do |root|
+        path = File.join(root, "CHANGELOG.md")
+        File.write(path, <<~MD)
+          # Changelog
+
+          ## [Unreleased]
+
+          ### Changed
+
+          ## [3.2.7] - 2026-08-29
+
+          ### Changed
+
+          - [kc] kettle-jem/prepare: updated 30 project files:
+            - configuration (1)
+            - dependencies (26)
+            - other (3)
+
+          - [kc] kettle-jem/template: updated 2 project files:
+            - dependencies (1)
+            - other (1)
+
+          - [kc] kettle-jem/prepare: updated 10 project files:
+            - dependencies (9)
+            - other (1)
+
+          - [kc] kettle-jem/template: updated 4 project files:
+            - code and tests (1)
+            - dependencies (1)
+            - other (1)
+            - workflows (1)
+
+          ## [3.2.6] - 2026-08-13
+
+          ### Changed
+
+          - [kc] kettle-jem/prepare: updated 1 project file:
+            - dependencies (1)
+
+          [Unreleased]: https://github.com/acme/demo/compare/v3.2.7...HEAD
+        MD
+
+        described_class.new(strict: false, root: root).send(:reformat_changelog!, File.read(path))
+
+        changelog = File.read(path)
+        release = changelog.split("## [3.2.7]").last.split("## [3.2.6]").first
+        previous_release = changelog.split("## [3.2.6]").last
+        expect(release.scan("[kc] kettle-jem/prepare").length).to eq(1)
+        expect(release.scan("[kc] kettle-jem/template").length).to eq(1)
+        expect(release).to include("updated 40 project files:", "updated 6 project files:")
+        expect(previous_release).to include("updated 1 project file:")
+      end
+    end
   end
 
   describe "prepared release rollback" do

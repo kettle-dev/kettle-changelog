@@ -30,6 +30,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Consolidate repeated keyed project-file summaries when updating a prepared release section.
 
+- Consolidate repeated keyed project-file summaries within each published release during changelog reformatting.
+
 ### Security
 
 ## [1.0.5] - 2026-08-28
