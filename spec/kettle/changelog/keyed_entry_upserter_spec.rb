@@ -153,6 +153,37 @@ RSpec.describe Kettle::Changelog::KeyedEntryUpserter do
     }.to raise_error(Kettle::Changelog::Error, /expected at most one \[kc\] kettle-jem-deps-floor entry/)
   end
 
+  it "collapses repeated keyed project-file updates while preserving distinct keys" do
+    source = <<~MARKDOWN
+      ### Changed
+
+      - [kc] kettle-jem/prepare: updated 30 project files:
+        - configuration (1)
+        - dependencies (26)
+        - other (3)
+
+      - [kc] kettle-jem/template: updated 2 project files:
+        - dependencies (1)
+        - other (1)
+
+      - [kc] kettle-jem/prepare: updated 10 project files:
+        - dependencies (9)
+        - other (1)
+
+      - [kc] kettle-jem/template: updated 4 project files:
+        - code and tests (1)
+        - dependencies (1)
+        - other (1)
+        - workflows (1)
+    MARKDOWN
+
+    updated = described_class.collapse_project_file_updates(source)
+
+    expect(updated.scan("[kc] kettle-jem/prepare").length).to eq(1)
+    expect(updated.scan("[kc] kettle-jem/template").length).to eq(1)
+    expect(updated).to include("updated 40 project files:", "- dependencies (35)", "updated 6 project files:")
+  end
+
   it "exposes keyed upserts through the JSON CLI interface" do
     write_changelog(<<~MARKDOWN)
       # Changelog

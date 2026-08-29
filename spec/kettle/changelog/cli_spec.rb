@@ -721,6 +721,44 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
       end
     end
 
+    it "collapses repeated keyed project-file updates when merging a prepared release" do
+      release_body = <<~MARKDOWN
+        ### Changed
+
+        - [kc] kettle-jem/prepare: updated 30 project files:
+          - configuration (1)
+          - dependencies (26)
+          - other (3)
+
+        - [kc] kettle-jem/template: updated 2 project files:
+          - dependencies (1)
+          - other (1)
+      MARKDOWN
+      unreleased_block = <<~MARKDOWN
+        ### Changed
+
+        - [kc] kettle-jem/prepare: updated 10 project files:
+          - dependencies (9)
+          - other (1)
+
+        - [kc] kettle-jem/template: updated 4 project files:
+          - code and tests (1)
+          - dependencies (1)
+          - other (1)
+          - workflows (1)
+      MARKDOWN
+
+      merged = described_class.new(strict: false).send(
+        :merge_release_body_with_unreleased,
+        release_body,
+        unreleased_block
+      )
+
+      expect(merged.scan("[kc] kettle-jem/prepare").length).to eq(1)
+      expect(merged.scan("[kc] kettle-jem/template").length).to eq(1)
+      expect(merged).to include("updated 40 project files:", "updated 6 project files:")
+    end
+
     it "updates a prerelease prepared release in place", freeze: Time.new(2026, 6, 21) do
       mkproj do |root|
         File.write(File.join(root, "lib", "my", "gem", "version.rb"), <<~RB)

@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Consolidate repeated keyed project-file summaries when updating a prepared release section.
+
 ### Security
 
 ## [1.0.5] - 2026-08-28

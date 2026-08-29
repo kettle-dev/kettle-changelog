@@ -710,7 +710,8 @@ module Kettle
           end
         end
 
-        ([leading] + sections.map { |section| section.fetch(:heading) + trim_blank_lines(section.fetch(:lines)).join }).join.rstrip + "\n"
+        merged = ([leading] + sections.map { |section| section.fetch(:heading) + trim_blank_lines(section.fetch(:lines)).join }).join.rstrip + "\n"
+        KeyedEntryUpserter.collapse_project_file_updates(merged)
       end
 
       def strip_release_metadata(release_body)

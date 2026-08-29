@@ -5,6 +5,67 @@ module Kettle
     class KeyedEntryUpserter
       SECTIONS = %w[Added Changed Deprecated Removed Fixed Security].freeze
       KEY_PREFIX = "[kc]"
+      PROJECT_FILE_UPDATE_FIRST_LINE = /\A[-*]\s+\[kc\]\s+([^\s:]+):\s+updated\s+\d+\s+project\s+files?:\s*\z/
+      PROJECT_FILE_UPDATE_CATEGORY_LINE = /\A\s{2,}[-*]\s+(.+?)\s+\((\d+)\)\s*\z/
+
+      class << self
+        # Consolidates repeated maintenance summaries after a prepared release
+        # is updated in place. The AST supplies list-item boundaries; the two
+        # regular expressions only parse the stable text payload inside those
+        # already-classified Markdown items.
+        def collapse_project_file_updates(source)
+          require "ast/crispr/markdown/markly"
+          context = Ast::Crispr::Markdown::Markly.document_context(content: source.to_s, source_label: "CHANGELOG.md")
+          updates = context.structural_owners(owner_scope: :list_items)
+            .select { |item| item.depth == 1 }
+            .filter_map { |item| project_file_update_record(item) }
+          duplicate_groups = updates.group_by { |update| update.fetch(:key) }.values.select { |group| group.length > 1 }
+          return source.to_s if duplicate_groups.empty?
+
+          lines = source.to_s.lines
+          duplicate_groups.flatten.sort_by { |update| update.fetch(:start_line) }.reverse_each do |update|
+            group = duplicate_groups.find { |candidate| candidate.include?(update) }
+            first = group.min_by { |candidate| candidate.fetch(:start_line) }
+            replacement = (update == first) ? project_file_update_entry(group).lines : []
+            lines[(update.fetch(:start_line) - 1)...update.fetch(:end_line)] = replacement
+          end
+          lines.join
+        end
+
+        private
+
+        def project_file_update_record(item)
+          lines = item.source.to_s.lines
+          key_match = PROJECT_FILE_UPDATE_FIRST_LINE.match(lines.shift.to_s.strip)
+          return unless key_match
+
+          counts = lines.filter_map do |line|
+            match = PROJECT_FILE_UPDATE_CATEGORY_LINE.match(line)
+            next unless match
+
+            [match[1].tr(" ", "_").to_sym, match[2].to_i]
+          end.to_h
+          return if counts.empty?
+
+          {
+            key: key_match[1],
+            counts: counts,
+            start_line: item.location.start_line,
+            end_line: item.location.end_line
+          }
+        end
+
+        def project_file_update_entry(entries)
+          counts = entries.each_with_object(Hash.new(0)) do |entry, totals|
+            entry.fetch(:counts).each { |category, count| totals[category] += count }
+          end
+          total = counts.values.sum
+          details = counts.sort_by { |category, _count| category.to_s }.map do |category, count|
+            "  - #{category.to_s.tr("_", " ")} (#{count})"
+          end
+          ["- #{KEY_PREFIX} #{entries.first.fetch(:key)}: updated #{total} project file#{"s" unless total == 1}:", *details, ""].join("\n")
+        end
+      end
 
       def initialize(section:, key:, entry:, legacy_prefixes: [], root: Kettle::Dev::CIHelpers.project_root)
         @root = root
