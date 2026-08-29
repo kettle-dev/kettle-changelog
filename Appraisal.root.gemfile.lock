@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.5)
+    kettle-changelog (1.0.6)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (>= 3.0.15, < 4.0.0)
+      kettle-dev (>= 3.0.17, < 4.0.0)
       version_gem (~> 1.1, >= 1.1.15)
 
 GEM
@@ -87,7 +87,7 @@ GEM
     gitmoji-regex (2.0.12)
       version_gem (~> 1.1, >= 1.1.15)
     json (2.21.2)
-    kettle-dev (3.0.15)
+    kettle-dev (3.0.17)
       emoji_regex (>= 15.0)
       kettle-gha-pins (~> 0.3, >= 0.3.14)
       kettle-ndjson (~> 0.1, >= 0.1.13)
@@ -367,7 +367,7 @@ CHECKSUMS
   backports (3.25.3) sha256=94298d32dc3c40ca15633b54e282780b49e2db0c045f602ea1907e4f63a17235
   benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
-  bundler (4.0.17) sha256=214e21431b5665dd2f99df8a5511c6b151d7a72e8015c8b38f8b775b61cbb6c1
+  bundler (4.0.19) sha256=b48056e4c77fb3853cc47775b5447ede44aaa4f53c32f168014ab4fe86587d47
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
   citrus (3.0.2) sha256=4ec2412fc389ad186735f4baee1460f7900a8e130ffe3f216b30d4f9c684f650
   concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
@@ -384,8 +384,8 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.12) sha256=bebbf29e9539a27f76d0695899c0fabde1b59dba556277508abf45e72a1dc24d
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
-  kettle-changelog (1.0.5)
-  kettle-dev (3.0.15) sha256=da20c1597dc12f642f291d65495bec174878bc2207929e3a36e422acbf3eb9df
+  kettle-changelog (1.0.6)
+  kettle-dev (3.0.17) sha256=1c758c1bfe76316c4bd5e501d887c91c59c195665281f50543dfdcfe1b103a13
   kettle-gha-pins (0.3.14) sha256=443a218149d3a2ab300875eb10ef55d5c4bc340bce7ba7caba026e1680dd8c21
   kettle-ndjson (0.1.13) sha256=62fc0f6f5812ecb103e0cf584ae6a66e2369266e48fbf42f7ee643288a8bf575
   kettle-rb (0.1.11) sha256=3e50b413048906f2c5aea69ff805fbf8f7f2b5ea9d9e3d95151d38d97d6640f3
