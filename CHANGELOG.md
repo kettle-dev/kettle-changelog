@@ -28,11 +28,20 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [1.0.6] - 2026-08-29
+
+- TAG: [v1.0.6][1.0.6t]
+- COVERAGE: 94.27% -- 1119/1187 lines in 6 files
+- BRANCH COVERAGE: 77.31% -- 385/498 branches in 6 files
+- 38.89% documented
+
+### Fixed
+
 - Consolidate repeated keyed project-file summaries when updating a prepared release section.
 
 - Consolidate repeated keyed project-file summaries within each published release during changelog reformatting.
-
-### Security
 
 ## [1.0.5] - 2026-08-28
 
@@ -183,7 +192,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.5...v1.0.6
+[1.0.6t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.6
 [1.0.5]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.4...v1.0.5
 [1.0.5t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.5
 [1.0.4]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.3...v1.0.4
