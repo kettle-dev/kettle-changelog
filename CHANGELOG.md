@@ -30,6 +30,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Honor the release-provided disposable lockfile when generating strict changelog coverage.
 
+- Use generated coverage bundles for changelog coverage when available, with explicit bundle selection overrides.
+
 ### Security
 
 ## [1.0.6] - 2026-08-29

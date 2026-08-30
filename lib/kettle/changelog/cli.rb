@@ -35,10 +35,11 @@ module Kettle
       # @param historical_backfill_version [String, nil] tagged release to document without moving Unreleased entries
       # @param version [String, nil] explicit version override for gems without a literal VERSION constant
       # @param yes [Boolean] when true, approve the selected release plan without prompting
-      def initialize(strict: true, enforce_coverage_thresholds: true, update_prep: false, reformat_only: false, historical_backfill_version: nil, version: nil, root: Kettle::Dev::CIHelpers.project_root, refresh_cache: false, yes: false, event_stream: nil)
+      def initialize(strict: true, enforce_coverage_thresholds: true, update_prep: false, reformat_only: false, historical_backfill_version: nil, version: nil, root: Kettle::Dev::CIHelpers.project_root, refresh_cache: false, yes: false, event_stream: nil, coverage_gemfile: nil)
         @root = root
         @changelog_path = resolved_changelog_path
         @coverage_root = resolved_coverage_root
+        @coverage_gemfile = resolved_coverage_gemfile(coverage_gemfile)
         @coverage_path = File.join(@coverage_root, "coverage", "coverage.json")
         @strict = strict
         @enforce_coverage_thresholds = enforce_coverage_thresholds
@@ -939,8 +940,7 @@ module Kettle
           env[key] = nil
         end
         env.merge!(changelog_coverage_workflow_thresholds)
-        gemfile = File.join(@coverage_root, "Gemfile")
-        env["BUNDLE_GEMFILE"] = gemfile if File.file?(gemfile)
+        env["BUNDLE_GEMFILE"] = @coverage_gemfile if @coverage_gemfile
         coverage_lockfile = ENV.fetch("KETTLE_CHANGELOG_COVERAGE_LOCKFILE", "").to_s.strip
         unless coverage_lockfile.empty?
           raise "Configured changelog coverage lockfile does not exist: #{coverage_lockfile}" unless File.file?(coverage_lockfile)
@@ -950,6 +950,30 @@ module Kettle
         # This is a release-tool handoff, not target-project configuration.
         env["KETTLE_CHANGELOG_COVERAGE_LOCKFILE"] = nil
         env
+      end
+
+      # Coverage has a deliberately smaller bundle than the project's normal
+      # development bundle when Appraisal generated gemfiles/coverage.gemfile.
+      # Keep the explicit setting separate from BUNDLE_GEMFILE: that variable
+      # commonly belongs to the outer kettle-changelog release bundle.
+      def resolved_coverage_gemfile(explicit_gemfile)
+        requested = explicit_gemfile.to_s.strip
+        requested = ENV.fetch("K_CHANGELOG_COVERAGE_GEMFILE", "").to_s.strip if requested.empty?
+
+        unless requested.empty?
+          path = File.expand_path(requested, @coverage_root)
+          raise "Configured changelog coverage Gemfile does not exist: #{path}" unless File.file?(path)
+
+          return path
+        end
+
+        generated = File.join(@coverage_root, "gemfiles", "coverage.gemfile")
+        return generated if File.file?(generated)
+
+        root_gemfile = File.join(@coverage_root, "Gemfile")
+        return root_gemfile if File.file?(root_gemfile)
+
+        nil
       end
 
       # The changelog coverage run is the final local test gate before a

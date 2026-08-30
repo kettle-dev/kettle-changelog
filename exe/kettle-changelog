@@ -63,7 +63,7 @@ end
 
 if ARGV.include?("-h") || ARGV.include?("--help")
   puts <<~USAGE
-    Usage: kettle-changelog [--version VERSION] [--yes] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--upsert-unreleased-entry --section SECTION --key KEY --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
+    Usage: kettle-changelog [--version VERSION] [--yes] [--coverage-gemfile PATH] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--upsert-unreleased-entry --section SECTION --key KEY --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
 
     Detects the current version from lib/**/version.rb, the latest live release, and
     the most recent CHANGELOG.md release section, then prompts to confirm the selected plan:
@@ -93,12 +93,14 @@ if ARGV.include?("-h") || ARGV.include?("--help")
       --events[=TYPES]          Print newline-delimited JSON changelog events
       --no-strict               Allow missing coverage and yard data (warnings only, no errors)
       --no-coverage-threshold   Generate coverage without hard-failing below configured thresholds
+      --coverage-gemfile PATH   Run coverage through this target-project Gemfile
 
     Environment:
       K_CHANGELOG_STRICT=false              Disable strict mode (equivalent to --no-strict flag)
       K_CHANGELOG_COVERAGE_HARD=false       Disable coverage threshold hard-failure
       K_CHANGELOG_PATH=path                 Read and write this changelog instead of ./CHANGELOG.md
       K_CHANGELOG_COVERAGE_ROOT=path        Run/read coverage from this root instead of the gem root
+      K_CHANGELOG_COVERAGE_GEMFILE=path     Target-project Gemfile for coverage; defaults to gemfiles/coverage.gemfile, then Gemfile
       K_CHANGELOG_VERSION_FILE=path         Read VERSION from this file instead of lib/**/version.rb
       K_CHANGELOG_GEM_NAME=name             Read live release data as this gem instead of root .gemspec
       KETTLE_GEM_COOP_REFRESH=true          Bypass cached gem.coop version data
@@ -206,6 +208,7 @@ begin
   end
 
   historical_backfill_version = extract_option_arg!(ARGV, "--backfill-released-version")
+  coverage_gemfile = extract_option_arg!(ARGV, "--coverage-gemfile")
 
   if upsert_unreleased_entry
     section = extract_option_arg!(ARGV, "--section")
@@ -240,7 +243,7 @@ begin
   end
 
   event_stream = events_output ? Kettle::Ndjson.event_stream($stdout, types: event_types) : nil
-  cli = Kettle::Changelog::CLI.new(strict: strict_mode, enforce_coverage_thresholds: coverage_hard, update_prep: update_prep, reformat_only: reformat_only, historical_backfill_version: historical_backfill_version, version: version_override, refresh_cache: refresh_cache, yes: yes, event_stream: event_stream)
+  cli = Kettle::Changelog::CLI.new(strict: strict_mode, enforce_coverage_thresholds: coverage_hard, update_prep: update_prep, reformat_only: reformat_only, historical_backfill_version: historical_backfill_version, version: version_override, refresh_cache: refresh_cache, yes: yes, event_stream: event_stream, coverage_gemfile: coverage_gemfile)
   if release_state_query
     state = cli.release_state
     puts(json_output ? JSON.pretty_generate(state) : cli.release_state_table(state))

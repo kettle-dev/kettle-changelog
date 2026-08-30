@@ -1225,6 +1225,69 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
       end
     end
 
+    it "prefers the generated coverage appraisal bundle" do
+      mkproj do |root|
+        coverage_root = File.join(root, "family")
+        coverage_gemfile = File.join(coverage_root, "gemfiles", "coverage.gemfile")
+        FileUtils.mkdir_p(File.dirname(coverage_gemfile))
+        File.write(File.join(coverage_root, "Gemfile"), "source \"https://rubygems.org\"\n")
+        File.write(coverage_gemfile, "source \"https://rubygems.org\"\n")
+        allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(root)
+        stub_env("K_CHANGELOG_COVERAGE_ROOT" => coverage_root)
+
+        expect(cli = described_class.new(strict: true)).to receive(:system).with(
+          hash_including("BUNDLE_GEMFILE" => coverage_gemfile),
+          "bundle",
+          "exec",
+          "kettle-test",
+          chdir: coverage_root
+        ) do
+          FileUtils.mkdir_p(File.join(coverage_root, "coverage"))
+          File.write(File.join(coverage_root, "coverage", "coverage.json"), JSON.generate("coverage" => {}))
+          true
+        end
+
+        cli.send(:coverage_lines)
+      end
+    end
+
+    it "uses an explicit coverage Gemfile in preference to the generated default" do
+      mkproj do |root|
+        generated = File.join(root, "gemfiles", "coverage.gemfile")
+        alternate = File.join(root, "gemfiles", "release-coverage.gemfile")
+        FileUtils.mkdir_p(File.dirname(generated))
+        File.write(File.join(root, "Gemfile"), "source \"https://rubygems.org\"\n")
+        File.write(generated, "source \"https://rubygems.org\"\n")
+        File.write(alternate, "source \"https://rubygems.org\"\n")
+        allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(root)
+        stub_env("K_CHANGELOG_COVERAGE_GEMFILE" => "gemfiles/release-coverage.gemfile")
+
+        expect(cli = described_class.new(strict: true)).to receive(:system).with(
+          hash_including("BUNDLE_GEMFILE" => alternate),
+          "bundle",
+          "exec",
+          "kettle-test",
+          chdir: root
+        ) do
+          FileUtils.mkdir_p(File.join(root, "coverage"))
+          File.write(File.join(root, "coverage", "coverage.json"), JSON.generate("coverage" => {}))
+          true
+        end
+
+        cli.send(:coverage_lines)
+      end
+    end
+
+    it "rejects a missing explicit coverage Gemfile" do
+      mkproj do |root|
+        allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(root)
+
+        expect {
+          described_class.new(strict: true, coverage_gemfile: "gemfiles/missing.gemfile")
+        }.to raise_error(RuntimeError, /Configured changelog coverage Gemfile does not exist/)
+      end
+    end
+
     it "runs strict coverage in the coverage root bundle while preserving dependency wiring" do
       mkproj do |member_root|
         coverage_root = File.join(member_root, "family")
