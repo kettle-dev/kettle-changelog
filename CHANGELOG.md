@@ -28,11 +28,20 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [1.0.7] - 2026-08-30
+
+- TAG: [v1.0.7][1.0.7t]
+- COVERAGE: 94.35% -- 1136/1204 lines in 6 files
+- BRANCH COVERAGE: 77.73% -- 398/512 branches in 6 files
+- 38.89% documented
+
+### Fixed
+
 - Honor the release-provided disposable lockfile when generating strict changelog coverage.
 
 - Use generated coverage bundles for changelog coverage when available, with explicit bundle selection overrides.
-
-### Security
 
 ## [1.0.6] - 2026-08-29
 
@@ -196,7 +205,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...HEAD
+[1.0.7]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...v1.0.7
+[1.0.7t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.7
 [1.0.6]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.5...v1.0.6
 [1.0.6t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.6
 [1.0.5]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.4...v1.0.5
