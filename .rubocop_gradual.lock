@@ -1,9 +1,0 @@
-{
-  "kettle-changelog.gemspec:3764735948": [
-    [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
-  ],
-  "spec/kettle/changelog/entry_adder_spec.rb:2036989935": [
-    [238, 58, 25, "Style/SlicingWithRange: Prefer `[(heading_level + 1)..]` over `[(heading_level + 1)..-1]`.", 945490021],
-    [242, 34, 17, "Style/SlicingWithRange: Prefer `[(index + 1)..]` over `[(index + 1)..-1]`.", 2379829754]
-  ]
-}

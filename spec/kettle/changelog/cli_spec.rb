@@ -1243,6 +1243,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
             "argv" => ARGV,
             "cwd" => Dir.pwd,
             "bundle_gemfile" => ENV["BUNDLE_GEMFILE"],
+            "bundle_lockfile" => ENV["BUNDLE_LOCKFILE"],
             "bundle_bin_path" => ENV["BUNDLE_BIN_PATH"],
             "bundler_setup" => ENV["BUNDLER_SETUP"],
             "rubyopt" => ENV["RUBYOPT"],
@@ -1277,6 +1278,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         stub_env(
           "BUNDLE_BIN_PATH" => File.join(member_root, "member-bundle-bin"),
           "BUNDLE_GEMFILE" => File.join(member_root, "Gemfile"),
+          "KETTLE_CHANGELOG_COVERAGE_LOCKFILE" => File.join(coverage_root, "tmp", "release.lock"),
           "BUNDLER_SETUP" => File.join(member_root, "member-setup"),
           "K_CHANGELOG_GEM_NAME" => "structuredmerge-ruby",
           "K_CHANGELOG_PATH" => File.join(member_root, "CHANGELOG.md"),
@@ -1288,6 +1290,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           "PATH" => "#{fake_bin}#{File::PATH_SEPARATOR}#{ENV.fetch("PATH", "")}",
           "RUBYOPT" => "-rbundler/setup"
         )
+        FileUtils.mkdir_p(File.join(coverage_root, "tmp"))
+        File.write(File.join(coverage_root, "tmp", "release.lock"), "PLATFORMS\n  x86_64-linux\n")
         allow(Kettle::Dev::BundlerEnvGuard).to receive(:unbundled_env).and_return(
           Kettle::Dev::BundlerEnvGuard.unbundled_env.merge("KETTLE_DEV_DEV" => "/workspace/kettle-dev")
         )
@@ -1298,7 +1302,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(snapshot).to include(
           "argv" => %w[exec kettle-test],
           "cwd" => coverage_root,
-          "bundle_gemfile" => File.join(coverage_root, "Gemfile")
+          "bundle_gemfile" => File.join(coverage_root, "Gemfile"),
+          "bundle_lockfile" => File.join(coverage_root, "tmp", "release.lock")
         )
         expect(snapshot.fetch("bundle_bin_path")).to be_nil.or eq("")
         expect(snapshot.fetch("bundler_setup")).to be_nil.or eq("")

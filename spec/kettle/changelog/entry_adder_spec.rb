@@ -235,11 +235,11 @@ RSpec.describe Kettle::Changelog::EntryAdder do
       heading_level = line.each_char.take_while { |char| char == "#" }.length
       next rows if heading_level.zero? || line[heading_level] != " "
 
-      rows << [index + 1, heading_level, line.strip, line[(heading_level + 1)..-1].to_s.strip]
+      rows << [index + 1, heading_level, line.strip, line[(heading_level + 1)..].to_s.strip]
     end
 
     heading_rows.each_with_index.map do |(start_line, level, source, text), index|
-      next_heading = heading_rows[(index + 1)..-1].to_a.find { |(_, next_level, _, _)| next_level <= level }
+      next_heading = heading_rows[(index + 1)..].to_a.find { |(_, next_level, _, _)| next_level <= level }
       end_line = next_heading ? next_heading.first - 1 : content.lines.length
       fake_heading_class.new(source, text, level, fake_location_class.new(start_line, end_line))
     end

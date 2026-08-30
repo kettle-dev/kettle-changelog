@@ -941,6 +941,14 @@ module Kettle
         env.merge!(changelog_coverage_workflow_thresholds)
         gemfile = File.join(@coverage_root, "Gemfile")
         env["BUNDLE_GEMFILE"] = gemfile if File.file?(gemfile)
+        coverage_lockfile = ENV.fetch("KETTLE_CHANGELOG_COVERAGE_LOCKFILE", "").to_s.strip
+        unless coverage_lockfile.empty?
+          raise "Configured changelog coverage lockfile does not exist: #{coverage_lockfile}" unless File.file?(coverage_lockfile)
+
+          env["BUNDLE_LOCKFILE"] = coverage_lockfile
+        end
+        # This is a release-tool handoff, not target-project configuration.
+        env["KETTLE_CHANGELOG_COVERAGE_LOCKFILE"] = nil
         env
       end
 
