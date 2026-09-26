@@ -18,7 +18,7 @@ git_source(:gitlab) { |repo_name| "https://gitlab.com/#{repo_name}" }
 # Include dependencies from kettle-changelog.gemspec
 gemspec
 
-gem "kettle-family", "~> 1.2", ">= 1.2.62"
+gem "kettle-family", "~> 1.3", ">= 1.3.1"
 
 # Local workspace dependency wiring for *_local.gemfile overrides
 gem "nomono", "~> 1.1", ">= 1.1.5", require: false # ruby >= 3.2.0
@@ -26,6 +26,10 @@ gem "nomono", "~> 1.1", ">= 1.1.5", require: false # ruby >= 3.2.0
 # Direct sibling dependencies (env-switched via KETTLE_DEV_DEV)
 direct_sibling_gems = %w[
   kettle-dev
+  kettle-gha-pins
+  kettle-ndjson
+  kettle-rb
+  kettle-test
 ]
 direct_sibling_dev = ENV.fetch("KETTLE_DEV_DEV", "")
 direct_sibling_local =

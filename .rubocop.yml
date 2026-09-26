@@ -13,7 +13,6 @@ inherit_mode:
   merge:
     - Exclude
 AllCops:
-  TargetRubyVersion: 4.0
   Exclude:
     - certs/**/*
     - checksums/**/*
