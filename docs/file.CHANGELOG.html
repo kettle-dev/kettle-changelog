@@ -70,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.8...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -83,6 +83,47 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 <h3 id="fixed">Fixed</h3>
 
 <h3 id="security">Security</h3>
+
+<h2 id="108---2026-09-27">
+<a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...v1.0.8">1.0.8</a> - 2026-09-27</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.8">v1.0.8</a>
+</li>
+  <li>COVERAGE: 94.35% – 1136/1204 lines in 6 files</li>
+  <li>BRANCH COVERAGE: 77.73% – 398/512 branches in 6 files</li>
+  <li>38.89% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>kettle-jem-template-20260913-001 - Templating now also surfaces a review<br>
+entry in <code>dependency_conflicts.resolve</code> when a direct development<br>
+dependency doesn’t support one or more of this project’s declared<br>
+<code>engines:</code> and has no template-managed modular home (e.g. <code>sqlite3</code> on<br>
+<code>jruby</code>). Review each entry and pick a resolution per the project’s own<br>
+engine support needs.</li>
+</ul>
+
+<h3 id="changed-1">Changed</h3>
+
+<ul>
+  <li>[kc] kettle-jem/prepare: updated 15 project files:
+    <ul>
+      <li>configuration (1)</li>
+      <li>dependencies (14)</li>
+    </ul>
+  </li>
+  <li>[kc] kettle-jem/template: updated 15 project files:
+    <ul>
+      <li>code and tests (1)</li>
+      <li>dependencies (2)</li>
+      <li>other (3)</li>
+      <li>workflows (9)</li>
+    </ul>
+  </li>
+</ul>
 
 <h2 id="107---2026-08-30">
 <a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...v1.0.7">1.0.7</a> - 2026-08-30</h2>
@@ -156,7 +197,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.50% documented</li>
 </ul>
 
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 
 <ul>
   <li>[kc] kettle-jem/prepare: updated 9 project files:
@@ -203,7 +244,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>38.71% documented</li>
 </ul>
 
-<h3 id="changed-2">Changed</h3>
+<h3 id="changed-3">Changed</h3>
 
 <ul>
   <li>Add structural [kc]-keyed upserts for maintenance changelog entries.</li>
@@ -220,7 +261,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>42.31% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.</li>
@@ -243,7 +284,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>47.62% documented</li>
 </ul>
 
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 
 <ul>
   <li>kettle-jem-template-20260720-005 - README Support &amp; Community links now<br>
@@ -261,7 +302,7 @@ RSpec helpers provided by <code>kettle-test</code>.</p>
   <li>Provide a minimal release bundle for standalone kettle-changelog bootstrapping.</li>
 </ul>
 
-<h3 id="changed-3">Changed</h3>
+<h3 id="changed-4">Changed</h3>
 
 <ul>
   <li>kettle-jem-template-20260716-002 - Gemspecs now ship fewer repository-only<br>

@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.8] - 2026-09-27
+
+- TAG: [v1.0.8][1.0.8t]
+- COVERAGE: 94.35% -- 1136/1204 lines in 6 files
+- BRANCH COVERAGE: 77.73% -- 398/512 branches in 6 files
+- 38.89% documented
+
+### Added
+
 - kettle-jem-template-20260913-001 - Templating now also surfaces a review
   entry in `dependency_conflicts.resolve` when a direct development
   dependency doesn't support one or more of this project's declared
@@ -38,14 +57,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - dependencies (2)
   - other (3)
   - workflows (9)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.0.7] - 2026-08-30
 
@@ -222,7 +233,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...v1.0.8
+[1.0.8t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.8
 [1.0.7]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...v1.0.7
 [1.0.7t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.7
 [1.0.6]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.5...v1.0.6
