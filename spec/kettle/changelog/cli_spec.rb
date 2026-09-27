@@ -1364,10 +1364,10 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
 
         expect(snapshot).to include(
           "argv" => %w[exec kettle-test],
-          "cwd" => coverage_root,
           "bundle_gemfile" => File.join(coverage_root, "Gemfile"),
           "bundle_lockfile" => File.join(coverage_root, "tmp", "release.lock")
         )
+        expect(File.realpath(snapshot.fetch("cwd"))).to eq(File.realpath(coverage_root))
         expect(snapshot.fetch("bundle_bin_path")).to be_nil.or eq("")
         expect(snapshot.fetch("bundler_setup")).to be_nil.or eq("")
         expect(snapshot.fetch("rubyopt")).to be_nil.or eq("")
