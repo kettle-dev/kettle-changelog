@@ -7,5 +7,14 @@
         49
       ]
     }
+  ],
+  "if respond_to?(:generator_only)\ngenerator_only do": [
+    {
+      "file": "Appraisal.root.gemfile",
+      "lines": [
+        18,
+        26
+      ]
+    }
   ]
 }

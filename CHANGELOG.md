@@ -33,10 +33,10 @@ Please file a bug if you notice a violation of semantic versioning.
   - configuration (1)
   - dependencies (14)
 
-- [kc] kettle-jem/template: updated 14 project files:
+- [kc] kettle-jem/template: updated 15 project files:
   - code and tests (1)
   - dependencies (2)
-  - other (2)
+  - other (3)
   - workflows (9)
 
 ### Deprecated
