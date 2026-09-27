@@ -1291,51 +1291,9 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
     it "runs strict coverage in the coverage root bundle while preserving dependency wiring" do
       mkproj do |member_root|
         coverage_root = File.join(member_root, "family")
-        fake_bin = File.join(member_root, "fake-bin")
-        snapshot_path = File.join(member_root, "coverage-subprocess-env.json")
-        FileUtils.mkdir_p(fake_bin)
         FileUtils.mkdir_p(coverage_root)
         File.write(File.join(member_root, "Gemfile"), "source \"https://rubygems.org\"\n")
         File.write(File.join(coverage_root, "Gemfile"), "source \"https://rubygems.org\"\n")
-        File.write(File.join(fake_bin, "bundle"), <<~RUBY)
-          #!/usr/bin/env ruby
-          require "fileutils"
-          require "json"
-
-          snapshot = {
-            "argv" => ARGV,
-            "cwd" => Dir.pwd,
-            "bundle_gemfile" => ENV["BUNDLE_GEMFILE"],
-            "bundle_lockfile" => ENV["BUNDLE_LOCKFILE"],
-            "bundle_bin_path" => ENV["BUNDLE_BIN_PATH"],
-            "bundler_setup" => ENV["BUNDLER_SETUP"],
-            "rubyopt" => ENV["RUBYOPT"],
-            "kettle_changelog_gem_name" => ENV["K_CHANGELOG_GEM_NAME"],
-            "kettle_changelog_path" => ENV["K_CHANGELOG_PATH"],
-            "kettle_changelog_version_file" => ENV["K_CHANGELOG_VERSION_FILE"],
-            "kettle_changelog_coverage_root" => ENV["K_CHANGELOG_COVERAGE_ROOT"],
-            "kettle_dev_dev" => ENV["KETTLE_DEV_DEV"],
-            "kettle_changelog_dev_root" => ENV["KETTLE_CHANGELOG_DEV_ROOT"],
-            "k_release_ci_workflows" => ENV["K_RELEASE_CI_WORKFLOWS"],
-            "kettle_release_skip_github_release" => ENV["KETTLE_RELEASE_SKIP_GITHUB_RELEASE"]
-          }
-          File.write(#{snapshot_path.dump}, JSON.generate(snapshot))
-          exit(12) unless ARGV == ["exec", "kettle-test"]
-
-          FileUtils.mkdir_p(File.join(Dir.pwd, "coverage"))
-          File.write(
-            File.join(Dir.pwd, "coverage", "coverage.json"),
-            JSON.generate(
-              "coverage" => {
-                "gems/alpha/lib/alpha.rb" => {
-                  "lines" => [1, 0],
-                  "branches" => [{"coverage" => 1}, {"coverage" => 0}]
-                }
-              }
-            )
-          )
-        RUBY
-        FileUtils.chmod(0o755, File.join(fake_bin, "bundle"))
 
         allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(member_root)
         stub_env(
@@ -1350,7 +1308,6 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           "KETTLE_DEV_DEV" => "/workspace/kettle-dev",
           "K_RELEASE_CI_WORKFLOWS" => "current.yml",
           "KETTLE_RELEASE_SKIP_GITHUB_RELEASE" => "true",
-          "PATH" => "#{fake_bin}#{File::PATH_SEPARATOR}#{ENV.fetch("PATH", "")}",
           "RUBYOPT" => "-rbundler/setup"
         )
         FileUtils.mkdir_p(File.join(coverage_root, "tmp"))
@@ -1359,26 +1316,39 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           Kettle::Dev::BundlerEnvGuard.unbundled_env.merge("KETTLE_DEV_DEV" => "/workspace/kettle-dev")
         )
 
-        line_cov, branch_cov = described_class.new(strict: true).send(:coverage_lines)
-        snapshot = JSON.parse(File.read(snapshot_path))
+        cli = described_class.new(strict: true)
+        child_env = nil
+        expect(cli).to receive(:system) do |env, *command, **options|
+          child_env = env
+          expect(command).to eq(%w[bundle exec kettle-test])
+          expect(File.realpath(options.fetch(:chdir))).to eq(File.realpath(coverage_root))
+          FileUtils.mkdir_p(File.join(coverage_root, "coverage"))
+          File.write(
+            File.join(coverage_root, "coverage", "coverage.json"),
+            JSON.generate(
+              "coverage" => {
+                "gems/alpha/lib/alpha.rb" => {
+                  "lines" => [1, 0],
+                  "branches" => [{"coverage" => 1}, {"coverage" => 0}]
+                }
+              }
+            )
+          )
+          true
+        end
 
-        expect(snapshot).to include(
-          "argv" => %w[exec kettle-test],
-          "bundle_gemfile" => File.join(coverage_root, "Gemfile"),
-          "bundle_lockfile" => File.join(coverage_root, "tmp", "release.lock")
+        line_cov, branch_cov = cli.send(:coverage_lines)
+
+        expect(child_env).to include(
+          "BUNDLE_GEMFILE" => File.join(coverage_root, "Gemfile"),
+          "BUNDLE_LOCKFILE" => File.join(coverage_root, "tmp", "release.lock"),
+          "KETTLE_DEV_DEV" => "/workspace/kettle-dev"
         )
-        expect(File.realpath(snapshot.fetch("cwd"))).to eq(File.realpath(coverage_root))
-        expect(snapshot.fetch("bundle_bin_path")).to be_nil.or eq("")
-        expect(snapshot.fetch("bundler_setup")).to be_nil.or eq("")
-        expect(snapshot.fetch("rubyopt")).to be_nil.or eq("")
-        expect(snapshot.fetch("kettle_changelog_gem_name")).to be_nil
-        expect(snapshot.fetch("kettle_changelog_path")).to be_nil
-        expect(snapshot.fetch("kettle_changelog_version_file")).to be_nil
-        expect(snapshot.fetch("kettle_changelog_coverage_root")).to be_nil
-        expect(snapshot.fetch("kettle_dev_dev")).to eq("/workspace/kettle-dev")
-        expect(snapshot.fetch("kettle_changelog_dev_root")).to be_nil
-        expect(snapshot.fetch("k_release_ci_workflows")).to be_nil
-        expect(snapshot.fetch("kettle_release_skip_github_release")).to be_nil
+        %w[BUNDLE_BIN_PATH BUNDLER_SETUP RUBYOPT K_CHANGELOG_GEM_NAME K_CHANGELOG_PATH K_CHANGELOG_VERSION_FILE
+          K_CHANGELOG_COVERAGE_ROOT KETTLE_CHANGELOG_DEV_ROOT K_RELEASE_CI_WORKFLOWS KETTLE_RELEASE_SKIP_GITHUB_RELEASE
+          KETTLE_CHANGELOG_COVERAGE_LOCKFILE].each do |key|
+          expect(child_env[key]).to be_nil
+        end
         expect(line_cov).to eq("COVERAGE: 50.00% -- 1/2 lines in 1 files")
         expect(branch_cov).to eq("BRANCH COVERAGE: 50.00% -- 1/2 branches in 1 files")
       end
@@ -1466,7 +1436,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
   end
 
   describe "#yard_percent_documented" do
-    it "warns and returns nil when bin/rake not executable" do
+    it "warns and returns nil when no bin documentation scripts exist" do
       mkproj do |root|
         allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(root)
         cli = described_class.new(strict: false)
@@ -1484,8 +1454,6 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         FileUtils.chmod(0o755, cmd)
         allow(Kettle::Dev::CIHelpers).to receive(:project_root).and_return(root)
         # Don't actually execute file; just stub capture2 to return our text
-        allow(File).to receive(:executable?).and_call_original
-        allow(File).to receive(:executable?).with(cmd).and_return(true)
         allow(Open3).to receive(:capture2e).and_return(["nothing documented line\n", double("ps")])
         cli = described_class.new(strict: false)
         expect(cli.send(:yard_percent_documented)).to be_nil
@@ -1522,8 +1490,8 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         File.write(yard, "#!/usr/bin/env ruby\n")
         FileUtils.chmod(0o755, rake)
         FileUtils.chmod(0o755, yard)
-        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), rake, "yard", {chdir: root}).and_return(["no task here\n", double("rake status")])
-        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), yard, {chdir: root}).and_return(["95.35% documented\n", double("yard status")])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), RbConfig.ruby, rake, "yard", {chdir: root}).and_return(["no task here\n", double("rake status")])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), RbConfig.ruby, yard, {chdir: root}).and_return(["95.35% documented\n", double("yard status")])
 
         cli = described_class.new(strict: true)
         expect(cli.send(:yard_percent_documented)).to eq("95.35% documented")
@@ -1545,7 +1513,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         FileUtils.chmod(0o755, rake)
         status = instance_double(Process::Status, success?: false, exitstatus: 1)
         output = "bundle exec yard-lint lib\nrake aborted!\nCommand failed with status (1): [bundle exec yard-lint lib]\n"
-        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), rake, "yard", {chdir: root}).and_return([output, status])
+        allow(Open3).to receive(:capture2e).with(hash_including("KETTLE_DEV_DEV" => "/workspace/kettle-dev"), RbConfig.ruby, rake, "yard", {chdir: root}).and_return([output, status])
 
         cli = described_class.new(strict: true)
 

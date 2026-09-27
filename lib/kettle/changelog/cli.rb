@@ -6,6 +6,7 @@ require "net/http"
 require "uri"
 require "fileutils"
 require "yaml"
+require "rbconfig"
 require "kettle/ndjson"
 
 module Kettle
@@ -1022,7 +1023,7 @@ module Kettle
 
         # Run the canonical docs task to get the documentation percentage.
         commands.each do |command|
-          prepare_yard_fence_tmp_files if command == [File.join(@root, "bin", "yard")]
+          prepare_yard_fence_tmp_files if command == [RbConfig.ruby, File.join(@root, "bin", "yard")]
           output, status = capture_yard_command(command)
           unless command_successful?(status)
             return handle_yard_documentation_failure(yard_command_failure_message(command, output, status))
@@ -1079,9 +1080,11 @@ module Kettle
 
       def yard_command_label(command)
         command = Array(command)
-        bin = command.first.to_s
+        ruby_script = command.first == RbConfig.ruby
+        bin = ruby_script ? command[1].to_s : command.first.to_s
+        arguments = ruby_script ? command.drop(2) : command.drop(1)
         if bin == File.join(@root, "bin", "rake")
-          "bin/rake #{command.drop(1).join(" ")}".strip
+          "bin/rake #{arguments.join(" ")}".strip
         elsif bin == File.join(@root, "bin", "yard")
           "bin/yard"
         else
@@ -1092,9 +1095,9 @@ module Kettle
       def yard_documentation_commands
         commands = []
         rake = File.join(@root, "bin", "rake")
-        commands << [rake, "yard"] if File.executable?(rake)
+        commands << [RbConfig.ruby, rake, "yard"] if File.file?(rake)
         yard = File.join(@root, "bin", "yard")
-        commands << [yard] if File.executable?(yard)
+        commands << [RbConfig.ruby, yard] if File.file?(yard)
         commands
       end
 

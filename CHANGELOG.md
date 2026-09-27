@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Run YARD binstubs through Ruby so release metadata checks work on Windows without Unix executable bits.
+
 ### Security
 
 ## [1.0.8] - 2026-09-27
