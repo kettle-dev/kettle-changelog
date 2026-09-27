@@ -28,15 +28,13 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Run YARD binstubs through Ruby so release metadata checks work on Windows without Unix executable bits.
-
 ### Security
 
 ## [1.0.8] - 2026-09-27
 
 - TAG: [v1.0.8][1.0.8t]
-- COVERAGE: 94.35% -- 1136/1204 lines in 6 files
-- BRANCH COVERAGE: 77.73% -- 398/512 branches in 6 files
+- COVERAGE: 94.37% -- 1139/1207 lines in 6 files
+- BRANCH COVERAGE: 77.52% -- 400/516 branches in 6 files
 - 38.89% documented
 
 ### Added
@@ -59,6 +57,10 @@ Please file a bug if you notice a violation of semantic versioning.
   - dependencies (2)
   - other (3)
   - workflows (9)
+
+### Fixed
+
+- Run YARD binstubs through Ruby so release metadata checks work on Windows without Unix executable bits.
 
 ## [1.0.7] - 2026-08-30
 
