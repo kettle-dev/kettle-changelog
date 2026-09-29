@@ -1321,7 +1321,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(cli).to receive(:system) do |env, *command, **options|
           child_env = env
           expect(command).to eq(%w[bundle exec kettle-test])
-          expect(File.realpath(options.fetch(:chdir))).to eq(File.realpath(coverage_root))
+          expect(Kettle::Dev::Paths.same?(options.fetch(:chdir), coverage_root)).to be(true)
           FileUtils.mkdir_p(File.join(coverage_root, "coverage"))
           File.write(
             File.join(coverage_root, "coverage", "coverage.json"),
