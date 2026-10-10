@@ -1024,6 +1024,51 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
     end
   end
 
+  describe "#reset_stale_appraisal_lockfile!" do
+    it "deletes the lockfile next to a gemfiles/ coverage gemfile" do
+      mkproj do |root|
+        gemfiles = File.join(root, "gemfiles")
+        FileUtils.mkdir_p(gemfiles)
+        gemfile = File.join(gemfiles, "coverage.gemfile")
+        File.write(gemfile, "source \"https://gem.coop\"\n")
+        lockfile = "#{gemfile}.lock"
+        File.write(lockfile, "GEM\n  remote: https://gem.coop/\n")
+
+        cli = described_class.new(strict: true, coverage_gemfile: gemfile)
+        cli.send(:reset_stale_appraisal_lockfile!)
+
+        expect(File.file?(lockfile)).to be(false)
+      end
+    end
+
+    it "does nothing when the coverage gemfile is the project root Gemfile" do
+      mkproj do |root|
+        gemfile = File.join(root, "Gemfile")
+        File.write(gemfile, "source \"https://gem.coop\"\n")
+        lockfile = File.join(root, "Gemfile.lock")
+        File.write(lockfile, "GEM\n  remote: https://gem.coop/\n")
+
+        cli = described_class.new(strict: true, coverage_gemfile: gemfile)
+        cli.send(:reset_stale_appraisal_lockfile!)
+
+        expect(File.file?(lockfile)).to be(true)
+      end
+    end
+
+    it "does nothing when no lockfile exists" do
+      mkproj do |root|
+        gemfiles = File.join(root, "gemfiles")
+        FileUtils.mkdir_p(gemfiles)
+        gemfile = File.join(gemfiles, "coverage.gemfile")
+        File.write(gemfile, "source \"https://gem.coop\"\n")
+
+        cli = described_class.new(strict: true, coverage_gemfile: gemfile)
+
+        expect { cli.send(:reset_stale_appraisal_lockfile!) }.not_to raise_error
+      end
+    end
+  end
+
   describe "#coverage_lines" do
     it "warns and returns nils when coverage.json missing" do
       mkproj do |root|

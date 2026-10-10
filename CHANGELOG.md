@@ -37,6 +37,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- prepare-release (strict coverage): delete the stale Appraisal-generated coverage lockfile (gemfiles/coverage.gemfile.lock) before running the coverage child. That lockfile is a gitignored local artifact that drifts after dependency bumps; a stale pin killed the coverage bundle with an opaque Bundler::GemNotFound (observed: kettle-rb 0.1.16 pinned while 0.1.17 was the only installed/source version). Deleting it mirrors rake appraisal:reset for exactly this lockfile, so the coverage bundle re-resolves fresh from the gemfile.
+
 ### Security
 
 ## [1.0.8] - 2026-09-27
