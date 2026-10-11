@@ -22,6 +22,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.9] - 2026-10-10
+
+- TAG: [v1.0.9][1.0.9t]
+- COVERAGE: 94.26% -- 1149/1219 lines in 6 files
+- BRANCH COVERAGE: 77.78% -- 406/522 branches in 6 files
+- 38.89% documented
+
+### Changed
+
 - [kc] kettle-jem/prepare: updated 10 project files:
   - dependencies (10)
 
@@ -31,15 +48,9 @@ Please file a bug if you notice a violation of semantic versioning.
   - other (1)
   - workflows (1)
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - prepare-release (strict coverage): delete the stale Appraisal-generated coverage lockfile (gemfiles/coverage.gemfile.lock) before running the coverage child. That lockfile is a gitignored local artifact that drifts after dependency bumps; a stale pin killed the coverage bundle with an opaque Bundler::GemNotFound (observed: kettle-rb 0.1.16 pinned while 0.1.17 was the only installed/source version). Deleting it mirrors rake appraisal:reset for exactly this lockfile, so the coverage bundle re-resolves fresh from the gemfile.
-
-### Security
 
 ## [1.0.8] - 2026-09-27
 
@@ -248,7 +259,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.8...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.9...HEAD
+[1.0.9]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.8...v1.0.9
+[1.0.9t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.9
 [1.0.8]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...v1.0.8
 [1.0.8t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.8
 [1.0.7]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.6...v1.0.7
