@@ -22,6 +22,15 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- Development dependency kettle-test floor raised to >= 2.0.25, which requires rspec-stubbed_env >= 1.0.17 (fixes the seed-dependent 'message expectation ... has already been invoked' CI failure class); the floor is enforced on the direct development declaration rather than only transitively
+
+- [kc] kettle-jem/template: updated 20 project files:
+  - configuration (1)
+  - dependencies (9)
+  - documentation (1)
+  - other (1)
+  - workflows (8)
+
 ### Deprecated
 
 ### Removed

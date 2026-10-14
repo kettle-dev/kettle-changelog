@@ -1,5 +1,5 @@
 {
-  "kettle-changelog.gemspec:347927809": [
+  "kettle-changelog.gemspec:3272394082": [
     [19, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 3888670706]
   ]
 }
