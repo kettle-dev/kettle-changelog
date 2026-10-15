@@ -22,6 +22,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.10] - 2026-10-14
+
+- TAG: [v1.0.10][1.0.10t]
+- COVERAGE: 94.26% -- 1149/1219 lines in 6 files
+- BRANCH COVERAGE: 77.78% -- 406/522 branches in 6 files
+- 38.89% documented
+
+### Changed
+
 - Development dependency kettle-test floor raised to >= 2.0.25, which requires rspec-stubbed_env >= 1.0.17 (fixes the seed-dependent 'message expectation ... has already been invoked' CI failure class); the floor is enforced on the direct development declaration rather than only transitively
 
 - [kc] kettle-jem/template: updated 20 project files:
@@ -33,14 +50,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - [kc] kettle-jem/prepare: updated 1 project file:
   - dependencies (1)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.0.9] - 2026-10-10
 
@@ -271,7 +280,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.9...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.10...HEAD
+[1.0.10]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.9...v1.0.10
+[1.0.10t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.10
 [1.0.9]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.8...v1.0.9
 [1.0.9t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.9
 [1.0.8]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.7...v1.0.8
