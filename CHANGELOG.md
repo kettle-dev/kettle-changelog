@@ -31,6 +31,9 @@ Please file a bug if you notice a violation of semantic versioning.
   - other (1)
   - workflows (8)
 
+- [kc] kettle-jem/prepare: updated 1 project file:
+  - dependencies (1)
+
 ### Deprecated
 
 ### Removed

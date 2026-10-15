@@ -2,21 +2,12 @@
 version: 1
 template_state:
   version: 7.1.29
-  applied_at: '2026-10-14'
+  applied_at: '2026-10-15'
   changelog_replay:
     last_entry_key: kettle-jem-template-20260913-001
     last_entry_date: '2026-09-13'
   maintenance_changelog:
     kettle-jem/prepare:
-    - Gemfile
-    - gemfiles/modular/changelog.gemfile
-    - gemfiles/modular/coverage.gemfile
-    - gemfiles/modular/documentation.gemfile
-    - gemfiles/modular/style.gemfile
-    - gemfiles/modular/style_local.gemfile
-    - gemfiles/modular/templating.gemfile
-    - gemfiles/modular/templating_local.gemfile
-    - gemfiles/modular/x_std_libs.gemfile
     - kettle-changelog.gemspec
     kettle-jem/template:
     - ".github/workflows/coverage.yml"
@@ -67,12 +58,12 @@ template_state:
     ".github/workflows/discord-notifier.yml.example": f9cc83a87058bd420426444510a1dd1520fd7cc15af50832ad52c25c5766be94
     ".github/workflows/framework-ci.yml.example": ed86c4bb31fcdbf069e3fd828625823eeab564add546a00dfaae4ecf38365962
     ".github/workflows/heads.yml.example": 2cd26b0f301b3f660cf06f4a6a0879ea91b7e742eb35f2c036fedb594ae00644
-    ".github/workflows/jruby-10.0.yml.example": 368da574823cec44871d95824d5c7cacf2018fc56a7fd4e9ea7a7a785ea3d86a
-    ".github/workflows/jruby-9.1.yml.example": 0b699b025af7697c8cb63f8ffaf34fd9a6c123a0ffe76b62de411b4dcd21d1e7
-    ".github/workflows/jruby-9.2.yml.example": 3f5d40d0f177851d37347a078b4fef7310280a81e20a33e4b38c25d2c4312983
-    ".github/workflows/jruby-9.3.yml.example": db6c5f689ec13cf50aae143c838427570725134b8015587f62c0fe1d8db211ee
-    ".github/workflows/jruby-9.4.yml.example": 28ff1ab703880d8f0669e87123a0377be3209b35c7559539ea1a6eaaead976e4
-    ".github/workflows/jruby.yml.example": 6d0d9264185ab51156ba01b630ff15936634feee5e15864966101ad06f394230
+    ".github/workflows/jruby-10.0.yml.example": d5001640d90f055e88f7c2e4f29967d642f92af80bd6bbf98fd10acc052ee770
+    ".github/workflows/jruby-9.1.yml.example": 1cbc8a1f9472da871df88c0bcfe930cf878964a55081f07c39bb724893735e59
+    ".github/workflows/jruby-9.2.yml.example": 8f1cc611728e49bc7f1495a2beaa9c37c1dc09edb616ae47441c661919e1af27
+    ".github/workflows/jruby-9.3.yml.example": 438e319df1a788b31396b13259912fff84c330c4a2ab18a8ccc1942058c34902
+    ".github/workflows/jruby-9.4.yml.example": 3a6f9a382b1073569a7479a09f4c57a1e47536ca174d29c0794e35a684d5b25a
+    ".github/workflows/jruby.yml.example": 124a1476b206eee831e4f984b3b4ba5dc42f879b075a07ede99a8f85f4675801
     ".github/workflows/license-eye.yml.example": 879a5e6baf41fae1b2e1a44591a632f56e426992988499956cb7636820b3fb99
     ".github/workflows/locked_deps.yml.example": 53b57f1de45ef0b82316e94ac63c2179a71bb8a8e5d90e9d7fd273764d6bbe56
     ".github/workflows/opencollective.yml.example": 785bd19b1a11ae8b0d2f4ffd25740f6f40c6422ccd57e08550f0792cd11e26f2
@@ -88,12 +79,12 @@ template_state:
     ".github/workflows/ruby-3.4.yml.example": 191de7370133ac8af8d1c01ce435129a8fe3d219cd61f3296c4088807ef31821
     ".github/workflows/style.yml.example": dd798d0a74804f420b1b0a4dd73001462233b74c3b13438bfe5669c596c9a226
     ".github/workflows/templating.yml.example": 0fe31f41d78e3e4a73c361d6c09ceee5dba32ab9609e33578887232b47b4006f
-    ".github/workflows/truffle.yml.example": 831afab89dc6e805bcfb0f5592f34514ab8e2311fb2fd1f15bf26e9a3cad4a4e
-    ".github/workflows/truffleruby-22.3.yml.example": 74712e9559539f0f232d2ed414462f9a0be0de6a91e63b38a134022df3686054
-    ".github/workflows/truffleruby-23.1.yml.example": c36741d26d879c8384e15a89499b5d0184dba849d1e8372c1a1ff98acde2212d
-    ".github/workflows/truffleruby-24.2.yml.example": c7204dc33d98e5338d182de407e93f78450de77cbf8df46eb140fe4c5549007d
-    ".github/workflows/truffleruby-25.0.yml.example": 6c938487fdbabba0eb4e20cfb0769f1d1748577d2468863f2a6d8a5cbb3e4d9a
-    ".github/workflows/truffleruby-33.0.yml.example": fc837cdcec624763c9d4a41cf5d0cf8b94acfea482366e794055f6f466466fd0
+    ".github/workflows/truffle.yml.example": d2d3d02fdf645bab3aa07373abb60687ce55700cdfc532a21f6b6aef291d5651
+    ".github/workflows/truffleruby-22.3.yml.example": '08b6e0261c11d397d1f247bff7787f8970740820ea15e3adf4d245deedbc1e81'
+    ".github/workflows/truffleruby-23.1.yml.example": 31be5fedeeb9eae6ff80b24bf1e6a5875d336e3b7c2b2bdcc7917a5c890bd256
+    ".github/workflows/truffleruby-24.2.yml.example": 5d99999ea77cea783a6a82e96488aedbc546d6e244a46ec1965fe89b146388b8
+    ".github/workflows/truffleruby-25.0.yml.example": a5b70e3bd5da3093559a97fe668bce13ecf331afaa7cb7bbc53f4a2b9ed7befd
+    ".github/workflows/truffleruby-33.0.yml.example": cac1af4d53e1779be00a6a011f8a702263191602c7e3ce422a2d12567d156f1a
     ".github/workflows/unlocked_deps.yml.example": 15689ef94d23aaf45aa18246d2cbe4a510df013e439aedf2e2551646a172eb5c
     ".gitignore.example": c15b9dca3951972fa683edb53a3082a77def1735a81c14e2b3be9d739cd8b8ae
     ".gitlab-ci.yml.example": ef64afa9855ebb59bbc87446fa9533238d3ce180966ceb19649a7f165715b92b
@@ -137,7 +128,7 @@ template_state:
     bin/setup.example: 0ac35089c95a91d8973fe7a318bf9fd98b9f8e00db92c5d9ca6cd858abb8d41b
     bin/turbo_tests2.example: 0d81b72c359419a4f0146e8f0438c610211c528398b672c85325a568c9f26db2
     certs/pboling.pem.example: 18956f60643666cc181e2743b3b3691bec08c5326f514f60af54d0cdb9ebc554
-    gem.gemspec.example: 6e4261769e58d2660562147ac89591599ada0bb2d301789afc96c85c95ac8e7f
+    gem.gemspec.example: d2df025c706dd8cf2ae773921ac4c207b40eb78beb3e3c4f331fcf3a338d6b74
     gemfiles/modular/benchmark/r4/v0.5.gemfile.example: 5bc3190090ae456df1a8cce28dd47a7fb293495f6d845ec7e53a7a8b50f14ae1
     gemfiles/modular/benchmark/vHEAD.gemfile.example: ca6cd52c55c3082759c6ddc97638970f12d953aec1822470823d316086aa6e25
     gemfiles/modular/cgi/r4/v0.5.gemfile.example: c2d14a39377a2435419ceaca22a3421ebd899e9cba943df8a90b576a33624870
@@ -543,7 +534,7 @@ files:
   CHANGELOG.md:
     recipe: template_source_application_CHANGELOG_md
     action: write
-    dest_sha256: 7217843d3356d4bad50cc04d6de02a86a09082321775dabef0a5ea441c975c94
+    dest_sha256: 459fa8f716c402485eea09495b2686b79e077bdbbdccf25c0137a03649580a35
     input_fingerprint: d70a2cabac4192c56e4351f8f10497c69fd371c05f47a40f121592e940781859
     template_sources:
     - CHANGELOG.md.example
@@ -942,8 +933,8 @@ files:
   kettle-changelog.gemspec:
     recipe: template_source_application_kettle_changelog_gemspec
     action: write
-    dest_sha256: e0729ae6dcea0103249f625fbaaf5a77f2a875a998426befac2dab5d1aef409b
-    input_fingerprint: 7fade7baf4406b180d398b4b4e9f1fc6e00177b0ff02d60b75caada9bbc13413
+    dest_sha256: 3da452372be6ed9c1457fdc6dcb10429882695693c7f415e951293576c5aac50
+    input_fingerprint: 9bc98640c7d20237681ddaa8e7651e63940809f216ff8471baa90dc75aa1fa66
     template_sources:
     - gem.gemspec.example
   lib/kettle/changelog/version.rb:
