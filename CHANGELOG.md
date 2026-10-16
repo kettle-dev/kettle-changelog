@@ -28,11 +28,20 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [1.0.12] - 2026-10-16
+
+- TAG: [v1.0.12][1.0.12t]
+- COVERAGE: 94.29% -- 1156/1226 lines in 6 files
+- BRANCH COVERAGE: 78.14% -- 411/526 branches in 6 files
+- 37.84% documented
+
+### Fixed
+
 - --backfill-released-version now builds the compare link from the latest older release section instead of the repository initial commit when an earlier section exists
 
 - update-prep folding real Unreleased entries into a backfilled placeholder section now replaces the historical-notes placeholder instead of merging real entries alongside it
-
-### Security
 
 ## [1.0.11] - 2026-10-15
 
@@ -299,7 +308,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.11...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.12...HEAD
+[1.0.12]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.11...v1.0.12
+[1.0.12t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.12
 [1.0.11]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.10...v1.0.11
 [1.0.11t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.11
 [1.0.10]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.9...v1.0.10
