@@ -96,7 +96,7 @@ Gem::Specification.new do |spec|
 
   # Utilities
   spec.add_dependency("ast-crispr-markdown-markly", "~> 7.1", ">= 7.1.1")        # ruby >= 4.0.0
-  spec.add_dependency("kettle-dev", "~> 3.1", ">= 3.1.13")                       # ruby >= 2.4.0
+  spec.add_dependency("kettle-dev", "~> 3.1", ">= 3.1.14")                       # ruby >= 2.4.0
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.15")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
@@ -125,7 +125,7 @@ Gem::Specification.new do |spec|
   # Loads version files in anonymous namespaces for coverage without constant redefinition warnings.
   spec.add_development_dependency("anonymous_loader", "~> 0.1", ">= 0.1.3")         # ruby >= 2.2.0
   spec.add_development_dependency("appraisal2", "~> 3.2", ">= 3.2.5")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
-  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.25")            # ruby >= 4.0.0
+  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.27")            # ruby >= 4.0.0
   spec.add_development_dependency("turbo_tests2", "~> 4.0", ">= 4.0.0")           # ruby >= 2.4.0, default kettle-test runner
 
   # Releasing
