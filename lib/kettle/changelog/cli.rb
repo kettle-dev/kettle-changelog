@@ -17,6 +17,7 @@ module Kettle
     # includes coverage and YARD stats, and updates link references.
     class CLI
       UNRELEASED_SECTION_HEADING = "[Unreleased]:"
+      HISTORICAL_PLACEHOLDER_LINE = "- Historical release notes are unavailable in this changelog."
       CHANGELOG_VERSION_PATTERN = /\d+\.\d+\.\d+(?:[.-][0-9A-Za-z]+)*/
       CHANGELOG_VERSION_PATTERN_SOURCE = CHANGELOG_VERSION_PATTERN.source
       COVERAGE_CHILD_ENV_PREFIXES = %w[K_CHANGELOG_].freeze
@@ -484,7 +485,7 @@ module Kettle
           end
           finish = [next_heading&.fetch(:start), footer, lines.length].compact.min
           body = lines[heading.fetch(:start)...finish].join
-          heading.merge(finish: finish, placeholder: body.include?("Historical release notes are unavailable in this changelog."))
+          heading.merge(finish: finish, placeholder: body.include?(HISTORICAL_PLACEHOLDER_LINE))
         end
       end
 
@@ -505,11 +506,16 @@ module Kettle
 
           ### Changed
 
-          - Historical release notes are unavailable in this changelog.
+          #{HISTORICAL_PLACEHOLDER_LINE}
 
         MD
+        # Compare from the latest existing section when it is older than the
+        # backfilled version; the initial-commit base is only right when no
+        # earlier release section exists.
+        previous = detect_previous_version(after.to_s)
+        previous = nil if previous && Gem::Version.new(previous) >= Gem::Version.new(version)
         updated = before + "## [Unreleased]\n" + unreleased_block.rstrip + "\n\n" + section + after.to_s
-        updated = update_link_refs(updated, owner, repo, nil, version)
+        updated = update_link_refs(updated, owner, repo, previous, version)
         updated = normalize_heading_spacing(updated).rstrip + "\n"
         File.write(@changelog_path, updated)
         emit_changelog_event(action: "backfill", status: "ok", version: version, plan: "historical_release")
@@ -707,6 +713,9 @@ module Kettle
         incoming = filter_unreleased_sections(unreleased_block)
         return existing if incoming.strip.empty?
         return incoming if existing.strip.empty?
+        # A backfilled section holding only the historical-notes placeholder is
+        # documentation of absence; once real entries arrive they replace it.
+        return incoming if placeholder_only_release_body?(existing)
 
         leading, sections = split_h3_sections(existing)
         _incoming_leading, incoming_sections = split_h3_sections(incoming)
@@ -724,6 +733,11 @@ module Kettle
 
         merged = ([leading] + sections.map { |section| section.fetch(:heading) + trim_blank_lines(section.fetch(:lines)).join }).join.rstrip + "\n"
         KeyedEntryUpserter.collapse_project_file_updates(merged)
+      end
+
+      def placeholder_only_release_body?(body)
+        remaining = body.lines.reject { |line| line.strip == HISTORICAL_PLACEHOLDER_LINE }
+        remaining.none? { |line| line.strip.start_with?("- ") }
       end
 
       def strip_release_metadata(release_body)

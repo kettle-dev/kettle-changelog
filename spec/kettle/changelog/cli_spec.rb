@@ -2160,6 +2160,58 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(changelog).to include("Historical release notes are unavailable in this changelog.")
       end
     end
+
+    it "compares backfilled links against the previous release section, not the initial commit" do
+      mkproj do |root|
+        File.write(File.join(root, "CHANGELOG.md"), <<~MD)
+          # Changelog
+
+          ## [Unreleased]
+
+          ## [1.2.2] - 2024-09-01
+
+          - TAG: [v1.2.2][1.2.2t]
+
+          [Unreleased]: https://github.com/acme/demo/compare/v1.2.2...HEAD
+          [1.2.2]: https://github.com/acme/demo/compare/v1.2.1...v1.2.2
+          [1.2.2t]: https://github.com/acme/demo/releases/tag/v1.2.2
+        MD
+        cli = described_class.new(strict: false, root: root)
+        allow(cli).to receive(:tagged_release_date).with("1.2.3").and_return("2024-09-24")
+        allow(Kettle::Dev::CIHelpers).to receive(:repo_info).and_return(["acme", "demo"])
+
+        cli.send(:backfill_historical_release!, "1.2.3")
+
+        changelog = File.read(File.join(root, "CHANGELOG.md"))
+        expect(changelog).to include("[1.2.3]: https://github.com/acme/demo/compare/v1.2.2...v1.2.3")
+      end
+    end
+
+    it "replaces the placeholder when update-prep folds real entries into the backfilled section" do
+      mkproj do |root|
+        File.write(File.join(root, "CHANGELOG.md"), <<~MD)
+          # Changelog
+
+          ## [Unreleased]
+
+          ### Fixed
+
+          - Keep this pending change.
+
+          [Unreleased]: https://github.com/acme/demo/compare/HEAD
+        MD
+        cli = described_class.new(strict: false, root: root)
+        allow(cli).to receive(:tagged_release_date).with("1.2.3").and_return("2024-09-24")
+        allow(Kettle::Dev::CIHelpers).to receive(:repo_info).and_return(["acme", "demo"])
+
+        cli.send(:backfill_historical_release!, "1.2.3")
+        cli.send(:update_prepared_release!, File.read(File.join(root, "CHANGELOG.md")), "2024-09-24", "acme", "demo", nil, nil, nil)
+
+        changelog = File.read(File.join(root, "CHANGELOG.md"))
+        expect(changelog).not_to include("Historical release notes are unavailable in this changelog.")
+        expect(changelog).to match(/## \[1\.2\.3\] - 2024-09-24.*- Keep this pending change\./m)
+      end
+    end
   end
 
   describe "#reformat_changelog!" do

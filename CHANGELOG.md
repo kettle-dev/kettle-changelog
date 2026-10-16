@@ -28,6 +28,10 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- --backfill-released-version now builds the compare link from the latest older release section instead of the repository initial commit when an earlier section exists
+
+- update-prep folding real Unreleased entries into a backfilled placeholder section now replaces the historical-notes placeholder instead of merging real entries alongside it
+
 ### Security
 
 ## [1.0.11] - 2026-10-15
