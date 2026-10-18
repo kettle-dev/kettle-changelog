@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Coverage failure reports point at the kettle-test log: when the fresh-coverage kettle-test run fails, the raised error names the newest tmp/kettle-test/turbo_tests2-*.log and its rspec summary (N examples, M failures) instead of only the exit status.
+
 ### Security
 
 ## [1.0.12] - 2026-10-16

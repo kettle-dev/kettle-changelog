@@ -850,7 +850,7 @@ module Kettle
 
           unless success
             emit_changelog_event(action: "coverage", status: "failed", command: "bundle exec kettle-test", root: Kettle::Dev.display_path(@coverage_root), reason: "exit status #{$?.exitstatus || "unknown"}")
-            raise "bundle exec kettle-test failed with exit status #{$?.exitstatus || "unknown"}"
+            raise "bundle exec kettle-test failed with exit status #{$?.exitstatus || "unknown"}#{coverage_failure_diagnostics}"
           end
 
           puts "Coverage generation complete."
@@ -936,6 +936,25 @@ module Kettle
             mark: mark
           )
         )
+      end
+
+      # Best-effort diagnostics for a failed coverage test run: kettle-test
+      # writes a full turbo_tests2 log under tmp/kettle-test; surface the
+      # newest one and its rspec summary so the failure presents with the
+      # spec context instead of only an exit status.
+      def coverage_failure_diagnostics
+        log_dir = File.join(@coverage_root.to_s, "tmp", "kettle-test")
+        logs = Dir.glob(File.join(log_dir, "turbo_tests2-*.log")).sort_by { |path| File.mtime(path) }
+        return "" if logs.empty?
+
+        latest = logs.last
+        summary = File.readlines(latest).reverse.find { |line| line.match?(/^\d+ examples?, \d+ failures/) }
+        diag = +" (full log: #{Kettle::Dev.display_path(latest)}"
+        diag << "; #{summary.strip}" if summary
+        diag << ")"
+        diag
+      rescue => e
+        " (could not read kettle-test logs: #{e.class}: #{e.message})"
       end
 
       # The coverage child runs against the Appraisal-generated coverage
