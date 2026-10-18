@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Coverage failure reports point at the kettle-test log: when the fresh-coverage kettle-test run fails, the raised error names the newest tmp/kettle-test/turbo_tests2-*.log and its rspec summary (N examples, M failures) instead of only the exit status.
-
 ### Security
+
+## [1.0.13] - 2026-10-18
+
+- TAG: [v1.0.13][1.0.13t]
+- COVERAGE: 93.53% -- 1157/1237 lines in 6 files
+- BRANCH COVERAGE: 77.55% -- 411/530 branches in 6 files
+- 37.84% documented
+
+### Fixed
+
+- Coverage failure reports point at the kettle-test log: when the fresh-coverage kettle-test run fails, the raised error names the newest tmp/kettle-test/turbo_tests2-*.log and its rspec summary (N examples, M failures) instead of only the exit status.
 
 ## [1.0.12] - 2026-10-16
 
@@ -310,7 +319,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.12...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.13...HEAD
+[1.0.13]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.12...v1.0.13
+[1.0.13t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.13
 [1.0.12]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.11...v1.0.12
 [1.0.12t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.12
 [1.0.11]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.10...v1.0.11

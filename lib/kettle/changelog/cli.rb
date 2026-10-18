@@ -949,7 +949,7 @@ module Kettle
 
         latest = logs.last
         summary = File.readlines(latest).reverse.find { |line| line.match?(/^\d+ examples?, \d+ failures/) }
-        diag = +" (full log: #{Kettle::Dev.display_path(latest)}"
+        diag = " (full log: #{Kettle::Dev.display_path(latest)}"
         diag << "; #{summary.strip}" if summary
         diag << ")"
         diag
