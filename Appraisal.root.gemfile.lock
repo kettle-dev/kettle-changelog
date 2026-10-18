@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.12)
+    kettle-changelog (1.0.13)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (~> 3.1, >= 3.1.14)
+      kettle-dev (~> 3.1, >= 3.1.16)
       version_gem (~> 1.1, >= 1.1.15)
 
 GEM
@@ -29,19 +29,19 @@ GEM
       rubocop (>= 1.0)
       version_gem (~> 1.1, >= 1.1.15)
     ast (2.4.3)
-    ast-crispr (7.1.10)
-      ast-merge (= 7.1.10)
+    ast-crispr (7.1.12)
+      ast-merge (= 7.1.12)
       service_actor (~> 3.9)
       version_gem (~> 1.1, >= 1.1.15)
-    ast-crispr-markdown-markly (7.1.10)
-      ast-crispr (= 7.1.10)
-      markdown-merge (= 7.1.10)
-      markly-merge (= 7.1.10)
+    ast-crispr-markdown-markly (7.1.12)
+      ast-crispr (= 7.1.12)
+      markdown-merge (= 7.1.12)
+      markly-merge (= 7.1.12)
       version_gem (~> 1.1, >= 1.1.15)
-    ast-merge (7.1.10)
+    ast-merge (7.1.12)
       benchmark
       token-resolver (~> 2.0, >= 2.0.4)
-      tree_haver (= 7.1.10)
+      tree_haver (= 7.1.12)
       version_gem (~> 1.1, >= 1.1.15)
     backports (3.25.3)
     benchmark (0.5.0)
@@ -87,7 +87,7 @@ GEM
     gitmoji-regex (2.0.15)
       version_gem (~> 1.1, >= 1.1.15)
     json (3.1.0)
-    kettle-dev (3.1.14)
+    kettle-dev (3.1.16)
       emoji_regex (>= 15.0)
       kettle-gha-pins (~> 0.3, >= 0.3.18)
       kettle-ndjson (~> 0.1, >= 0.1.20)
@@ -118,13 +118,13 @@ GEM
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     logger (1.7.0)
-    markdown-merge (7.1.10)
-      ast-merge (= 7.1.10)
-      tree_haver (= 7.1.10)
+    markdown-merge (7.1.12)
+      ast-merge (= 7.1.12)
+      tree_haver (= 7.1.12)
       version_gem (~> 1.1, >= 1.1.15)
     markly (0.19.0)
-    markly-merge (7.1.10)
-      markdown-merge (= 7.1.10)
+    markly-merge (7.1.12)
+      markdown-merge (= 7.1.12)
       markly (~> 0.9)
       version_gem (~> 1.1, >= 1.1.15)
     parallel (1.28.0)
@@ -267,7 +267,7 @@ GEM
     silent_stream (1.0.12)
       logger (~> 1.2)
       version_gem (>= 1.1.8, < 3)
-    sorbet-runtime (0.6.13571)
+    sorbet-runtime (0.6.13573)
     standard (1.57.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -301,10 +301,10 @@ GEM
       delegate (~> 0.1)
       rspec (~> 3.0)
       timecop (>= 0.7, < 1)
-    token-resolver (2.0.13)
+    token-resolver (2.0.14)
       parslet (~> 2.0)
       version_gem (~> 1.1, >= 1.1.15)
-    tree_haver (7.1.10)
+    tree_haver (7.1.12)
       citrus (~> 3.0)
       parslet (~> 2.0)
       tree_sitter_language_pack (>= 1.17.0, < 2.0)
@@ -367,9 +367,9 @@ CHECKSUMS
   appraisal2 (3.2.5) sha256=da78f806654e603e7da9f880db50a941f55c2202b5e619858ccca3b9d71d4c39
   appraisal2-rubocop (1.0.4) sha256=d35de99e31b965690cea1e6820ecd78e308d80d5004d768b3d78ec353f181bd9
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
-  ast-crispr (7.1.10) sha256=5431ad39944b49098e1c7bc66a556b3eb008510a15989caf3d98373451ed267d
-  ast-crispr-markdown-markly (7.1.10) sha256=20edb41d7b3eb7873ef39c582e4a4223f5f8b02419219f6c5500fc16da65c6eb
-  ast-merge (7.1.10) sha256=a60348effc169beddc650c686c1860de001d060528963cdc6ecfc1fc22d74c9a
+  ast-crispr (7.1.12) sha256=54c269cda077e675f673c926e52ed241e4787b5e1cbfb664d61adaf98a5a04df
+  ast-crispr-markdown-markly (7.1.12) sha256=fca0089e9b43a2735995d80a5969607bcdcceaf900a997b1ec1d612213a7ccbb
+  ast-merge (7.1.12) sha256=d17581e49723239c68f2fcc9ac5fcb42370174b3c2e3aa710f3980c146a8db78
   backports (3.25.3) sha256=94298d32dc3c40ca15633b54e282780b49e2db0c045f602ea1907e4f63a17235
   benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c
   bigdecimal (4.1.3) sha256=61ebe1e5e559bdc3cc6f2c0ee7f427321fc838f59611c294356eb04d6e21cf66
@@ -390,8 +390,8 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.15) sha256=c6571bffd757f95c06d84a7d2d0b3f180eca7fe576882c371cee1f1a081cd968
   json (3.1.0) sha256=3ce7ccf8fde58960177a3a756c31f292a4c1e1dedee884547096a5b0604e3bd8
-  kettle-changelog (1.0.12)
-  kettle-dev (3.1.14) sha256=f7cac6a50e78d2a770dc10cf0f181e59be84adfe394f911fe9878adf72ad8448
+  kettle-changelog (1.0.13)
+  kettle-dev (3.1.16) sha256=1c43b11ad45e7627f91b63bca18ed2b41ff2d3d6620e0a7355ee3735393c10d2
   kettle-gha-pins (0.3.18) sha256=7e1aab36c248bab6b55e6c9d79b9efb8233c14a5e33e0d8013a874c49030046a
   kettle-ndjson (0.1.20) sha256=75c366059d43a2d73a32a87e7e5fd28ccfacf658753469845601e03557290eab
   kettle-rb (0.1.18) sha256=28521523267e09c2616da73073b71cbffdf298a5f7d0399bec6429ab5db74217
@@ -399,9 +399,9 @@ CHECKSUMS
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
-  markdown-merge (7.1.10) sha256=24df8bb1bdccc8d08db31e2f42f27ba553c5f7bdc30582374ab330105660f8d2
+  markdown-merge (7.1.12) sha256=50fe1949126e6aa38df1a173c33a0d0459a8c64ea0b4dfa4a0e39d1de2286e95
   markly (0.19.0) sha256=cd2c0e86eaf3660ed2a3a94104877f8bd41adda78e7c295c017d03de0d4044ca
-  markly-merge (7.1.10) sha256=1a719463d5c53446f555b6dd3f478a0f28f73486757c5ca8b9cd67149fa29709
+  markly-merge (7.1.12) sha256=048e609384e006ec89c96ed70d7f7f4af4ddd799e9fbdcd7cf74b2fbd2534d85
   parallel (1.28.0) sha256=33e6de1484baf2524792d178b0913fc8eb94c628d6cfe45599ad4458c638c970
   parser (3.3.12.0) sha256=21a6d7f755d5a24dfbdc6e6b772e4e879a52e7631a88bc5a3a134606052c9828
   parslet (2.0.0) sha256=d45130695d39b43d7e6a91f4d2ec66b388a8d822bae38de9b4de9a5fbde1f606
@@ -449,7 +449,7 @@ CHECKSUMS
   runtime_groups (0.1.3) sha256=d9608807605eaaafd4f19790526115be1dd5f995dbc2bc59fc89a2c238764b2d
   service_actor (3.9.4) sha256=e63b523630b9a7e62959b2a90113b08d2565b5de9c148557b281ef847c9539ce
   silent_stream (1.0.12) sha256=377c43aa10033fe90c33b39ea8cd97d79f2d1c4856df598efc56f3091f3ae782
-  sorbet-runtime (0.6.13571) sha256=deddfa1e22d7caf4e2ba697eb2907c7a04a1192e7483270e5556a2ef13ea7d21
+  sorbet-runtime (0.6.13573) sha256=7a96a9699c4aa6987e915ff7ca166ae79056efc3714ef4f3719d672fb3222afb
   standard (1.57.0) sha256=4a65ea92421fbaf77fb54da91e16093cf79b335b8f62c35aaa3dd714c8592858
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.9.0) sha256=49483d31be448292951d80e5e67cdcb576c2502103c7b40aec6f1b6e9c88e3f2
@@ -460,8 +460,8 @@ CHECKSUMS
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   timecop (0.9.11) sha256=41284dc6e5041f2184f781ace766f942108c842f8d8c1386a26e6343decc7542
   timecop-rspec (1.0.3) sha256=005f14841bb606dcaefb060e321b5388e2e59537742bee8b3a9a9a40e598fab9
-  token-resolver (2.0.13) sha256=aba890ce6be32ff7226e991f9f54d7bd99df312849c119482de48661280e33a5
-  tree_haver (7.1.10) sha256=47f2121d709fce1df3952b4e03a60b43a5812a08d24f0d5a02ea67f95b2e69ed
+  token-resolver (2.0.14) sha256=b50ac4ff67a2a220b77836f3b943ba5ac5d52f2961aae13a3b75663282af71e6
+  tree_haver (7.1.12) sha256=4ba7deb9a05b01b427eb5ef5f09b8d0f09a2c9ca0bcc2662d364ce6ab871341e
   tree_sitter_language_pack (1.22.1-aarch64-linux) sha256=2c90390c0ec671984b04b852eddec8bc0ff2000656204841169da44ab600d4b4
   tree_sitter_language_pack (1.22.1-arm64-darwin) sha256=a375edb921dfd0c686d2052b40fe22e6159ec9e7b2e92ca8c35d84602771c63a
   tree_sitter_language_pack (1.22.1-x86_64-darwin) sha256=104105b1087c708526eeb5805ad24ce7026c5d231365bbe455e70d315db7c0ec
