@@ -1,11 +1,29 @@
 {
+  "- configuration (1)\n- dependencies (9)": [
+    {
+      "file": "CHANGELOG.md",
+      "lines": [
+        26,
+        113
+      ]
+    }
+  ],
+  "- dependencies (3)\n- documentation (1)": [
+    {
+      "file": "CHANGELOG.md",
+      "lines": [
+        30,
+        57
+      ]
+    }
+  ],
   "- documentation (1)\n- other (1)": [
     {
       "file": "CHANGELOG.md",
       "lines": [
-        31,
-        96,
-        117
+        58,
+        115,
+        136
       ]
     }
   ],
@@ -13,8 +31,8 @@
     {
       "file": "CHANGELOG.md",
       "lines": [
-        32,
-        118
+        59,
+        137
       ]
     }
   ],
