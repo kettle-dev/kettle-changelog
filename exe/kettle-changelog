@@ -63,7 +63,7 @@ end
 
 if ARGV.include?("-h") || ARGV.include?("--help")
   puts <<~USAGE
-    Usage: kettle-changelog [--version VERSION] [--yes] [--coverage-gemfile PATH] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--upsert-unreleased-entry --section SECTION --key KEY --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
+    Usage: kettle-changelog [--version VERSION] [--yes] [--coverage-gemfile PATH] [--update-prep|--reformat|--backfill-released-version VERSION] [--pending-release] [--release-state] [--release-stats [--file PATH]] [--refresh-cache] [--add-unreleased-entry --section SECTION --entry TEXT] [--upsert-unreleased-entry --section SECTION --key KEY --entry TEXT] [--json|--events[=TYPES]] [--no-strict] [--no-coverage-threshold]
 
     Detects the current version from lib/**/version.rb, the latest live release, and
     the most recent CHANGELOG.md release section, then prompts to confirm the selected plan:
@@ -82,6 +82,8 @@ if ARGV.include?("-h") || ARGV.include?("--help")
       --pending-release         Query whether the changelog has release work pending; exits 0 for yes, 1 for no
       --release-state,
       --release-status          Print changelog release state, including latest published release and pending sources
+      --release-stats           Print the latest released section's coverage/doc stats from a changelog (read-only;
+                                --file PATH or stdin; add --json; exits 1 when line coverage is not recorded)
       --refresh-cache           Bypass cached gem.coop version data for this invocation
       --add-unreleased-entry    Add one entry to an existing section under ## [Unreleased]
       --upsert-unreleased-entry Insert or replace one [kc]-keyed entry under ## [Unreleased]
@@ -209,6 +211,23 @@ begin
 
   historical_backfill_version = extract_option_arg!(ARGV, "--backfill-released-version")
   coverage_gemfile = extract_option_arg!(ARGV, "--coverage-gemfile")
+  release_stats_query = ARGV.delete("--release-stats")
+  release_stats_file = extract_option_arg!(ARGV, "--file")
+
+  if release_stats_query
+    # Read-only: no project root, git, network or version detection. Reads --file PATH, or stdin when absent/"-".
+    text = (release_stats_file.nil? || release_stats_file == "-") ? $stdin.read : File.read(release_stats_file)
+    stats = Kettle::Changelog::ReleaseStats.parse(text)
+    if json_output
+      puts(JSON.pretty_generate(stats))
+    elsif stats
+      cov = stats[:coverage]
+      puts("#{stats[:version]}#{stats[:date] ? " (#{stats[:date]})" : ""}: " + (cov ? "#{format("%.2f", cov[:percent])}% line coverage (#{cov[:covered]}/#{cov[:total]} lines in #{cov[:files]} files)" : "no line coverage recorded"))
+    else
+      puts("No released section found.")
+    end
+    exit((stats && stats[:coverage]) ? 0 : 1)
+  end
 
   if upsert_unreleased_entry
     section = extract_option_arg!(ARGV, "--section")

@@ -132,7 +132,7 @@ Use `--yes` for non-interactive release automation. Add a note without preparing
 bundle exec kettle-changelog --add-unreleased-entry --section Fixed --entry "Describe the fix."
 ```
 
-Useful queries and maintenance commands include `--pending-release`, `--release-state`, `--reformat`, `--update-prep`, `--json`, and `--events=changelog`. Run `bundle exec kettle-changelog --help` for the complete option list.
+Useful queries and maintenance commands include `--pending-release`, `--release-state`, `--release-stats`, `--reformat`, `--update-prep`, `--json`, and `--events=changelog`. Run `bundle exec kettle-changelog --help` for the complete option list.
 
 ## 🔐 Security
 
