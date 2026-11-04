@@ -70,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -83,6 +83,24 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 <h3 id="fixed">Fixed</h3>
 
 <h3 id="security">Security</h3>
+
+<h2 id="1016---2026-11-03">
+<a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...v1.0.16">1.0.16</a> - 2026-11-03</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.16">v1.0.16</a>
+</li>
+  <li>COVERAGE: 93.68% – 1185/1265 lines in 7 files</li>
+  <li>BRANCH COVERAGE: 77.96% – 421/540 branches in 7 files</li>
+  <li>36.36% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>
+<code>kettle-changelog --release-stats [--file PATH] [--json]</code> reads the latest released section’s coverage, branch coverage and documentation stats back out of a changelog (read-only: no project root, git or network; reads stdin when <code>--file</code> is omitted). Only the exact generated line shapes count, <code>[Unreleased]</code> and older releases are ignored, and it exits 1 when line coverage is not recorded. Backed by <code>Kettle::Changelog::ReleaseStats.parse</code>.</li>
+</ul>
 
 <h2 id="1015---2026-10-28">
 <a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.14...v1.0.15">1.0.15</a> - 2026-10-28</h2>
@@ -288,7 +306,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>38.89% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>kettle-jem-template-20260913-001 - Templating now also surfaces a review<br>
@@ -460,7 +478,7 @@ engine support needs.</li>
   <li>42.31% documented</li>
 </ul>
 
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 
 <ul>
   <li>Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.</li>
@@ -483,7 +501,7 @@ engine support needs.</li>
   <li>47.62% documented</li>
 </ul>
 
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 
 <ul>
   <li>kettle-jem-template-20260720-005 - README Support &amp; Community links now<br>

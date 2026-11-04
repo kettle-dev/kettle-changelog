@@ -20,8 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- `kettle-changelog --release-stats [--file PATH] [--json]` reads the latest released section's coverage, branch coverage and documentation stats back out of a changelog (read-only: no project root, git or network; reads stdin when `--file` is omitted). Only the exact generated line shapes count, `[Unreleased]` and older releases are ignored, and it exits 1 when line coverage is not recorded. Backed by `Kettle::Changelog::ReleaseStats.parse`.
-
 ### Changed
 
 ### Deprecated
@@ -31,6 +29,17 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [1.0.16] - 2026-11-03
+
+- TAG: [v1.0.16][1.0.16t]
+- COVERAGE: 93.68% -- 1185/1265 lines in 7 files
+- BRANCH COVERAGE: 77.96% -- 421/540 branches in 7 files
+- 36.36% documented
+
+### Added
+
+- `kettle-changelog --release-stats [--file PATH] [--json]` reads the latest released section's coverage, branch coverage and documentation stats back out of a changelog (read-only: no project root, git or network; reads stdin when `--file` is omitted). Only the exact generated line shapes count, `[Unreleased]` and older releases are ignored, and it exits 1 when line coverage is not recorded. Backed by `Kettle::Changelog::ReleaseStats.parse`.
 
 ## [1.0.15] - 2026-10-28
 
@@ -359,7 +368,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...HEAD
+[1.0.16]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...v1.0.16
+[1.0.16t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.16
 [1.0.15]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.14...v1.0.15
 [1.0.15t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.15
 [1.0.14]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.13...v1.0.14
