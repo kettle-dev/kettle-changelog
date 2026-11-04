@@ -222,7 +222,8 @@ begin
       puts(JSON.pretty_generate(stats))
     elsif stats
       cov = stats[:coverage]
-      puts("#{stats[:version]}#{stats[:date] ? " (#{stats[:date]})" : ""}: " + (cov ? "#{format("%.2f", cov[:percent])}% line coverage (#{cov[:covered]}/#{cov[:total]} lines in #{cov[:files]} files)" : "no line coverage recorded"))
+      released = [stats[:version], stats[:date] && "(#{stats[:date]})"].compact.join(" ")
+      puts("#{released}: " + (cov ? "#{format("%.2f", cov[:percent])}% line coverage (#{cov[:covered]}/#{cov[:total]} lines in #{cov[:files]} files)" : "no line coverage recorded"))
     else
       puts("No released section found.")
     end
