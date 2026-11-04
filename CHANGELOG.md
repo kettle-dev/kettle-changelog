@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- `kettle-changelog --release-stats [--file PATH] [--json]` reads the latest released section's coverage, branch coverage and documentation stats back out of a changelog (read-only: no project root, git or network; reads stdin when `--file` is omitted). Only the exact generated line shapes count, `[Unreleased]` and older releases are ignored, and it exits 1 when line coverage is not recorded. Backed by `Kettle::Changelog::ReleaseStats.parse`.
+
 ### Changed
 
 ### Deprecated
