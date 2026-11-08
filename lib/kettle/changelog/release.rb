@@ -17,7 +17,8 @@ module Kettle
       def extract(content:, version: nil, latest: false, **options)
         raise Error, "changelog must be a valid nonempty UTF-8 string" unless content.is_a?(String) && content.valid_encoding? && !content.strip.empty?
         raise Error, "specify a version or latest" unless latest != !version.nil?
-        raise Error, "version must be a release version or tag" unless latest || (version.is_a?(String) && version.match?(/\Av?(?:\d+|\d+\.\d+|\d+\.\d+\.\d+[0-9A-Za-z.+-]*)\z/))
+        valid_version = version.is_a?(String) && version.match?(/\Av?(?:\d+|\d+\.\d+|\d+\.\d+\.\d+[0-9A-Za-z.+-]*)\z/)
+        raise Error, "version must be a release version or tag" if !latest && !valid_version
 
         require "ast/crispr/markdown/markly"
         context = Ast::Crispr::Markdown::Markly.document_context(content: content, source_label: "changelog")
@@ -91,11 +92,13 @@ module Kettle
         body = body_lines.join.strip
         used = definitions.select do |label, _line|
           body.scan(/\[([^\]]+)\](?:\[([^\]]*)\])?/).any? do |first, second|
-            normalize_label(second.nil? || second.empty? ? first : second) == label
+            normalize_label((second.nil? || second.empty?) ? first : second) == label
           end
         end
         body = ([body] + used.values.map(&:strip)).reject(&:empty?).join("\n\n")
-        stats = ReleaseStats.parse("## [#{heading_match[1].delete_prefix("v")}]#{heading_match[2] ? " - #{heading_match[2]}" : ""}\n#{body}")
+        stats_heading = "## [#{heading_match[1].delete_prefix("v")}]"
+        stats_heading += " - #{heading_match[2]}" if heading_match[2]
+        stats = ReleaseStats.parse("#{stats_heading}\n#{body}")
         tag = body[/^\s*-\s+TAG:\s*\[([^\]]+)\]/, 1]
         heading_tag_ref = selected.heading_source.to_s[/\[tag\]\[([^\]]+)\]/i, 1]
         if !tag && heading_tag_ref

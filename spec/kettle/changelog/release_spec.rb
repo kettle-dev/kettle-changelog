@@ -164,23 +164,23 @@ RSpec.describe Kettle::Changelog::Release do
     expect { described_class.extract(content: "", version: "1.0.0") }.to raise_error(Kettle::Changelog::Error)
     expect { described_class.extract(content: content, version: "latest") }.to raise_error(Kettle::Changelog::Error)
   end
-end
 
-RSpec.describe "release command" do
-  it "prints JSON on success and fails without a matching version" do
-    require "open3"
-    command = [RbConfig.ruby, File.expand_path("../../../exe/kettle-changelog", __dir__), "--release", "1.0.0"]
-    output, error, status = Open3.capture3(*command, stdin_data: "## [1.0.0]\n- Item\n")
-    expect(status.success?).to be(true), error
-    expect(JSON.parse(output).fetch("markdown")).to eq("- Item\n")
-    output, _error, status = Open3.capture3(*command, stdin_data: "## [2.0.0]\n- Item\n")
-    expect(status.success?).to be(false)
-    expect(output).to be_empty
-    output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--latest", stdin_data: "## [2.0.0]\n- Latest\n## [1.0.0]\n- Old\n")
-    expect(status.success?).to be(true), error
-    expect(JSON.parse(output).fetch("version")).to eq("2.0.0")
-    output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--release", "v3.2", stdin_data: "## [3.2.1]\n- New\n## [v3.2.0]\n- Old\n")
-    expect(status.success?).to be(true), error
-    expect(JSON.parse(output).map { |release| release.fetch("version") }).to eq(%w[3.2.1 3.2.0])
+  describe "release command" do
+    it "prints JSON on success and fails without a matching version" do
+      require "open3"
+      command = [RbConfig.ruby, File.expand_path("../../../exe/kettle-changelog", __dir__), "--release", "1.0.0"]
+      output, error, status = Open3.capture3(*command, stdin_data: "## [1.0.0]\n- Item\n")
+      expect(status.success?).to be(true), error
+      expect(JSON.parse(output).fetch("markdown")).to eq("- Item\n")
+      output, _error, status = Open3.capture3(*command, stdin_data: "## [2.0.0]\n- Item\n")
+      expect(status.success?).to be(false)
+      expect(output).to be_empty
+      output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--latest", stdin_data: "## [2.0.0]\n- Latest\n## [1.0.0]\n- Old\n")
+      expect(status.success?).to be(true), error
+      expect(JSON.parse(output).fetch("version")).to eq("2.0.0")
+      output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--release", "v3.2", stdin_data: "## [3.2.1]\n- New\n## [v3.2.0]\n- Old\n")
+      expect(status.success?).to be(true), error
+      expect(JSON.parse(output).map { |release| release.fetch("version") }).to eq(%w[3.2.1 3.2.0])
+    end
   end
 end
