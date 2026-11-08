@@ -70,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -83,6 +83,23 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 <h3 id="fixed">Fixed</h3>
 
 <h3 id="security">Security</h3>
+
+<h2 id="1018---2026-11-08">
+<a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...v1.0.18">1.0.18</a> - 2026-11-08</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.18">v1.0.18</a>
+</li>
+  <li>COVERAGE: 93.62% – 1263/1349 lines in 8 files</li>
+  <li>BRANCH COVERAGE: 78.31% – 462/590 branches in 8 files</li>
+  <li>36.73% documented</li>
+</ul>
+
+<h3 id="fixed-1">Fixed</h3>
+
+<ul>
+  <li>Support slash-separated release dates (e.g. <code>## 3.14.0 / 2026-07-26</code>) during release extraction.</li>
+</ul>
 
 <h2 id="1017---2026-11-08">
 <a href="https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...v1.0.17">1.0.17</a> - 2026-11-08</h2>
@@ -207,7 +224,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.84% documented</li>
 </ul>
 
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 
 <ul>
   <li>Coverage failure reports point at the kettle-test log: when the fresh-coverage kettle-test run fails, the raised error names the newest tmp/kettle-test/turbo_tests2-*.log and its rspec summary (N examples, M failures) instead of only the exit status.</li>
@@ -224,7 +241,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.84% documented</li>
 </ul>
 
-<h3 id="fixed-2">Fixed</h3>
+<h3 id="fixed-3">Fixed</h3>
 
 <ul>
   <li>
@@ -323,7 +340,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   </li>
 </ul>
 
-<h3 id="fixed-3">Fixed</h3>
+<h3 id="fixed-4">Fixed</h3>
 
 <ul>
   <li>prepare-release (strict coverage): delete the stale Appraisal-generated coverage lockfile (gemfiles/coverage.gemfile.lock) before running the coverage child. That lockfile is a gitignored local artifact that drifts after dependency bumps; a stale pin killed the coverage bundle with an opaque Bundler::GemNotFound (observed: kettle-rb 0.1.16 pinned while 0.1.17 was the only installed/source version). Deleting it mirrors rake appraisal:reset for exactly this lockfile, so the coverage bundle re-resolves fresh from the gemfile.</li>
@@ -370,7 +387,7 @@ engine support needs.</li>
   </li>
 </ul>
 
-<h3 id="fixed-4">Fixed</h3>
+<h3 id="fixed-5">Fixed</h3>
 
 <ul>
   <li>Run YARD binstubs through Ruby so release metadata checks work on Windows without Unix executable bits.</li>
@@ -387,7 +404,7 @@ engine support needs.</li>
   <li>38.89% documented</li>
 </ul>
 
-<h3 id="fixed-5">Fixed</h3>
+<h3 id="fixed-6">Fixed</h3>
 
 <ul>
   <li>
@@ -409,7 +426,7 @@ engine support needs.</li>
   <li>38.89% documented</li>
 </ul>
 
-<h3 id="fixed-6">Fixed</h3>
+<h3 id="fixed-7">Fixed</h3>
 
 <ul>
   <li>
@@ -431,7 +448,7 @@ engine support needs.</li>
   <li>39.39% documented</li>
 </ul>
 
-<h3 id="fixed-7">Fixed</h3>
+<h3 id="fixed-8">Fixed</h3>
 
 <ul>
   <li>Backfill missing release-tag Markdown references only when the matching local Git tag exists.</li>
@@ -478,7 +495,7 @@ engine support needs.</li>
   <li>37.50% documented</li>
 </ul>
 
-<h3 id="fixed-8">Fixed</h3>
+<h3 id="fixed-9">Fixed</h3>
 
 <ul>
   <li>Prevent release-target K_CHANGELOG_* overrides from leaking into nested coverage test processes.</li>
@@ -518,7 +535,7 @@ engine support needs.</li>
   <li>Expose structural transfer-entry merging for consumers that replay kettle-jem template history without duplicating Markdown traversal.</li>
 </ul>
 
-<h3 id="fixed-9">Fixed</h3>
+<h3 id="fixed-10">Fixed</h3>
 
 <ul>
   <li>Preserve family-local dependency wiring during aggregate coverage runs.</li>
@@ -570,7 +587,7 @@ installing the main Gemfile bundle.</li>
 use ClickGems instead of BestGems.</li>
 </ul>
 
-<h3 id="fixed-10">Fixed</h3>
+<h3 id="fixed-11">Fixed</h3>
 
 <ul>
   <li>kettle-jem-template-20260720-003 - StructuredMerge Git diff driver config now<br>

@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Support slash-separated release dates (e.g. `## 3.14.0 / 2026-07-26`) during release extraction.
-
 ### Security
+
+## [1.0.18] - 2026-11-08
+
+- TAG: [v1.0.18][1.0.18t]
+- COVERAGE: 93.62% -- 1263/1349 lines in 8 files
+- BRANCH COVERAGE: 78.31% -- 462/590 branches in 8 files
+- 36.73% documented
+
+### Fixed
+
+- Support slash-separated release dates (e.g. `## 3.14.0 / 2026-07-26`) during release extraction.
 
 ## [1.0.17] - 2026-11-08
 
@@ -391,7 +400,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...HEAD
+[1.0.18]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...v1.0.18
+[1.0.18t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.18
 [1.0.17]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...v1.0.17
 [1.0.17t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.17
 [1.0.16]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...v1.0.16
