@@ -40,6 +40,13 @@ RSpec.describe Kettle::Changelog::Release do
     expect(result[:markdown]).not_to include("Old release", "sponsor", "[unrelated]:")
   end
 
+  it "selects the first published release when latest is requested" do
+    result = described_class.extract(content: "## [Unreleased]\n- Work\n" + content, latest: true)
+    expect(result).to include(version: "2.0.0", date: "2026-01-02")
+    expect { described_class.extract(content: content, latest: true, version: "1.0.0") }.to raise_error(Kettle::Changelog::Error)
+    expect { described_class.extract(content: "## [Unreleased]\n", latest: true) }.to raise_error(Kettle::Changelog::Error)
+  end
+
   it "excludes a trailing level-three sponsorship footer from the last release" do
     input = "## 1.0.0\n### Fixed\n- Fix.\n### Sponsorship\nDonate today.\n"
     expect(described_class.extract(content: input, version: "1.0.0")[:markdown]).to eq("### Fixed\n- Fix.\n")
@@ -68,5 +75,8 @@ RSpec.describe "release command" do
     output, _error, status = Open3.capture3(*command, stdin_data: "## [2.0.0]\n- Item\n")
     expect(status.success?).to be(false)
     expect(output).to be_empty
+    output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--latest", stdin_data: "## [2.0.0]\n- Latest\n## [1.0.0]\n- Old\n")
+    expect(status.success?).to be(true), error
+    expect(JSON.parse(output).fetch("version")).to eq("2.0.0")
   end
 end

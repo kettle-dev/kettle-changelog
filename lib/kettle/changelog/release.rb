@@ -14,18 +14,20 @@ module Kettle
       # @param version [String] release version or tag (with or without v)
       # @return [Hash] release metadata and standalone Markdown body
       # @raise [Kettle::Changelog::Error] when extraction is ambiguous or fails
-      def extract(content:, version:, **options)
+      def extract(content:, version: nil, latest: false, **options)
         raise Error, "changelog must be a valid nonempty UTF-8 string" unless content.is_a?(String) && content.valid_encoding? && !content.strip.empty?
-        raise Error, "version must be a release version or tag" unless version.is_a?(String) && version.match?(/\Av?\d+\.\d+\.\d+[0-9A-Za-z.+-]*\z/)
+        raise Error, "specify a version or latest" unless latest != !version.nil?
+        raise Error, "version must be a release version or tag" unless latest || (version.is_a?(String) && version.match?(/\Av?\d+\.\d+\.\d+[0-9A-Za-z.+-]*\z/))
 
         require "ast/crispr/markdown/markly"
         context = Ast::Crispr::Markdown::Markly.document_context(content: content, source_label: "changelog")
         headings = context.structural_owners(owner_scope: :heading_sections).sort_by { |owner| owner.location.start_line }
         matches = headings.select do |heading|
           match = heading.heading_text.to_s.strip.match(HEADING)
-          heading.level == 2 && match && match[1].delete_prefix("v") == version.delete_prefix("v")
+          heading.level == 2 && match && (latest || match[1].delete_prefix("v") == version.delete_prefix("v"))
         end
-        raise Error, "expected exactly one release for #{version.inspect}, found #{matches.length}" unless matches.length == 1
+        matches = matches.first(1) if latest
+        raise Error, "expected exactly one release for #{latest ? "latest" : version.inspect}, found #{matches.length}" unless matches.length == 1
 
         selected = matches.first
         heading_match = selected.heading_text.to_s.strip.match(HEADING)
