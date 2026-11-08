@@ -4,7 +4,7 @@ module Kettle
   module Changelog
     # Extracts releases without changing the input document.
     module Release
-      HEADING = /\A(?:\[)?(v?\d+\.\d+\.\d+[0-9A-Za-z.+-]*)(?:\])?(?:\s+(?:-\s+)?(\d{4}-\d{2}-\d{2}))?(?:\s+\([^\n]*\))?\s*\z/
+      HEADING = /\A(?:\[)?(v?\d+\.\d+\.\d+[0-9A-Za-z.+-]*)(?:\])?(?:\s+(?:[-\/]\s+)?(\d{4}-\d{2}-\d{2}))?(?:\s+\([^\n]*\))?\s*\z/
       DEFINITION = /\A {0,3}\[([^\]]+)\]:[ \t]*(.*)$/
       FOOTER = /\A(?:community|sponsors?|sponsorship|support(?:ers| us)?|funding|contributing|contributors|acknowledg(?:e)?ments|license)\b/i
 
