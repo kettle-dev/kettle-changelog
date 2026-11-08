@@ -112,7 +112,7 @@
     <tr>
       <td>Source</td>
       <td>
-<a href="https://gitlab.com/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=GitHub&amp;logoColor=green" alt="Source on GitHub.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-1.265-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
+<a href="https://gitlab.com/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/kettle-dev/kettle-changelog"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=GitHub&amp;logoColor=green" alt="Source on GitHub.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-1.349-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
 </td>
     </tr>
     <tr>
@@ -338,6 +338,19 @@ which may be required to run <code>kettle-changelog</code> itself from a release
 
 <pre class="code language-console"><code class="language-console">bundle exec kettle-changelog --add-unreleased-entry --section Fixed --entry &quot;Describe the fix.&quot;
 </code></pre>
+
+<p>Extract a specific release without modifying the changelog:</p>
+
+<pre class="code language-sh"><code class="language-sh">bundle exec kettle-changelog --release v1.2.3 --file CHANGELOG.md
+# Or pipe Markdown to stdin:
+cat CHANGELOG.md | bundle exec kettle-changelog --release 1.2.3
+# Select every release in a major or minor version:
+bundle exec kettle-changelog --release v3.2 --file CHANGELOG.md
+# Select the first published release instead:
+bundle exec kettle-changelog --latest --file CHANGELOG.md
+</code></pre>
+
+<p><code>--latest</code> and <code>--release</code> are mutually exclusive. A one- or two-segment version (such as <code>3</code> or <code>v3.2</code>) returns an array of matching releases in changelog order; full versions and <code>--latest</code> return one object. Both forms accept an optional <code>v</code> prefix. No matches exit nonzero. The command prints JSON with <code>version</code>, <code>date</code>, <code>tag</code>, <code>markdown</code>, <code>coverage</code>, <code>branch_coverage</code>, and <code>documented</code>. Missing metadata is <code>null</code>. The Markdown body excludes the release heading and contains its referenced link definitions, found anywhere in the changelog. Shared definitions are included independently in each matching release. Release headings must be level two and contain a three-part version, optionally prefixed with <code>v</code> and followed by a date and tag link. A subsequent level-two heading or a level-three community, sponsorship, funding, contributing, acknowledgments, or license heading ends the release. Missing or ambiguous releases and invalid input exit nonzero. The Ruby API is <code>Kettle::Changelog::Release.extract(content: markdown, version: "1.2.3")</code> and raises <code>Kettle::Changelog::Error</code> on failure.</p>
 
 <p>Useful queries and maintenance commands include <code>--pending-release</code>, <code>--release-state</code>, <code>--release-stats</code>, <code>--reformat</code>, <code>--update-prep</code>, <code>--json</code>, and <code>--events=changelog</code>. Run <code>bundle exec kettle-changelog --help</code> for the complete option list.</p>
 

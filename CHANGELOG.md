@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.17] - 2026-11-08
+
+- TAG: [v1.0.17][1.0.17t]
+- COVERAGE: 93.62% -- 1263/1349 lines in 8 files
+- BRANCH COVERAGE: 78.31% -- 462/590 branches in 8 files
+- 36.73% documented
+
+### Added
+
 - Extract a selected changelog release as structured JSON with `--release` or `--latest`, including matching major and minor version ranges.
 
 ### Changed
@@ -31,14 +50,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - dependencies (3)
   - other (1)
   - workflows (1)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.0.16] - 2026-11-03
 
@@ -378,7 +389,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...HEAD
+[1.0.17]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...v1.0.17
+[1.0.17t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.17
 [1.0.16]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.15...v1.0.16
 [1.0.16t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.16
 [1.0.15]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.14...v1.0.15
