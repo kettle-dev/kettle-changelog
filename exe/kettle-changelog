@@ -82,7 +82,7 @@ if ARGV.include?("-h") || ARGV.include?("--help")
       --pending-release         Query whether the changelog has release work pending; exits 0 for yes, 1 for no
       --release-state,
       --release-status          Print changelog release state, including latest published release and pending sources
-      --release VERSION         Extract a release as JSON (read-only; --file PATH or stdin)
+      --release VERSION         Extract matching release(s) as JSON (full, major, or major.minor; --file or stdin)
       --latest                  Extract the latest release as JSON (read-only; --file PATH or stdin)
       --release-stats           Print the latest released section's coverage/doc stats from a changelog (read-only;
                                 --file PATH or stdin; add --json; exits 1 when line coverage is not recorded)

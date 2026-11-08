@@ -20,7 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Extract a selected changelog release as structured JSON with `--release` or `--latest`.
+- Extract a selected changelog release as structured JSON with `--release` or `--latest`, including matching major and minor version ranges.
 
 ### Changed
 

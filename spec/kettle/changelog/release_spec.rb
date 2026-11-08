@@ -40,6 +40,31 @@ RSpec.describe Kettle::Changelog::Release do
     expect(result[:markdown]).not_to include("Old release", "sponsor", "[unrelated]:")
   end
 
+  it "returns releases matching major and minor versions in document order" do
+    input = <<~MD
+      ## [v3.20.0]
+      - Twenty.
+      ## [3.2.1-rc.1]
+      - Prerelease.
+      ## [v3.2.0]
+      - Two.
+      ## [3.1.0]
+      - One.
+      ## [30.2.0]
+      - Thirty.
+    MD
+    %w[3 v3].each do |version|
+      expect(described_class.extract(content: input, version: version).map { |release| release[:version] }).to eq(%w[3.20.0 3.2.1-rc.1 3.2.0 3.1.0])
+    end
+    %w[3.2 v3.2].each do |version|
+      releases = described_class.extract(content: input, version: version)
+      expect(releases.map { |release| release[:version] }).to eq(%w[3.2.1-rc.1 3.2.0])
+      expect(releases.last[:markdown]).to eq("- Two.\n")
+    end
+    expect { described_class.extract(content: input, version: "v4") }.to raise_error(Kettle::Changelog::Error)
+    expect { described_class.extract(content: "## [3.2.0]\n## [v3.2.0]\n", version: "3") }.to raise_error(Kettle::Changelog::Error)
+  end
+
   it "selects the first published release when latest is requested" do
     result = described_class.extract(content: "## [Unreleased]\n- Work\n" + content, latest: true)
     expect(result).to include(version: "2.0.0", date: "2026-01-02")
@@ -78,5 +103,8 @@ RSpec.describe "release command" do
     output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--latest", stdin_data: "## [2.0.0]\n- Latest\n## [1.0.0]\n- Old\n")
     expect(status.success?).to be(true), error
     expect(JSON.parse(output).fetch("version")).to eq("2.0.0")
+    output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--release", "v3.2", stdin_data: "## [3.2.1]\n- New\n## [v3.2.0]\n- Old\n")
+    expect(status.success?).to be(true), error
+    expect(JSON.parse(output).map { |release| release.fetch("version") }).to eq(%w[3.2.1 3.2.0])
   end
 end

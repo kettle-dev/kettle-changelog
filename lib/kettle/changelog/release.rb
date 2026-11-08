@@ -2,7 +2,7 @@
 
 module Kettle
   module Changelog
-    # Extracts a single release without changing the input document.
+    # Extracts releases without changing the input document.
     module Release
       HEADING = /\A(?:\[)?(v?\d+\.\d+\.\d+[0-9A-Za-z.+-]*)(?:\])?(?:\s+(?:-\s+)?(\d{4}-\d{2}-\d{2}))?(?:\s+\([^\n]*\))?\s*\z/
       DEFINITION = /\A {0,3}\[([^\]]+)\]:\s*\S+/
@@ -12,24 +12,35 @@ module Kettle
 
       # @param content [String] Markdown changelog
       # @param version [String] release version or tag (with or without v)
-      # @return [Hash] release metadata and standalone Markdown body
+      # @return [Hash, Array<Hash>] a release, or matching releases for a partial version
       # @raise [Kettle::Changelog::Error] when extraction is ambiguous or fails
       def extract(content:, version: nil, latest: false, **options)
         raise Error, "changelog must be a valid nonempty UTF-8 string" unless content.is_a?(String) && content.valid_encoding? && !content.strip.empty?
         raise Error, "specify a version or latest" unless latest != !version.nil?
-        raise Error, "version must be a release version or tag" unless latest || (version.is_a?(String) && version.match?(/\Av?\d+\.\d+\.\d+[0-9A-Za-z.+-]*\z/))
+        raise Error, "version must be a release version or tag" unless latest || (version.is_a?(String) && version.match?(/\Av?(?:\d+|\d+\.\d+|\d+\.\d+\.\d+[0-9A-Za-z.+-]*)\z/))
 
         require "ast/crispr/markdown/markly"
         context = Ast::Crispr::Markdown::Markly.document_context(content: content, source_label: "changelog")
         headings = context.structural_owners(owner_scope: :heading_sections).sort_by { |owner| owner.location.start_line }
+        partial = !latest && version.match?(/\Av?\d+(?:\.\d+)?\z/)
+        requested = version&.delete_prefix("v")
         matches = headings.select do |heading|
           match = heading.heading_text.to_s.strip.match(HEADING)
-          heading.level == 2 && match && (latest || match[1].delete_prefix("v") == version.delete_prefix("v"))
+          release_version = match && match[1].delete_prefix("v")
+          heading.level == 2 && match && (latest || (partial ? release_version.start_with?("#{requested}.") : release_version == requested))
         end
         matches = matches.first(1) if latest
-        raise Error, "expected exactly one release for #{latest ? "latest" : version.inspect}, found #{matches.length}" unless matches.length == 1
+        raise Error, "no release found for #{latest ? "latest" : version.inspect}" if matches.empty?
+        versions = matches.map { |heading| heading.heading_text.to_s.strip.match(HEADING)[1].delete_prefix("v") }
+        raise Error, "ambiguous release for #{version.inspect}" if versions.uniq.length != versions.length || (!partial && matches.length != 1)
 
-        selected = matches.first
+        releases = matches.map { |selected| extract_heading(content, headings, selected) }
+        partial ? releases : releases.first
+      rescue LoadError => e
+        raise Error, "release extraction requires the Markdown parser: #{e.message}"
+      end
+
+      def extract_heading(content, headings, selected)
         heading_match = selected.heading_text.to_s.strip.match(HEADING)
         start = selected.location.start_line
         boundary = headings.find do |heading|
@@ -75,9 +86,8 @@ module Kettle
           tag = definitions[normalize_label(heading_tag_ref)].to_s[%r{/releases/tag/([^\s>]+)}, 1]
         end
         {version: heading_match[1].delete_prefix("v"), date: heading_match[2], tag: tag, markdown: body.empty? ? "" : "#{body}\n", coverage: stats[:coverage], branch_coverage: stats[:branch_coverage], documented: stats[:documented]}
-      rescue LoadError => e
-        raise Error, "release extraction requires the Markdown parser: #{e.message}"
       end
+      private_class_method :extract_heading
 
       def normalize_label(label)
         label.to_s.strip.gsub(/\s+/, " ").downcase
