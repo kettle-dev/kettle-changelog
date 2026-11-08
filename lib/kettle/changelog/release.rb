@@ -5,7 +5,7 @@ module Kettle
     # Extracts releases without changing the input document.
     module Release
       HEADING = /\A(?:\[)?(v?\d+\.\d+\.\d+[0-9A-Za-z.+-]*)(?:\])?(?:\s+(?:-\s+)?(\d{4}-\d{2}-\d{2}))?(?:\s+\([^\n]*\))?\s*\z/
-      DEFINITION = /\A {0,3}\[([^\]]+)\]:\s*\S+/
+      DEFINITION = /\A {0,3}\[([^\]]+)\]:[ \t]*(.*)$/
       FOOTER = /\A(?:community|sponsors?|sponsorship|support(?:ers| us)?|funding|contributing|contributors|acknowledg(?:e)?ments|license)\b/i
 
       module_function
@@ -68,8 +68,24 @@ module Kettle
           match = line.match(DEFINITION)
           next unless match
 
-          definitions[normalize_label(match[1])] ||= line
-          definition_lines << index
+          definition = line.dup
+          indices = [index]
+          continuation = index + 1
+          if match[2].strip.empty?
+            destination = lines[continuation]
+            next unless destination&.match?(/\A {1,3}\S/)
+
+            definition << destination
+            indices << continuation
+            continuation += 1
+          end
+          title = lines[continuation]
+          if title&.match?(/\A {1,3}(?:"[^"\n]*"|'[^'\n]*'|\([^()\n]*\))[ \t]*\r?\n?\z/)
+            definition << title
+            indices << continuation
+          end
+          definitions[normalize_label(match[1])] ||= definition
+          definition_lines.concat(indices)
         end
         body_lines = body_lines.each_with_index.reject { |_line, index| definition_lines.include?(start + index) }.map(&:first)
         body = body_lines.join.strip

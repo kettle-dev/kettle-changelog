@@ -65,6 +65,53 @@ RSpec.describe Kettle::Changelog::Release do
     expect { described_class.extract(content: "## [3.2.0]\n## [v3.2.0]\n", version: "3") }.to raise_error(Kettle::Changelog::Error)
   end
 
+  it "makes each release self-contained when definitions are shared across releases" do
+    input = <<~MD
+      # Changelog
+
+      ## [3.2.0]
+      - See [the shared guide][shared] and [local].
+
+      [local]: https://example.com/local
+
+      ## [3.1.0]
+      - Also see [Shared][] and [the older guide][older].
+
+      [SHARED]: https://example.com/shared
+      [older]: https://example.com/older
+
+      ## [2.0.0]
+      - Reference [shared].
+    MD
+    releases = described_class.extract(content: input, version: "3")
+    expect(releases.map { |release| release[:version] }).to eq(%w[3.2.0 3.1.0])
+    expect(releases[0][:markdown]).to include("[SHARED]: https://example.com/shared", "[local]: https://example.com/local")
+    expect(releases[0][:markdown]).not_to include("[older]:", "Also see")
+    expect(releases[1][:markdown]).to include("[SHARED]: https://example.com/shared", "[older]: https://example.com/older")
+    expect(releases[1][:markdown]).not_to include("[local]:", "the shared guide")
+    older = described_class.extract(content: input, version: "2.0.0")
+    expect(older[:markdown]).to include("[SHARED]: https://example.com/shared")
+    releases.concat([older]).each do |release|
+      expect(Markly.render_html(release.fetch(:markdown))).to include('href="https://example.com/shared"')
+    end
+  end
+
+  it "preserves multi-line shared reference definitions" do
+    input = <<~MD
+      ## [3.0.0]
+      - [Guide][shared]
+      ## [2.0.0]
+      - Old.
+      [shared]:
+        https://example.com/guide
+        "Guide title"
+    MD
+    release = described_class.extract(content: input, version: "3.0.0")
+    expect(release[:markdown]).to include("[shared]:\n  https://example.com/guide\n  \"Guide title\"")
+    expect(Markly.render_html(release[:markdown])).to include('href="https://example.com/guide" title="Guide title"')
+    expect(described_class.extract(content: input, version: "2.0.0")[:markdown]).to eq("- Old.\n")
+  end
+
   it "selects the first published release when latest is requested" do
     result = described_class.extract(content: "## [Unreleased]\n- Work\n" + content, latest: true)
     expect(result).to include(version: "2.0.0", date: "2026-01-02")
