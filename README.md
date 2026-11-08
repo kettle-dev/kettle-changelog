@@ -132,6 +132,20 @@ Use `--yes` for non-interactive release automation. Add a note without preparing
 bundle exec kettle-changelog --add-unreleased-entry --section Fixed --entry "Describe the fix."
 ```
 
+Extract a specific release without modifying the changelog:
+
+```sh
+bundle exec kettle-changelog --release v1.2.3 --file CHANGELOG.md
+# Or pipe Markdown to stdin:
+cat CHANGELOG.md | bundle exec kettle-changelog --release 1.2.3
+# Select every release in a major or minor version:
+bundle exec kettle-changelog --release v3.2 --file CHANGELOG.md
+# Select the first published release instead:
+bundle exec kettle-changelog --latest --file CHANGELOG.md
+```
+
+`--latest` and `--release` are mutually exclusive. A one- or two-segment version (such as `3` or `v3.2`) returns an array of matching releases in changelog order; full versions and `--latest` return one object. Both forms accept an optional `v` prefix. No matches exit nonzero. The command prints JSON with `version`, `date`, `tag`, `markdown`, `coverage`, `branch_coverage`, and `documented`. Missing metadata is `null`. The Markdown body excludes the release heading and contains its referenced link definitions, found anywhere in the changelog. Shared definitions are included independently in each matching release. Release headings must be level two and contain a three-part version, optionally prefixed with `v` and followed by a date and tag link. A subsequent level-two heading or a level-three community, sponsorship, funding, contributing, acknowledgments, or license heading ends the release. Missing or ambiguous releases and invalid input exit nonzero. The Ruby API is `Kettle::Changelog::Release.extract(content: markdown, version: "1.2.3")` and raises `Kettle::Changelog::Error` on failure.
+
 Useful queries and maintenance commands include `--pending-release`, `--release-state`, `--release-stats`, `--reformat`, `--update-prep`, `--json`, and `--events=changelog`. Run `bundle exec kettle-changelog --help` for the complete option list.
 
 ## 🔐 Security

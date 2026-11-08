@@ -53,7 +53,7 @@ begin
   require "kettle/ndjson"
   require "kettle/dev/executable_version"
   Kettle::Dev::ExecutableVersion.print_and_exit!(script_basename, ARGV, value_option: true)
-  machine_output = ARGV.any? { |arg| arg == "--json" || arg.start_with?("--events") }
+  machine_output = ARGV.any? { |arg| arg == "--json" || arg == "--latest" || arg == "--release" || arg.start_with?("--release=") || arg.start_with?("--events") }
   Kettle::Dev::ExecutableVersion.print_header(script_basename) unless machine_output
 rescue LoadError => e
   warn("#{script_basename}: could not load dependency: #{e.class}: #{e.message}")
@@ -82,6 +82,8 @@ if ARGV.include?("-h") || ARGV.include?("--help")
       --pending-release         Query whether the changelog has release work pending; exits 0 for yes, 1 for no
       --release-state,
       --release-status          Print changelog release state, including latest published release and pending sources
+      --release VERSION         Extract matching release(s) as JSON (full, major, or major.minor; --file or stdin)
+      --latest                  Extract the latest release as JSON (read-only; --file PATH or stdin)
       --release-stats           Print the latest released section's coverage/doc stats from a changelog (read-only;
                                 --file PATH or stdin; add --json; exits 1 when line coverage is not recorded)
       --refresh-cache           Bypass cached gem.coop version data for this invocation
@@ -211,8 +213,17 @@ begin
 
   historical_backfill_version = extract_option_arg!(ARGV, "--backfill-released-version")
   coverage_gemfile = extract_option_arg!(ARGV, "--coverage-gemfile")
+  release_version = extract_option_arg!(ARGV, "--release")
+  latest_release = ARGV.delete("--latest")
   release_stats_query = ARGV.delete("--release-stats")
   release_stats_file = extract_option_arg!(ARGV, "--file")
+
+  if release_version || latest_release
+    raise Kettle::Changelog::Error, "--release cannot be combined with other options" unless ARGV.empty? && !release_stats_query && !version_override && !events_output
+    text = (release_stats_file.nil? || release_stats_file == "-") ? $stdin.read : File.read(release_stats_file)
+    puts JSON.pretty_generate(Kettle::Changelog::Release.extract(content: text, version: release_version, latest: !!latest_release))
+    exit 0
+  end
 
   if release_stats_query
     # Read-only: no project root, git, network or version detection. Reads --file PATH, or stdin when absent/"-".
