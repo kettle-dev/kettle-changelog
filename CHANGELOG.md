@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Support slash-separated release dates (e.g. `## 3.14.0 / 2026-07-26`) during release extraction.
+
 ### Security
 
 ## [1.0.17] - 2026-11-08
