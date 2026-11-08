@@ -18,7 +18,7 @@ git_source(:gitlab) { |repo_name| "https://gitlab.com/#{repo_name}" }
 # Include dependencies from kettle-changelog.gemspec
 gemspec
 
-gem "kettle-family", "~> 1.3", ">= 1.3.35"
+gem "kettle-family", "~> 1.3", ">= 1.3.38"
 
 # Local workspace dependency wiring for *_local.gemfile overrides
 gem "nomono", "~> 1.1", ">= 1.1.18", require: false # ruby >= 3.2.0
@@ -81,7 +81,7 @@ if direct_sibling_gems.any? &&
 
     eval_nomono_gems(
       gems: direct_sibling_gems,
-      requirements: {"kettle-dev" => ["~> 3.1", ">= 3.1.25"], "kettle-test" => ["~> 2.0", ">= 2.0.28"]},
+      requirements: {"kettle-dev" => ["~> 3.1", ">= 3.1.27"], "kettle-test" => ["~> 2.0", ">= 2.0.29"]},
       prefix: "KETTLE_DEV",
       path_env: "KETTLE_DEV_DEV",
       root: ["src", "my", "kettle-dev"]
@@ -106,9 +106,11 @@ end
 # wiring fails version solving for every command in the bundle.
 #
 # (env-switched: STRUCTUREDMERGE_DEV=/path/to/structuredmerge/ruby/gems for local paths)
+
 eval_gemfile "gemfiles/modular/templating.gemfile" if
   ENV.fetch("K_JEM_TEMPLATING", "false").casecmp("true").zero? ||
-    ENV.fetch("STRUCTUREDMERGE_DEV", "false").casecmp("false") != 0
+    ENV.fetch("STRUCTUREDMERGE_DEV", "false").casecmp("false") != 0 ||
+    ENV.fetch("STRUCTUREDMERGE_CORE_DEV", "false").casecmp("false") != 0
 
 # Debugging
 eval_gemfile "gemfiles/modular/debug.gemfile"
