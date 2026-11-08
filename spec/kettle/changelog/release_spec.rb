@@ -96,6 +96,35 @@ RSpec.describe Kettle::Changelog::Release do
     end
   end
 
+  it "preserves hard-wrapped entries, nested lists, and reference links" do
+    input = <<~MD
+      ## [3.0.0]
+      ### Changed
+
+      - A long entry that wraps at a fixed width
+        and continues with [a wrapped
+        guide][shared].
+        - A nested entry with its own
+          continuation.
+
+        A second paragraph in the entry
+        continues here.
+
+      A standalone paragraph also wraps
+      across multiple lines.
+
+      ## [2.0.0]
+      - Old release.
+
+      [shared]: https://example.com/guide
+    MD
+    markdown = described_class.extract(content: input, version: "3.0.0")[:markdown]
+    expect(markdown).to include("- A long entry that wraps at a fixed width\n  and continues with [a wrapped\n  guide][shared].\n  - A nested entry with its own\n    continuation.\n\n  A second paragraph in the entry\n  continues here.")
+    expect(markdown).to include("A standalone paragraph also wraps\nacross multiple lines.")
+    expect(Markly.render_html(markdown)).to include('href="https://example.com/guide"')
+    expect(markdown).not_to include("Old release")
+  end
+
   it "preserves multi-line shared reference definitions" do
     input = <<~MD
       ## [3.0.0]
