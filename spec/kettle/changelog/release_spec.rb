@@ -158,6 +158,13 @@ RSpec.describe Kettle::Changelog::Release do
     expect(described_class.extract(content: input, version: "1.0.0")).to include(date: "2025-01-01", tag: "v1.0.0")
   end
 
+  it "extracts slash-separated dates and respects adjacent release boundaries" do
+    input = "## 3.15.0 / 2026-08-01\n- Newer.\n## 3.14.0 / 2026-07-26\n### Fixed\n- Target.\n## 3.13.0 / 2026-07-01\n- Older.\n"
+    release = described_class.extract(content: input, version: "v3.14.0")
+    expect(release).to include(version: "3.14.0", date: "2026-07-26", markdown: "### Fixed\n- Target.\n")
+    expect(described_class.extract(content: input, version: "3.13.0")[:markdown]).to eq("- Older.\n")
+  end
+
   it "rejects missing, ambiguous and invalid releases" do
     expect { described_class.extract(content: content, version: "3.0.0") }.to raise_error(Kettle::Changelog::Error)
     expect { described_class.extract(content: "## [1.0.0]\n## [v1.0.0]\n", version: "1.0.0") }.to raise_error(Kettle::Changelog::Error)
@@ -172,6 +179,9 @@ RSpec.describe Kettle::Changelog::Release do
       output, error, status = Open3.capture3(*command, stdin_data: "## [1.0.0]\n- Item\n")
       expect(status.success?).to be(true), error
       expect(JSON.parse(output).fetch("markdown")).to eq("- Item\n")
+      output, error, status = Open3.capture3(RbConfig.ruby, command[1], "--release", "v3.14.0", stdin_data: "## 3.14.0 / 2026-07-26\n- Target\n## 3.13.0 / 2026-07-01\n- Older\n")
+      expect(status.success?).to be(true), error
+      expect(JSON.parse(output)).to include("version" => "3.14.0", "date" => "2026-07-26", "markdown" => "- Target\n")
       output, _error, status = Open3.capture3(*command, stdin_data: "## [2.0.0]\n- Item\n")
       expect(status.success?).to be(false)
       expect(output).to be_empty
