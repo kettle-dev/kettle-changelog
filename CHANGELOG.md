@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- TransferMerger no longer removes excluded transfer keys from released version sections; pruning is limited to Unreleased (structuredmerge/structuredmerge-ruby#151).
+
 ### Security
 
 ## [1.0.18] - 2026-11-08
