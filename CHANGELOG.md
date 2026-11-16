@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- TransferMerger no longer removes excluded transfer keys from released version sections; pruning is limited to Unreleased (structuredmerge/structuredmerge-ruby#151).
-
 ### Security
+
+## [1.0.19] - 2026-11-16
+
+- TAG: [v1.0.19][1.0.19t]
+- COVERAGE: 93.63% -- 1264/1350 lines in 8 files
+- BRANCH COVERAGE: 78.55% -- 465/592 branches in 8 files
+- 36.73% documented
+
+### Fixed
+
+- TransferMerger no longer removes excluded transfer keys from released version sections; pruning is limited to Unreleased (structuredmerge/structuredmerge-ruby#151).
 
 ## [1.0.18] - 2026-11-08
 
@@ -402,7 +411,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.19...HEAD
+[1.0.19]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...v1.0.19
+[1.0.19t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.19
 [1.0.18]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...v1.0.18
 [1.0.18t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.18
 [1.0.17]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.16...v1.0.17
