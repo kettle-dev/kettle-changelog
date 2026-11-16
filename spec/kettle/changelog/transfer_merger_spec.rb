@@ -51,6 +51,35 @@ RSpec.describe Kettle::Changelog::TransferMerger do
     expect(result).to include("kettle-jem-template-20260802-001 - New transfer.")
   end
 
+  it "never removes excluded transfer keys from released version sections" do
+    released = <<~MARKDOWN
+      # Changelog
+
+      ## [Unreleased]
+
+      ### Fixed
+
+      - kettle-jem-template-20260801-001 - Pending transfer.
+
+      ## [1.0.0] - 2026-01-01
+
+      ### Fixed
+
+      - kettle-jem-template-20260801-001 - Same key, already released.
+      - kettle-jem-template-20260720-005 - Released only.
+    MARKDOWN
+
+    result = described_class.apply(
+      content: released,
+      entries: [],
+      excluded_keys: %w[kettle-jem-template-20260801-001 kettle-jem-template-20260720-005]
+    )
+
+    expect(result).not_to include("Pending transfer.")
+    expect(result).to include("- kettle-jem-template-20260801-001 - Same key, already released.")
+    expect(result).to include("- kettle-jem-template-20260720-005 - Released only.")
+  end
+
   it "is idempotent for an already-applied transfer entry" do
     once = described_class.apply(content: content, entries: [entry])
 

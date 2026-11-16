@@ -64,6 +64,8 @@ module Kettle
         lines = source_lines(content)
         removals = transfer_occurrences(content).filter_map do |occurrence|
           next unless @excluded_keys.include?(occurrence.fetch(:key).to_s)
+          # Released sections are immutable history; only Unreleased may be pruned.
+          next unless occurrence.fetch(:release_heading) == "## [Unreleased]"
 
           (occurrence.fetch(:start_line)..occurrence.fetch(:end_line))
         end
