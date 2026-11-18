@@ -45,6 +45,51 @@ RSpec.describe Kettle::Changelog::KeyedEntryUpserter do
     MARKDOWN
   end
 
+  it "creates the missing section in a bare scaffolded changelog" do
+    write_changelog(<<~MARKDOWN)
+      ## [Unreleased]
+
+      ## [0.1.0] - 2026-11-18
+
+      - Initial release
+    MARKDOWN
+
+    result = described_class.new(root: @root, section: "Changed", key: "kettle-jem", entry: "Updated 2 project files").run
+
+    expect(result).to include(changed: true, matched: "inserted")
+    expect(read_changelog).to eq(<<~MARKDOWN)
+      ## [Unreleased]
+
+      ### Changed
+
+      - [kc] kettle-jem: Updated 2 project files
+
+      ## [0.1.0] - 2026-11-18
+
+      - Initial release
+    MARKDOWN
+  end
+
+  it "creates a missing section in Keep a Changelog order" do
+    write_changelog(<<~MARKDOWN)
+      ## [Unreleased]
+
+      ### Added
+
+      - Thing
+
+      ### Fixed
+
+      - Bug
+
+      ## [0.1.0] - 2026-11-18
+    MARKDOWN
+
+    described_class.new(root: @root, section: "Changed", key: "k", entry: "x").run
+
+    expect(read_changelog.scan(/^### \w+/)).to eq(["### Added", "### Changed", "### Fixed"])
+  end
+
   it "replaces a keyed entry and reports an identical rerun as unchanged" do
     write_changelog(<<~MARKDOWN)
       # Changelog

@@ -17,7 +17,7 @@ module Kettle
         raise Error, "missing CHANGELOG.md in #{Kettle::Dev.display_path(@root)}" unless File.file?(@changelog_path)
 
         require_markly_crispr!
-        source = File.read(@changelog_path)
+        source = UnreleasedSection.ensure(File.read(@changelog_path), @section, source_label: @changelog_path)
         context = Ast::Crispr::Markdown::Markly.document_context(content: source, source_label: @changelog_path)
         sections = context.structural_owners(owner_scope: :heading_sections)
         unreleased = find_unreleased_heading!(sections)

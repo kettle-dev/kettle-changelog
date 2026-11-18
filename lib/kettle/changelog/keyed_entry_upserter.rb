@@ -119,7 +119,7 @@ module Kettle
       end
 
       def read_source!
-        File.read(@changelog_path)
+        UnreleasedSection.ensure(File.read(@changelog_path), @section, source_label: @changelog_path)
       end
 
       def require_markly!
