@@ -58,10 +58,12 @@ end
 
 appraise "head" do
   eval_gemfile "modular/x_std_libs.gemfile"
+  eval_gemfile "modular/rspec.gemfile"
 end
 
 appraise "current" do
   eval_gemfile "modular/x_std_libs.gemfile"
+  eval_gemfile "modular/rspec.gemfile"
 end
 
 appraise "dep-heads" do
