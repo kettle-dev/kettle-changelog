@@ -22,6 +22,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.20] - 2026-11-18
+
+- TAG: [v1.0.20][1.0.20t]
+- COVERAGE: 93.69% -- 1292/1379 lines in 9 files
+- BRANCH COVERAGE: 78.77% -- 475/603 branches in 9 files
+- 37.25% documented
+
+### Changed
+
 - [kc] kettle-jem/prepare: updated 12 project files:
   - dependencies (12)
 
@@ -30,15 +47,9 @@ Please file a bug if you notice a violation of semantic versioning.
   - other (3)
   - workflows (1)
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - Adding an entry to a bare scaffolded `CHANGELOG.md` (e.g. from `bundle gem`, with an empty `## [Unreleased]`) now creates the missing `### Section` in Keep a Changelog order instead of raising, for both `EntryAdder` and `KeyedEntryUpserter`.
-
-### Security
 
 ## [1.0.19] - 2026-11-16
 
@@ -421,7 +432,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.19...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.20...HEAD
+[1.0.20]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.19...v1.0.20
+[1.0.20t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.20
 [1.0.19]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...v1.0.19
 [1.0.19t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.19
 [1.0.18]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.17...v1.0.18
