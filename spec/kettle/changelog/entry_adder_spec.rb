@@ -174,18 +174,45 @@ RSpec.describe Kettle::Changelog::EntryAdder do
     expect { adder.run }.to raise_error(Kettle::Changelog::Error, /expected exactly one ## \[Unreleased\] section/)
   end
 
-  it "fails when the requested section is missing" do
+  it "creates the requested section in a bare scaffolded changelog" do
+    write_changelog(<<~MARKDOWN)
+      ## [Unreleased]
+
+      ## [0.1.0] - 2026-11-18
+
+      - Initial release
+    MARKDOWN
+
+    result = described_class.new(root: @root, section: "Changed", entry: "Entry.").run
+
+    expect(result).to eq(:changed)
+    expect(read_changelog).to eq(<<~MARKDOWN)
+      ## [Unreleased]
+
+      ### Changed
+
+      - Entry.
+
+      ## [0.1.0] - 2026-11-18
+
+      - Initial release
+    MARKDOWN
+  end
+
+  it "creates the requested section after existing sections" do
     write_changelog(<<~MARKDOWN)
       # Changelog
 
       ## [Unreleased]
 
       ### Added
+
+      ## [1.0.0] - 2026-01-01
     MARKDOWN
 
-    adder = described_class.new(root: @root, section: "Changed", entry: "Entry.")
+    described_class.new(root: @root, section: "Fixed", entry: "Entry.").run
 
-    expect { adder.run }.to raise_error(Kettle::Changelog::Error, /expected at least one ### Changed section/)
+    expect(read_changelog.scan(/^### \w+/)).to eq(["### Added", "### Fixed"])
   end
 
   it "wraps the Markly CRISPR load error in a kettle-dev error" do

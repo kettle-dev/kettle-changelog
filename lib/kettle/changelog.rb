@@ -13,6 +13,7 @@ module Kettle
     autoload :Release, "kettle/changelog/release"
     autoload :ReleaseStats, "kettle/changelog/release_stats"
     autoload :KeyedEntryUpserter, "kettle/changelog/keyed_entry_upserter"
+    autoload :UnreleasedSection, "kettle/changelog/unreleased_section"
     autoload :TransferMerger, "kettle/changelog/transfer_merger"
   end
 end

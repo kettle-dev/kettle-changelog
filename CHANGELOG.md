@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Adding an entry to a bare scaffolded `CHANGELOG.md` (e.g. from `bundle gem`, with an empty `## [Unreleased]`) now creates the missing `### Section` in Keep a Changelog order instead of raising, for both `EntryAdder` and `KeyedEntryUpserter`.
+
 ### Security
 
 ## [1.0.19] - 2026-11-16
