@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- coverage: fail (strict) or warn instead of recording "0.00% -- 0/0 lines in 0 files" when the coverage run tracked no files, which silently hid a misconfigured monorepo root for fourteen releases
-
 ### Security
+
+## [1.0.21] - 2026-11-25
+
+- TAG: [v1.0.21][1.0.21t]
+- COVERAGE: 93.72% -- 1298/1385 lines in 9 files
+- BRANCH COVERAGE: 78.91% -- 479/607 branches in 9 files
+- 37.25% documented
+
+### Fixed
+
+- coverage: fail (strict) or warn instead of recording "0.00% -- 0/0 lines in 0 files" when the coverage run tracked no files, which silently hid a misconfigured monorepo root for fourteen releases
 
 ## [1.0.20] - 2026-11-18
 
@@ -434,7 +443,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.20...HEAD
+[Unreleased]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.21...HEAD
+[1.0.21]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.20...v1.0.21
+[1.0.21t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.21
 [1.0.20]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.19...v1.0.20
 [1.0.20t]: https://github.com/kettle-dev/kettle-changelog/releases/tag/v1.0.20
 [1.0.19]: https://github.com/kettle-dev/kettle-changelog/compare/v1.0.18...v1.0.19
