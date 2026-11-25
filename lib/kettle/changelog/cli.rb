@@ -827,6 +827,20 @@ module Kettle
         !filter_unreleased_sections(unreleased_block.to_s).strip.empty?
       end
 
+      # A coverage run that tracked no files records "0.00% -- 0/0 lines in 0 files"
+      # as if it were a measurement. That happened for fourteen consecutive monorepo
+      # releases because the family root had no SimpleCov file tracking, so fail loudly.
+      def ensure_coverage_tracked_files!(file_count)
+        return unless file_count.zero?
+
+        message = "Coverage tracked 0 files in #{Kettle::Dev.display_path(@coverage_path)}; " \
+          "configure SimpleCov to cover the sources the suite exercises " \
+          "(a monorepo family root needs its own .simplecov, e.g. cover 'gems/*/lib/**/*.rb')"
+        raise message if @strict
+
+        warn(message)
+      end
+
       def coverage_lines
         if @strict
           # Always generate fresh coverage data in strict mode
@@ -894,6 +908,7 @@ module Kettle
             covered_branches += 1 if cov > 0
           end
         end
+        ensure_coverage_tracked_files!(file_count)
         line_pct = (total_lines > 0) ? ((covered_lines.to_f / total_lines) * 100.0) : 0.0
         branch_pct = (total_branches > 0) ? ((covered_branches.to_f / total_branches) * 100.0) : 0.0
         line_str = format("COVERAGE: %.2f%% -- %d/%d lines in %d files", line_pct, covered_lines, total_lines, file_count)

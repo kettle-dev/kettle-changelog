@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- coverage: fail (strict) or warn instead of recording "0.00% -- 0/0 lines in 0 files" when the coverage run tracked no files, which silently hid a misconfigured monorepo root for fourteen releases
+
 ### Security
 
 ## [1.0.20] - 2026-11-18

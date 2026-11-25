@@ -1288,7 +1288,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           chdir: coverage_root
         ) do
           FileUtils.mkdir_p(File.join(coverage_root, "coverage"))
-          File.write(File.join(coverage_root, "coverage", "coverage.json"), JSON.generate("coverage" => {}))
+          File.write(File.join(coverage_root, "coverage", "coverage.json"), JSON.generate("coverage" => {"lib/example.rb" => {"lines" => [1, 0, nil]}}))
           true
         end
 
@@ -1315,7 +1315,7 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
           chdir: root
         ) do
           FileUtils.mkdir_p(File.join(root, "coverage"))
-          File.write(File.join(root, "coverage", "coverage.json"), JSON.generate("coverage" => {}))
+          File.write(File.join(root, "coverage", "coverage.json"), JSON.generate("coverage" => {"lib/example.rb" => {"lines" => [1, 0, nil]}}))
           true
         end
 
@@ -2354,6 +2354,21 @@ RSpec.describe Kettle::Changelog::CLI, :check_output do
         expect(changelog).not_to include("## [3.1.1]")
         expect(changelog).not_to include("[3.1.1]:")
       end
+    end
+  end
+
+  describe "#ensure_coverage_tracked_files!" do
+    it "raises in strict mode when the coverage run tracked no files" do
+      cli = described_class.new(strict: true)
+
+      expect { cli.send(:ensure_coverage_tracked_files!, 0) }.to raise_error(/Coverage tracked 0 files/)
+      expect { cli.send(:ensure_coverage_tracked_files!, 3) }.not_to raise_error
+    end
+
+    it "only warns when not strict" do
+      cli = described_class.new(strict: false)
+
+      expect { cli.send(:ensure_coverage_tracked_files!, 0) }.to output(/Coverage tracked 0 files/).to_stderr
     end
   end
 end
