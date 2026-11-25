@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.20)
+    kettle-changelog (1.0.21)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (~> 3.1, >= 3.1.29)
+      kettle-dev (~> 3.1, >= 3.1.31)
       version_gem (~> 1.1, >= 1.1.17)
 
 GEM
@@ -29,20 +29,20 @@ GEM
       rubocop (>= 1.0)
       version_gem (~> 1.1, >= 1.1.15)
     ast (2.4.3)
-    ast-crispr (7.1.17)
-      ast-merge (= 7.1.17)
+    ast-crispr (7.1.19)
+      ast-merge (= 7.1.19)
       service_actor (~> 3.9)
-      version_gem (~> 1.1, >= 1.1.16)
-    ast-crispr-markdown-markly (7.1.17)
-      ast-crispr (= 7.1.17)
-      markdown-merge (= 7.1.17)
-      markly-merge (= 7.1.17)
-      version_gem (~> 1.1, >= 1.1.16)
-    ast-merge (7.1.17)
+      version_gem (~> 1.1, >= 1.1.17)
+    ast-crispr-markdown-markly (7.1.19)
+      ast-crispr (= 7.1.19)
+      markdown-merge (= 7.1.19)
+      markly-merge (= 7.1.19)
+      version_gem (~> 1.1, >= 1.1.17)
+    ast-merge (7.1.19)
       benchmark
       token-resolver (~> 2.0, >= 2.0.4)
-      tree_haver (= 7.1.17)
-      version_gem (~> 1.1, >= 1.1.16)
+      tree_haver (= 7.1.19)
+      version_gem (~> 1.1, >= 1.1.17)
     backports (3.25.3)
     benchmark (0.5.0)
     bigdecimal (4.1.3)
@@ -63,12 +63,12 @@ GEM
       zeitwerk (~> 2.6)
     dry-inflector (1.3.1)
     dry-initializer (3.2.0)
-    dry-logic (1.6.0)
+    dry-logic (1.6.1)
       bigdecimal
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.1)
       zeitwerk (~> 2.6)
-    dry-schema (1.16.0)
+    dry-schema (1.17.0)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 1.0, >= 1.0.1)
       dry-core (~> 1.1)
@@ -86,11 +86,11 @@ GEM
     emoji_regex (15.0.0)
     gitmoji-regex (2.0.17)
       version_gem (~> 1.1, >= 1.1.17)
-    json (3.1.0)
-    kettle-dev (3.1.29)
+    json (3.2.0)
+    kettle-dev (3.1.31)
       emoji_regex (>= 15.0)
-      kettle-gha-pins (~> 0.3, >= 0.3.20)
-      kettle-ndjson (~> 0.1, >= 0.1.23)
+      kettle-gha-pins (~> 0.3, >= 0.3.21)
+      kettle-ndjson (~> 0.1, >= 0.1.24)
       kettle-rb (~> 0.1, >= 0.1.21)
       kettle-test (~> 2.0, >= 2.0.30)
       ruby-progressbar (~> 1.13)
@@ -120,23 +120,25 @@ GEM
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     logger (1.7.0)
-    markdown-merge (7.1.17)
-      ast-merge (= 7.1.17)
-      tree_haver (= 7.1.17)
-      version_gem (~> 1.1, >= 1.1.16)
+    markdown-merge (7.1.19)
+      ast-merge (= 7.1.19)
+      tree_haver (= 7.1.19)
+      version_gem (~> 1.1, >= 1.1.17)
     markly (0.19.0)
-    markly-merge (7.1.17)
-      markdown-merge (= 7.1.17)
+    markly-merge (7.1.19)
+      markdown-merge (= 7.1.19)
       markly (~> 0.9)
-      version_gem (~> 1.1, >= 1.1.16)
+      version_gem (~> 1.1, >= 1.1.17)
     parallel (1.28.0)
-    parser (3.3.13.0)
+    parser (3.3.14.0)
       ast (~> 2.4.1)
       racc
     parslet (2.0.0)
     prism (2.1.0)
     prism (2.1.0-aarch64-linux-gnu)
     prism (2.1.0-aarch64-linux-musl)
+    prism (2.1.0-arm-linux-gnu)
+    prism (2.1.0-arm-linux-musl)
     prism (2.1.0-arm64-darwin)
     prism (2.1.0-x86_64-darwin)
     prism (2.1.0-x86_64-linux-gnu)
@@ -193,7 +195,7 @@ GEM
       rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.52.0)
+    rubocop-ast (1.53.0)
       ast (~> 2.4)
       parser (>= 3.3.7.2)
       prism (>= 1.7)
@@ -280,7 +282,7 @@ GEM
     silent_stream (1.0.13)
       logger (~> 1.2)
       version_gem (>= 1.1.8, < 3)
-    sorbet-runtime (0.6.13698)
+    sorbet-runtime (0.6.13724)
     standard (1.57.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -308,6 +310,10 @@ GEM
     stone_checksums (1.0.11)
       version_gem (~> 1.1, >= 1.1.17)
     strings-ansi (0.2.0)
+    structuredmerge-core (0.2.3)
+      rb_sys (>= 0.9.130, < 0.10)
+      sorbet-runtime (~> 0.6)
+      version_gem (~> 1.1, >= 1.1.17)
     thor (1.5.0)
     timecop (0.9.11)
     timecop-rspec (1.0.3)
@@ -317,21 +323,22 @@ GEM
     token-resolver (2.0.16)
       parslet (~> 2.0)
       version_gem (~> 1.1, >= 1.1.17)
-    tree_haver (7.1.17)
+    tree_haver (7.1.19)
       citrus (~> 3.0)
       parslet (~> 2.0)
+      structuredmerge-core (~> 0.2, >= 0.2.2)
       tree_sitter_language_pack (>= 1.17.0, < 2.0)
-      version_gem (~> 1.1, >= 1.1.16)
-    tree_sitter_language_pack (1.25.0)
+      version_gem (~> 1.1, >= 1.1.17)
+    tree_sitter_language_pack (1.27.2)
       rb_sys (>= 0.9.130, < 0.10)
       sorbet-runtime (~> 0.6)
-    tree_sitter_language_pack (1.25.0-aarch64-linux)
+    tree_sitter_language_pack (1.27.2-aarch64-linux)
       sorbet-runtime (~> 0.6)
-    tree_sitter_language_pack (1.25.0-arm64-darwin)
+    tree_sitter_language_pack (1.27.2-arm64-darwin)
       sorbet-runtime (~> 0.6)
-    tree_sitter_language_pack (1.25.0-x86_64-darwin)
+    tree_sitter_language_pack (1.27.2-x86_64-darwin)
       sorbet-runtime (~> 0.6)
-    tree_sitter_language_pack (1.25.0-x86_64-linux)
+    tree_sitter_language_pack (1.27.2-x86_64-linux)
       sorbet-runtime (~> 0.6)
     tsort (0.2.0)
     tty-cursor (0.7.1)
@@ -354,7 +361,10 @@ PLATFORMS
   aarch64-linux
   aarch64-linux-gnu
   aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
   arm64-darwin
+  ruby
   x86_64-darwin
   x86_64-linux
   x86_64-linux-gnu
@@ -388,13 +398,13 @@ CHECKSUMS
   appraisal2 (3.2.6) sha256=6664d2404b9fe160dfbbed4dd9b78e7b9146402bc3468ff92ba78c1878bc318a
   appraisal2-rubocop (1.0.5) sha256=91db38e8585dc2b07491eee6c288764511a6c6a0a5d06c339c91ab6a4164bea8
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
-  ast-crispr (7.1.17) sha256=35219c373a02aa6348b07fd080f84c3c80bfd852750e55f6d980aa6c5ddf92c8
-  ast-crispr-markdown-markly (7.1.17) sha256=5e5c80a32e6b32cb4256c803d1dab71867c3ba96065205b781d8ef71c8e51f86
-  ast-merge (7.1.17) sha256=19f053511f7fe589d5ff2c5c2ba9a7dedb7e3d4efca7928ff9a3ddcb46524426
+  ast-crispr (7.1.19) sha256=5677af2dd2121dda023a6c4e781ba35a61f0f945fefabfe936bd05f4cb7e22b3
+  ast-crispr-markdown-markly (7.1.19) sha256=a5458c22a0e81d68c58c89c45143ba554449a4e363acb4f13ebec1e86173e70c
+  ast-merge (7.1.19) sha256=d2858cc7c6f1bf41758f6ff5c7f702d459b80340541586cdad8b6071b8c3b359
   backports (3.25.3) sha256=94298d32dc3c40ca15633b54e282780b49e2db0c045f602ea1907e4f63a17235
   benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c
   bigdecimal (4.1.3) sha256=61ebe1e5e559bdc3cc6f2c0ee7f427321fc838f59611c294356eb04d6e21cf66
-  bundler (4.1.0) sha256=d7b7a797b988e544a0677a9c6ed78146f2f63d05ae1af8bc7d9426cf88b46377
+  bundler (4.1.1) sha256=7a76aebebc2e476cbc1e11314200d7fe83c7398d6930f1d048e4d3dd2d0e93e3
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
   citrus (3.0.2) sha256=4ec2412fc389ad186735f4baee1460f7900a8e130ffe3f216b30d4f9c684f650
   concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
@@ -405,14 +415,14 @@ CHECKSUMS
   dry-core (1.2.0) sha256=0cc5a7da88df397f153947eeeae42e876e999c1e30900f3c536fb173854e96a1
   dry-inflector (1.3.1) sha256=7fb0c2bb04f67638f25c52e7ba39ab435d922a3a5c3cd196120f63accb682dcc
   dry-initializer (3.2.0) sha256=37d59798f912dc0a1efe14a4db4a9306989007b302dcd5f25d0a2a20c166c4e3
-  dry-logic (1.6.0) sha256=da6fedbc0f90fc41f9b0cc7e6f05f5d529d1efaef6c8dcc8e0733f685745cea2
-  dry-schema (1.16.0) sha256=cd3aaeabc0f1af66ec82a29096d4c4fb92a0a58b9dae29a22b1bbceb78985727
+  dry-logic (1.6.1) sha256=3cea14d2108b62f1a99d20b993dff3a5c365136a3995202fd33d9a163baedd31
+  dry-schema (1.17.0) sha256=404b448f4266998795b88edcd9f5dc51af798d8b3831cc6f60da5a1af8d5faa1
   dry-types (1.9.2) sha256=c52d3d6bdb0269fc299c44a7d9d5fcd736a63b393e2459b38728d9736b7df164
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.17) sha256=b5613403eeeed0c01310cefb0c8b0eb196623800468942ecfc3ef33715b67c89
-  json (3.1.0) sha256=3ce7ccf8fde58960177a3a756c31f292a4c1e1dedee884547096a5b0604e3bd8
-  kettle-changelog (1.0.20)
-  kettle-dev (3.1.29) sha256=d74eb2a8549e8a036ad8a25dd0a07d30c85c2b1adcae08c08c838b8bdc357061
+  json (3.2.0) sha256=4a4e222a9ee6ffb296ab3171b6b39d85fec83afc4e7b57eee17edf68c74aec87
+  kettle-changelog (1.0.21)
+  kettle-dev (3.1.31) sha256=54f83525048bc3bf1b8399d1e2df915fe6e8e559ad9e7067be71a94640eef97c
   kettle-gha-pins (0.3.21) sha256=c0f08ef9fb6065cb1f1b77c44fdb117c7152255aef4ecd385b027312e874e508
   kettle-ndjson (0.1.24) sha256=138b8710a29960e89233e0f5339ac5f2f2bcf6b95e69566b9baaf572f78ef736
   kettle-rb (0.1.21) sha256=da48380788b274340f954b21b203073a72622869d8db9111ab34e52e7f902c04
@@ -420,15 +430,17 @@ CHECKSUMS
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
-  markdown-merge (7.1.17) sha256=62ddc987130658263d8973f6198a5e886cb39153aab729e89e837862a8146ab4
+  markdown-merge (7.1.19) sha256=bf8cf0a1ecf295f088c0fb6548f435ab7e915c3f7968c5486b78bfb41ac43f3f
   markly (0.19.0) sha256=cd2c0e86eaf3660ed2a3a94104877f8bd41adda78e7c295c017d03de0d4044ca
-  markly-merge (7.1.17) sha256=61b9c884edb9778197934717778dafbcba8b6153cf58c54aef00d579149ed452
+  markly-merge (7.1.19) sha256=7cd2807626638da136a2cb9b13926a253f06f975ced0217f86ddc7a0f703b21b
   parallel (1.28.0) sha256=33e6de1484baf2524792d178b0913fc8eb94c628d6cfe45599ad4458c638c970
-  parser (3.3.13.0) sha256=e02f9b63c2fe05b0c68f692ba4df89b3cb113b663964f75d988fbebfd6c3deca
+  parser (3.3.14.0) sha256=62f8f76af7b919425ee2d811880e9dcb8011ab40bfd59970dfb583141697e58f
   parslet (2.0.0) sha256=d45130695d39b43d7e6a91f4d2ec66b388a8d822bae38de9b4de9a5fbde1f606
   prism (2.1.0) sha256=1c0a7c6dea0e93183390fb123f007564dbe663198e2f86ad87204151147601f3
   prism (2.1.0-aarch64-linux-gnu) sha256=808dddc72def68e1a0463689414c97e0ba211938eddbab05387a4844aa2b3ec2
   prism (2.1.0-aarch64-linux-musl) sha256=dd1a0732620c1e575dabb07a297a62911fabd72f8e20ce850b522a866f877930
+  prism (2.1.0-arm-linux-gnu) sha256=96b2426b9dbab05448c4add735619929042be3cd7e871ff186468121b62bcfa8
+  prism (2.1.0-arm-linux-musl) sha256=00ef918e42a3dc98f11a461bf473586a3424b0f78bee8a4e43b5a65a5f5e2cd0
   prism (2.1.0-arm64-darwin) sha256=2d0c2e3e011cfd89c041940907d3ff3def379d7b0f2ba158d1d42238e8ad8afc
   prism (2.1.0-x86_64-darwin) sha256=6c645d8e6afc742956c7518220ce5106367727c4d9980ac9ab386d55004ddab4
   prism (2.1.0-x86_64-linux-gnu) sha256=b2b647afce09551e650b8bb3e2fc91d7d73d392a09534ca307ec0d619c33bfd4
@@ -453,7 +465,7 @@ CHECKSUMS
   rspec-support (3.13.8) sha256=e4160030309b7e3e9d9863dfe720a35dfcc577162f5402cd68fc8c5258a0ffd6
   rspec_junit_formatter (0.8.0) sha256=2c505d4a79713d298bc8361532cc3eb3427d9279ffe3f8ceeeeeb72ffc279a20
   rubocop (1.91.0) sha256=9c82b7bf391c5d7e3798c5b9996e22a1fe3bd7468e351dfdeb96140c058296d0
-  rubocop-ast (1.52.0) sha256=18d5c58fe4e59c9a9222172dc5ba4c52642d445ce4e696ed86646beea675fe8d
+  rubocop-ast (1.53.0) sha256=027984d28485d6502ae4c72f9341080f54f538599f5dbb54f81875a4ddcad574
   rubocop-capybara (2.23.0) sha256=f9ea1ba3a7561ee8e88cf76fc378ce517ce5327155f305ee7b5c2500e5aee357
   rubocop-env (0.1.0) sha256=5ab9a259e71822bf514c8e900a9b68cc2f74ccc87d5493efcd03213f3068e718
   rubocop-factory_bot (2.28.0) sha256=4b17fc02124444173317e131759d195b0d762844a71a29fe8139c1105d92f0cb
@@ -478,7 +490,7 @@ CHECKSUMS
   runtime_groups (0.1.5) sha256=67ec26ded158b9ae80371b4342a346aad79d904d1245cd579fb7e06d874b2432
   service_actor (3.9.4) sha256=e63b523630b9a7e62959b2a90113b08d2565b5de9c148557b281ef847c9539ce
   silent_stream (1.0.13) sha256=beed122ee712d968d9029b169a8e293df149a5fba8b7ea39165b418b70063666
-  sorbet-runtime (0.6.13698) sha256=ea1b7a4fb61f2f19f634794bc77a266d36cea19b7f183370db411ba2b06353a9
+  sorbet-runtime (0.6.13724) sha256=573bf33330a92ddf4ec25b4b8149293959c8c5de10de5198581c833021c46624
   standard (1.57.0) sha256=4a65ea92421fbaf77fb54da91e16093cf79b335b8f62c35aaa3dd714c8592858
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.9.0) sha256=49483d31be448292951d80e5e67cdcb576c2502103c7b40aec6f1b6e9c88e3f2
@@ -486,16 +498,17 @@ CHECKSUMS
   standard-rubocop-lts (2.0.15) sha256=d5a521a2f6fb78a7a8e784c739bb6b73654682045a00a2043c65cc4d13aed777
   stone_checksums (1.0.11) sha256=b9f2f188cb3b47375774cb77b57bf7477d7ae104e57c91ca48cecb472aa42d66
   strings-ansi (0.2.0) sha256=90262d760ea4a94cc2ae8d58205277a343409c288cbe7c29416b1826bd511c88
+  structuredmerge-core (0.2.3) sha256=e55eb1d1358ea5f1b144df176f2f53fdfef56f4bad155113d287e467437c6e80
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   timecop (0.9.11) sha256=41284dc6e5041f2184f781ace766f942108c842f8d8c1386a26e6343decc7542
   timecop-rspec (1.0.3) sha256=005f14841bb606dcaefb060e321b5388e2e59537742bee8b3a9a9a40e598fab9
   token-resolver (2.0.16) sha256=418b5881cd23beab719179a8f7ceeca7816e918ff9b1d462dd32eddc38c4ed8e
-  tree_haver (7.1.17) sha256=9d512198a26229a0830d0b6305d44b713f11f04e6b5ad9edb62aa553079fae3a
-  tree_sitter_language_pack (1.25.0) sha256=924bb9ddf6ee1859cae65e9e9346996b3b642ea23b6ef69167ed2df0e6530223
-  tree_sitter_language_pack (1.25.0-aarch64-linux) sha256=f8bcbf3bdd78ec0c1c90abacfc8ea02d879cbfc92f2493aa68ef5e66f3bfafaf
-  tree_sitter_language_pack (1.25.0-arm64-darwin) sha256=621bd1890939c8536556b1b960ae3998fd86ba0f9d90981915ac138b96edd2cf
-  tree_sitter_language_pack (1.25.0-x86_64-darwin) sha256=8a89f23bfd2fd85db50e7e04015dd0a5461ca18ef2f912ae9042f28e7ce7c02b
-  tree_sitter_language_pack (1.25.0-x86_64-linux) sha256=43c46682ecec1093dfbfeefea18859bf56a13ad011b3915d0d70cdfb3ac439ea
+  tree_haver (7.1.19) sha256=5cbe4555c93a7b9d1e44ea29a2a147a6f3b6088d87589e1e10a567255e586ea2
+  tree_sitter_language_pack (1.27.2) sha256=c51ce5f9deb7365ff11ac1ca8629d27f00699af53ff82def94306d317d39dc82
+  tree_sitter_language_pack (1.27.2-aarch64-linux) sha256=6c9e1602ac644f886befa8f98aa16df86caf4fed571c50622a35136ba1485524
+  tree_sitter_language_pack (1.27.2-arm64-darwin) sha256=1c5beddd24f3ba53e2ed068e10fc5ab1923b73c0e40d335f56a8ee5dc4c96983
+  tree_sitter_language_pack (1.27.2-x86_64-darwin) sha256=d2ea9075f1fa6e03344813fe2e0ab1aad4b41507104aea012fb65c9bcd3dfac6
+  tree_sitter_language_pack (1.27.2-x86_64-linux) sha256=c7da8f26109a575ed01d842397e6eced9ab304715f9574a6c25fd89b0cdde7b2
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   tty-cursor (0.7.1) sha256=79534185e6a777888d88628b14b6a1fdf5154a603f285f80b1753e1908e0bf48
   tty-progressbar (0.18.3) sha256=6cbb4260e55e74a9180d502143eb6a467d2c8e51bf5f3c9509fb5cacc3d4a5f6
@@ -506,4 +519,4 @@ CHECKSUMS
   zeitwerk (2.8.3) sha256=2c85125a8467ce069e20123d1e709a08955c9d29c118c25b46b7b7fafdbb92e5
 
 BUNDLED WITH
-  4.1.0
+  4.1.1
