@@ -10,9 +10,9 @@ GIT
 PATH
   remote: .
   specs:
-    kettle-changelog (1.0.21)
+    kettle-changelog (1.0.22)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (~> 3.1, >= 3.1.33)
+      kettle-dev (~> 3.1, >= 3.1.34)
       version_gem (~> 1.1, >= 1.1.17)
 
 GEM
@@ -87,31 +87,31 @@ GEM
     gitmoji-regex (2.0.17)
       version_gem (~> 1.1, >= 1.1.17)
     json (3.2.0)
-    kettle-dev (3.1.33)
+    kettle-dev (3.1.34)
       emoji_regex (>= 15.0)
-      kettle-gha-pins (~> 0.3, >= 0.3.21)
-      kettle-ndjson (~> 0.1, >= 0.1.24)
-      kettle-rb (~> 0.1, >= 0.1.21)
-      kettle-test (~> 2.0, >= 2.0.30)
+      kettle-gha-pins (~> 0.3, >= 0.3.22)
+      kettle-ndjson (~> 0.1, >= 0.1.25)
+      kettle-rb (~> 0.1, >= 0.1.22)
+      kettle-test (~> 2.0, >= 2.0.31)
       ruby-progressbar (~> 1.13)
       tty-progressbar (~> 0.18)
       version_gem (~> 1.1, >= 1.1.17)
-    kettle-gha-pins (0.3.21)
+    kettle-gha-pins (0.3.22)
       kettle-ndjson (~> 0.1, >= 0.1.23)
       ruby-progressbar (~> 1.13)
       tty-progressbar (~> 0.18)
       version_gem (~> 1.1, >= 1.1.17)
-    kettle-ndjson (0.1.24)
+    kettle-ndjson (0.1.25)
       version_gem (~> 1.1, >= 1.1.17)
-    kettle-rb (0.1.21)
-    kettle-test (2.0.30)
+    kettle-rb (0.1.22)
+    kettle-test (2.0.31)
       appraisal2 (~> 3.0, >= 3.0.6)
       backports (~> 3.0)
       kettle-ndjson (~> 0.1, >= 0.1.24)
       rspec (~> 3.0)
       rspec-block_is_expected (~> 1.0, >= 1.0.6)
       rspec-pending_for (~> 0.1, >= 0.1.20)
-      rspec-stubbed_env (~> 1.0, >= 1.0.18)
+      rspec-stubbed_env (~> 1.0, >= 1.0.19)
       rspec_junit_formatter (~> 0.6)
       silent_stream (~> 1.0, >= 1.0.12)
       timecop-rspec (~> 1.0, >= 1.0.3)
@@ -320,7 +320,7 @@ GEM
       delegate (~> 0.1)
       rspec (~> 3.0)
       timecop (>= 0.7, < 1)
-    token-resolver (2.0.16)
+    token-resolver (2.0.17)
       parslet (~> 2.0)
       version_gem (~> 1.1, >= 1.1.17)
     tree_haver (7.1.20)
@@ -376,7 +376,7 @@ DEPENDENCIES
   bundler-audit (~> 0.9.3)
   gitmoji-regex (~> 2.0, >= 2.0.17)
   kettle-changelog!
-  kettle-test (~> 2.0, >= 2.0.30)
+  kettle-test (~> 2.0, >= 2.0.31)
   rake (~> 13.0)
   reek (~> 6.6, >= 6.6.0)
   require_bench (~> 1.0, >= 1.0.5)
@@ -420,12 +420,12 @@ CHECKSUMS
   emoji_regex (15.0.0) sha256=a508b2c0bee561169564e0aec96085020c900520d335e5533fd8e78e59493829
   gitmoji-regex (2.0.17) sha256=b5613403eeeed0c01310cefb0c8b0eb196623800468942ecfc3ef33715b67c89
   json (3.2.0) sha256=4a4e222a9ee6ffb296ab3171b6b39d85fec83afc4e7b57eee17edf68c74aec87
-  kettle-changelog (1.0.21)
-  kettle-dev (3.1.33) sha256=eb2c2e66478ee41a89346c1c1c7126fe113871ae7750266015e1bbd1d74558c9
-  kettle-gha-pins (0.3.21) sha256=c0f08ef9fb6065cb1f1b77c44fdb117c7152255aef4ecd385b027312e874e508
-  kettle-ndjson (0.1.24) sha256=138b8710a29960e89233e0f5339ac5f2f2bcf6b95e69566b9baaf572f78ef736
-  kettle-rb (0.1.21) sha256=da48380788b274340f954b21b203073a72622869d8db9111ab34e52e7f902c04
-  kettle-test (2.0.30) sha256=9865770add5c9e93b83ab780fc9443a7a4a3fd27a258790e1f40021668170f1f
+  kettle-changelog (1.0.22)
+  kettle-dev (3.1.34) sha256=f6d744b646eb3f9465f3e1bcdf6187123cc7807ff661b47876e9d41cea479db9
+  kettle-gha-pins (0.3.22) sha256=5ea0e34419c6da8b277ee44acc19afbe06ea64a56cfec8945fc7346f57bc7cf2
+  kettle-ndjson (0.1.25) sha256=a5dd239c1f4e1a5ddcf80ff9b09d6b6dd24d3df51461cfb0bca0b28080dbdff4
+  kettle-rb (0.1.22) sha256=ee456dfbddae0b32b0afc738d0634d4095119933f58aa017195f6c68c2b62bb9
+  kettle-test (2.0.31) sha256=e7d54080253f245db24104b41ccc7784888aacd89619809656992dfee5300c75
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
@@ -501,7 +501,7 @@ CHECKSUMS
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   timecop (0.9.11) sha256=41284dc6e5041f2184f781ace766f942108c842f8d8c1386a26e6343decc7542
   timecop-rspec (1.0.3) sha256=005f14841bb606dcaefb060e321b5388e2e59537742bee8b3a9a9a40e598fab9
-  token-resolver (2.0.16) sha256=418b5881cd23beab719179a8f7ceeca7816e918ff9b1d462dd32eddc38c4ed8e
+  token-resolver (2.0.17) sha256=63cc44400294406052eebb9c9f886fe05c667be5bf36235a9b8d26a36581dba7
   tree_haver (7.1.20) sha256=726d82de36ef4425c503e10c1b489df220f64a5922cf8139a772aeba17f30232
   tree_sitter_language_pack (1.28.0) sha256=bc075cb1fe2fe88819d0f3a7d69464b8485e12217312a7b2f341e7d22c12f908
   tree_sitter_language_pack (1.28.0-aarch64-linux) sha256=ab79f7cdff4a35ce3958026dafe7cd90e48ec786b721f13dec348279b5d8ffa8

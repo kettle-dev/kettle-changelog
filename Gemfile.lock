@@ -12,7 +12,7 @@ PATH
   specs:
     kettle-changelog (1.0.22)
       ast-crispr-markdown-markly (~> 7.1, >= 7.1.1)
-      kettle-dev (~> 3.1, >= 3.1.33)
+      kettle-dev (~> 3.1, >= 3.1.34)
       version_gem (~> 1.1, >= 1.1.17)
 
 GEM
@@ -631,9 +631,9 @@ DEPENDENCIES
   gitmoji-regex (~> 2.0, >= 2.0.17)
   irb (~> 1.17)
   kettle-changelog!
-  kettle-family (~> 1.3, >= 1.3.52)
-  kettle-soup-cover (~> 3.0, >= 3.0.17)
-  kettle-test (~> 2.0, >= 2.0.30)
+  kettle-family (~> 1.3, >= 1.3.53)
+  kettle-soup-cover (~> 3.0, >= 3.0.18)
+  kettle-test (~> 2.0, >= 2.0.31)
   kramdown (~> 2.6, >= 2.6.1)
   kramdown-parser-gfm (~> 1.1)
   mutex_m (~> 0.2)
